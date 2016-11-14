@@ -17,6 +17,7 @@ public class Contest extends DomainEntity {
     private Date closed_at;
     private int numberOfWinners;
     private Collection<QualifiedRecipe> qualifiedRecipes;
+    private boolean ended;
 
     public Contest() {
         super();
@@ -67,5 +68,14 @@ public class Contest extends DomainEntity {
 
     public void setQualifiedRecipes(Collection<QualifiedRecipe> qualifiedRecipes) {
         this.qualifiedRecipes = qualifiedRecipes;
+    }
+
+    @Column(columnDefinition="bit default 0")
+    public boolean isEnded() {
+        return ended;
+    }
+
+    public void setEnded(boolean ended) {
+        this.ended = ended;
     }
 }

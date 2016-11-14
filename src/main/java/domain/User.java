@@ -8,6 +8,7 @@ import java.util.Collection;
 public class User extends UserOrNutritionist
 {
     private Collection<Recipe> recipes;
+    private Collection<MasterClass> masterClasses;
     public User()
     {
         super();
@@ -20,5 +21,14 @@ public class User extends UserOrNutritionist
 
     public void setRecipes(Collection<Recipe> recipes) {
         this.recipes = recipes;
+    }
+
+    @ManyToMany
+    public Collection<MasterClass> getMasterClasses() {
+        return masterClasses;
+    }
+
+    public void setMasterClasses(Collection<MasterClass> masterClasses) {
+        this.masterClasses = masterClasses;
     }
 }

@@ -105,6 +105,12 @@ public class MessageService {
         messageRepository.save(message);
     }
 
+    public void saveMessage(Message message){
+
+        save(message);
+
+    }
+
     public void moveMessage(int messageId,int folderId){
         Folder newFolder = folderService.findOne(folderId);
         Message message = findOne(messageId);
@@ -141,4 +147,6 @@ public class MessageService {
         }
         return result;
     }
+
+
 }
