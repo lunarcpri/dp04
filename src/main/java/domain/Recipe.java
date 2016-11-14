@@ -24,6 +24,7 @@ public class Recipe  extends DomainEntity {
     private String title;
     private Date created_at;
     private Date updated_at;
+    private boolean read_only;
     private String picture;
     private String summary;
     private String hits;
@@ -178,6 +179,15 @@ public class Recipe  extends DomainEntity {
 
     public void setComments(Collection<Comment> comments) {
         this.comments = comments;
+    }
+
+
+    public boolean isRead_only() {
+        return read_only;
+    }
+
+    public void setRead_only(boolean read_only) {
+        this.read_only = read_only;
     }
 }
 

@@ -24,6 +24,9 @@ public class UserOrNutritionistService {
 
     @Autowired
     private UserAccountService userAccountService;
+    
+    @Autowired
+    private ActorService actorService;
 
 
     public UserOrNutritionistService(){
@@ -71,7 +74,7 @@ public class UserOrNutritionistService {
 
     public Boolean isFollowing(int id){
 
-        Assert.isTrue(!userOrNutritionistRepository.following(userService.findByPrincipal().getId(), id).isEmpty());
+        Assert.isTrue(!userOrNutritionistRepository.following(actorService.findByPrincipal().getId(), id).isEmpty());
 
         return true;
     }
@@ -83,21 +86,22 @@ public class UserOrNutritionistService {
         Assert.isTrue(!isFollowing(userOrNutritionist.getId()));
         userAccountService.assertRole("USER,NUTRITIONIST");
 
-        Collection<UserOrNutritionist> followers = userService.findOne(userOrNutritionist.getId()).getFollower();
-        Collection<UserOrNutritionist> following = userService.findByPrincipal().getFollowing();
+        UserOrNutritionist followingUser = (UserOrNutritionist) actorService.findByPrincipal();
 
-        followers.add(userService.findByPrincipal());
-        following.add(userService.findOne(userOrNutritionist.getId()));
+        Collection<UserOrNutritionist> followers = followingUser.getFollower();
+        Collection<UserOrNutritionist> following =  userOrNutritionist.getFollowing();
 
-        userService.findByPrincipal().setFollowing(following);
-        userService.findOne(userOrNutritionist.getId()).setFollower(followers);
+        followers.add(followingUser);
+        following.add(userOrNutritionist);
 
-        Assert.isTrue(!isFollowing(userOrNutritionist.getId()));
+        followingUser.setFollowing(following);
+        userOrNutritionist.setFollower(followers);
 
+        save(followingUser);
         save(userOrNutritionist);
-        save(userService.findByPrincipal());
 
     }
+
 
     public void unfollow(UserOrNutritionist userOrNutritionist){
 
@@ -105,17 +109,19 @@ public class UserOrNutritionistService {
         Assert.isTrue(isFollowing(userOrNutritionist.getId()));
         userAccountService.assertRole("USER,NUTRITIONIST");
 
-        Collection<UserOrNutritionist> followers = userService.findOne(userOrNutritionist.getId()).getFollower();
-        Collection<UserOrNutritionist> following = userService.findByPrincipal().getFollowing();
+        UserOrNutritionist followingUser = (UserOrNutritionist) actorService.findByPrincipal();
 
-        followers.remove(userService.findByPrincipal());
-        following.remove(userService.findOne(userOrNutritionist.getId()));
+        Collection<UserOrNutritionist> followers = followingUser.getFollower();
+        Collection<UserOrNutritionist> following =  userOrNutritionist.getFollowing();
 
-        userService.findByPrincipal().setFollowing(following);
-        userService.findOne(userOrNutritionist.getId()).setFollower(followers);
+        followers.remove(followingUser);
+        following.remove(userOrNutritionist);
 
+        followingUser.setFollowing(following);
+        userOrNutritionist.setFollower(followers);
+
+        save(followingUser);
         save(userOrNutritionist);
-        save(userService.findByPrincipal());
 
     }
 
@@ -129,7 +135,7 @@ public class UserOrNutritionistService {
     }
 
     public Collection<Recipe> findAllRecipesByFollowingActors(){
-        UserOrNutritionist userOrNutritionist = findUserOrNutritionistByActor(userService.findByPrincipal());
+        UserOrNutritionist userOrNutritionist = findUserOrNutritionistByActor(actorService.findByPrincipal());
         Collection<UserOrNutritionist> followers= userOrNutritionist.getFollowing();
         List<Recipe> list = new ArrayList<Recipe>();
         for(UserOrNutritionist e: followers){

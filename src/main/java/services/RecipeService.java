@@ -34,6 +34,9 @@ public class RecipeService {
     @Autowired
     private LikesService likesService;
 
+    @Autowired
+    CategoryService categoryService;
+
     public RecipeService(){
 
         super();
@@ -115,36 +118,26 @@ public class RecipeService {
 
     }
 
-    public void modifyRecipe(Recipe recipe, String title,
-                             String picture,
-                             String summary,
-                             String hits,
-                             Collection<Quantity> quantities,
-                             Collection<Step> steps,
-                             User author,
-                             Category category){
-
-        Assert.isTrue(recipe.getId() == actorService.findByPrincipal().getId());
+    public void modifyRecipe(Recipe recipe, int id){
         userAccountService.assertRole("USER");
-        Recipe modified = recipe;
-
+        Recipe old = findOne(id);
+        Assert.isTrue(!old.isRead_only());
         Date updatedAt = new Date();
 
-        modified.setUpdated_at(updatedAt);
-        modified.setTitle(title);
-        modified.setPicture(picture);
-        modified.setSummary(summary);
-        modified.setHits(hits);
-        Assert.notNull(quantities);
-        modified.setQuantities(quantities);
-        Assert.notNull(steps);
-        modified.setSteps(steps);
-        Assert.notNull(author);
-        modified.setAuthor(author);
-        Assert.notNull(category);
-        modified.setCategory(category);
+        old.setUpdated_at(updatedAt);
+        old.setTitle(recipe.getTitle());
+        old.setPicture(recipe.getPicture());
+        old.setSummary(recipe.getSummary());
+        old.setHits(recipe.getHits());
+        old.setUpdated_at(new Date());
+        Assert.notNull(recipe.getQuantities());
+        old.setQuantities(recipe.getQuantities());
+        Assert.notNull(recipe.getSteps());
+        old.setSteps(recipe.getSteps());
+        Assert.notNull(recipe.getCategory());
+        old.setCategory(recipe.getCategory());
 
-        save(modified);
+        save(old);
     }
 
     public void delete(Recipe recipe){
@@ -191,6 +184,15 @@ public class RecipeService {
         Assert.notNull(result);
 
         return result;
+    }
+
+    public Collection<Recipe> findAllByCategory(int id){
+        Collection<Recipe> result;
+
+        result = recipeRepository.findAllByCategory(id);
+        Assert.notNull(result);
+
+        return  result;
     }
 
 }

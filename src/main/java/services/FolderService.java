@@ -21,7 +21,7 @@ public class FolderService {
     private FolderRepository folderRepository;
 
     @Autowired
-    private UserService userService;
+    private ActorService actorService;
 
 
     public FolderService(){
@@ -68,7 +68,7 @@ public class FolderService {
 
     public Folder createCustomFolder(Folder folder){
 
-        User user = userService.findByPrincipal();
+        Actor user = actorService.findByPrincipal();
         Assert.notNull(user);
         folder.setActor(user);
         folder.setFolderType(Folder.FolderType.CUSTOM);

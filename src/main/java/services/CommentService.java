@@ -24,7 +24,7 @@ public class CommentService {
     private UserAccountService userAccountService;
 
     @Autowired
-    private UserService userService;
+    private ActorService actorService;
 
     @Autowired
     private UserOrNutritionistService userOrNutritionistService;
@@ -74,7 +74,7 @@ public class CommentService {
     public void newComment(Comment comment){
         userAccountService.assertRole("USER,NUTRITIONIST");
         UserOrNutritionist actor = userOrNutritionistService
-                .findUserOrNutritionistByActor(userService.findByPrincipal());
+                .findUserOrNutritionistByActor(actorService.findByPrincipal());
         comment.setAutor(actor);
         comment.setCreated_at(new Date());
 

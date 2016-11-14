@@ -23,13 +23,16 @@ public class MessageService {
     private MessageRepository messageRepository;
 
     @Autowired
-    private UserService userService;
+    private ActorService actorService;
 
     @Autowired
     private FolderService folderService;
 
     @Autowired
     private SpamTagsService spamTagsService;
+
+    @Autowired
+    private UserService userService;
 
 
     public MessageService(){
@@ -62,7 +65,7 @@ public class MessageService {
     }
 
     public void deleteById(int messageId){
-        Actor actor = userService.findByPrincipal();
+        Actor actor = actorService.findByPrincipal();
         Message message = findOne(messageId);
         Folder folder = null;
         if (message.getSender() == actor || message.getRecipient() == actor){
@@ -82,7 +85,7 @@ public class MessageService {
         Message result;
 
         Date sendedAt = new Date();
-        Actor senderActor = userService.findByPrincipal();
+        Actor senderActor = actorService.findByPrincipal();
         Assert.notNull(senderActor);
         Actor recipientActor = userService.findOne(recipientId);
         Assert.notNull(recipientActor);
@@ -105,7 +108,7 @@ public class MessageService {
     public void moveMessage(int messageId,int folderId){
         Folder newFolder = folderService.findOne(folderId);
         Message message = findOne(messageId);
-        Actor actor = userService.findByPrincipal();
+        Actor actor = actorService.findByPrincipal();
         Assert.notNull(newFolder);
         Assert.notNull(message);
         Assert.notNull(actor);

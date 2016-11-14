@@ -112,4 +112,10 @@ public class UserService {
     public List<User> findAllByPopularity(){
         return userRepository.findAllByPopularity();
     }
+
+    public List<User> findAllByLikes(){
+        return userRepository.findAllByLikes();
+    }
+
+
 }

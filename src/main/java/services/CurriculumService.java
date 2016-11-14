@@ -22,7 +22,7 @@ public class CurriculumService {
     private CurriculumRepository curriculumRepository;
 
     @Autowired
-    private UserService userService;
+    private ActorService actorService;
 
     @Autowired
     private NutritionistService nutritionistService;
@@ -59,7 +59,7 @@ public class CurriculumService {
     }
 
     public void deleteCurriculum(int id){
-        Actor a = userService.findByPrincipal();
+        Actor a = actorService.findByPrincipal();
         Curriculum curriculum = findOne(id);
 
         if (curriculum.getNutritionist() == a){
@@ -80,32 +80,24 @@ public class CurriculumService {
     }
 
 
-    public void newCurriculum(String educational, String experience, String hobbies, Collection<Reference> references){
+    public void newCurriculum(Curriculum curriculum){
         userAccountService.assertRole("NUTRITIONIST");
-        Actor actor = userService.findByPrincipal();
+        Actor actor = actorService.findByPrincipal();
         Nutritionist nutritionist = (Nutritionist) actor;
-        Curriculum curriculum = create();
-        curriculum.setEducational(educational);
-        curriculum.setExperience(experience);
-        curriculum.setHobbies(hobbies);
         curriculum.setNutritionist(nutritionist);
-        curriculum.setReferences(references);
-
         save(curriculum);
 
     }
 
-    public void modify(int id,String educational, String experience, String hobbies, Collection<Reference> references){
+    public void modify(int id, Curriculum curr){
         userAccountService.assertRole("NUTRITIONIST");
-        Actor actor = userService.findByPrincipal();
+        Actor actor = actorService.findByPrincipal();
         Nutritionist nutritionist = (Nutritionist) actor;
         Curriculum curriculum = findOne(id);
-        Assert.isTrue(curriculum.getNutritionist() == nutritionist);
-        curriculum.setEducational(educational);
-        curriculum.setExperience(experience);
-        curriculum.setHobbies(hobbies);
-        curriculum.setNutritionist(nutritionist);
-        curriculum.setReferences(references);
+        curriculum.setEducational(curr.getEducational());
+        curriculum.setExperience(curr.getExperience());
+        curriculum.setHobbies(curr.getHobbies());
+        curriculum.setReferences(curr.getReferences());
 
         save(curriculum);
     }

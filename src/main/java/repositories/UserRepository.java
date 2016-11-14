@@ -1,6 +1,6 @@
 package repositories;
 
-import domain.Folder;
+
 import domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -26,4 +25,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("select u from User u order by u.follower.size DESC")
     List<User> findAllByPopularity();
+
+
+    @Query("select u, (select avg(l.size) from User u2 join u2.recipes r join r.likes l where u2.id=u.id) as averagel " +
+            "from User u order by averagel DESC")
+    List<User> findAllByLikes();
 }

@@ -32,6 +32,9 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     @Query("select stddev(r.quantities.size), avg(r.quantities.size) from Recipe r")
     List<Object[]> findStdevAvgIngredientsPerRecipe();
 
+    @Query("select r from Recipe r where r.category.id=?1")
+    Collection<Recipe> findAllByCategory(int id);
+
 
 
 }
