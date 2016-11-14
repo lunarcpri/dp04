@@ -25,6 +25,7 @@ public class SponsorService {
         UserAccount userAccount;
 
         userAccount = LoginService.getPrincipal();
+        System.out.println(userAccount.getId());
         Assert.notNull(userAccount);
         result = sponsorRepository.findBySponsorAccountId(userAccount.getId());
 

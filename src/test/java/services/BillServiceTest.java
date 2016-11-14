@@ -26,7 +26,7 @@ public class BillServiceTest extends AbstractTest {
     @Test
     public void testGetMonthlyBills(){
 
-        super.authenticate("sponsor1");
+        super.authenticate("user3");
 
         Collection<Bill> bills = billService.list();
 

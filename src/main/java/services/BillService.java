@@ -25,8 +25,12 @@ public class BillService {
     }
 
     public Collection<Bill> list(){
+        Collection<Bill> bills;
+        System.out.println(sponsorService.findByPrincipal().getId());
+        bills = billRepository.getMonthlyBills(sponsorService.findByPrincipal().getId(), new Date());
+        Assert.notNull(bills);
 
-        return billRepository.getMonthlyBills(sponsorService.findByPrincipal().getId(), new Date());
+        return bills;
     }
 
     public Collection<Bill> list(Date date){

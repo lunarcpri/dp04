@@ -288,6 +288,7 @@
         <property name="phone" value="+34 (001) 955661915" />
         <property name="address" value="Address 1" />
         <property name="company" value="Company 3" />
+        <property name="userAccount" ref="userAccount4"/>
     </bean>
 
     <bean id="sponsor4" class="domain.Sponsor">
