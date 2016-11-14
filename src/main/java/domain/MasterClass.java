@@ -72,7 +72,7 @@ public class MasterClass extends DomainEntity{
         this.promoted = promoted;
     }
 
-    @ManyToMany(mappedBy = "masterClasses")
+    @ManyToMany
     public Collection<User> getAttendingUsers() {
         return attendingUsers;
     }

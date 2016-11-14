@@ -70,5 +70,12 @@ public class Contest extends DomainEntity {
         this.qualifiedRecipes = qualifiedRecipes;
     }
 
+    @Column(columnDefinition="bit default 0")
+    public boolean isEnded() {
+        return ended;
+    }
 
+    public void setEnded(boolean ended) {
+        this.ended = ended;
+    }
 }

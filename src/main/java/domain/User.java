@@ -23,7 +23,7 @@ public class User extends UserOrNutritionist
         this.recipes = recipes;
     }
 
-    @ManyToMany(mappedBy = "attendingUsers")
+    @ManyToMany
     public Collection<MasterClass> getMasterClasses() {
         return masterClasses;
     }
