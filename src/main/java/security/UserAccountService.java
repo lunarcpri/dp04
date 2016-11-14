@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import services.ActorService;
 import services.UserService;
 
 @Service
@@ -18,6 +19,9 @@ public class UserAccountService {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private ActorService actorService;
 	
 	// Supporting services ----------------------------------------------------
 		
@@ -40,7 +44,7 @@ public class UserAccountService {
 	}
 
 	public void assertRole(String role) {
-		Actor actor = userService.findByPrincipal();
+		Actor actor = actorService.findByPrincipal();
 		String[] roles = role.split(",");
 		for (String e : roles) {
 			Authority authority = new Authority();
