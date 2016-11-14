@@ -20,7 +20,7 @@ public class CampaignService {
     private CampaignRepository campaignRepository;
 
     @Autowired
-    private ActorService actorService;
+    private SponsorService sponsorService;
 
     public CampaignService(){
         super();
@@ -38,7 +38,7 @@ public class CampaignService {
         Assert.notNull(c);
 
 
-        c.setSponsor(this.getActualSponsor());
+        c.setSponsor(sponsorService.getActualSponsor());
 
         return campaignRepository.save(c);
 
@@ -47,7 +47,7 @@ public class CampaignService {
     public Campaign modify(int ID, Campaign c){
 
 
-        Assert.isTrue(c.getSponsor().equals(this.getActualSponsor()));
+        Assert.isTrue(c.getSponsor().equals(sponsorService.getActualSponsor()));
         Assert.isTrue(!isActive(c) && !hasPassed(c));
 
         Campaign campaign = campaignRepository.findOne(ID);
@@ -65,7 +65,7 @@ public class CampaignService {
 
         Campaign campaign = campaignRepository.findOne(ID);
 
-        Assert.isTrue(campaign.getSponsor().equals(this.getActualSponsor()));
+        Assert.isTrue(campaign.getSponsor().equals(sponsorService.getActualSponsor()));
         Assert.isTrue(!isActive(campaign) && !hasPassed(campaign));
 
         campaignRepository.delete(ID);
@@ -74,14 +74,10 @@ public class CampaignService {
 
     public Collection<Campaign> list(){
 
-        return this.getActualSponsor().getCampaigns();
+        return sponsorService.getActualSponsor().getCampaigns();
 
     }
 
-    private Sponsor getActualSponsor(){
-
-        return (Sponsor) actorService.findByPrincipal();
-    }
 
     private boolean isActive(Campaign c){
 
