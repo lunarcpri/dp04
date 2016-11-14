@@ -27,6 +27,7 @@ public class MasterClassService {
     private MessageService messageService;
 
 
+
     public MasterClassService(){
 
         super();
@@ -99,6 +100,22 @@ public class MasterClassService {
             message.setRecipient(u);
             messageService.saveMessage(message);
         }
+    }
+
+    public void attendMasterClass(MasterClass masterClass){
+
+        userAccountService.assertRole("USER");
+        User user = (User) actorService.findByPrincipal();
+        Assert.isTrue(!masterClass.getAttendingUsers().contains(user));
+
+        MasterClass result = masterClass;
+
+        Collection<User> currentlyAttending = result.getAttendingUsers();
+        currentlyAttending.add(user);
+        result.setAttendingUsers(currentlyAttending);
+
+        save(result);
+
     }
 
 
