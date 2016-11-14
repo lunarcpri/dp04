@@ -1,5 +1,6 @@
 package services;
 
+import domain.Actor;
 import domain.Recipe;
 import domain.SocialIdentity;
 import domain.User;
@@ -22,11 +23,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private RecipeService recipeService;
 
     @Autowired
-    private SocialIdentityService socialIdentityService;
+    private ActorService actorService;
 
     public UserService(){
         super();
@@ -74,35 +73,13 @@ public class UserService {
        userRepository.delete(user);
     }
 
-    public User findByPrincipal() {
-        User result;
-        UserAccount userAccount;
-
-        userAccount = LoginService.getPrincipal();
-        Assert.notNull(userAccount);
-        result = findByUserAccount(userAccount);
-        Assert.notNull(result);
-
-        return result;
-    }
-
-    public User findByUserAccount(UserAccount userAccount) {
-        Assert.notNull(userAccount);
-
-        User result;
-
-        result = userRepository.findByUserAccountId(userAccount.getId());
-
-
-        return result;
-    }
 
     /* Other methdos */
 
     public User edit(String name, String surnames, String address, String email, String phone) {
         User result;
 
-        result = findByPrincipal();
+        result = (User) actorService.findByPrincipal();
         Assert.notNull(result);
         result.setName(name);
         result.setSurnames(surnames);
