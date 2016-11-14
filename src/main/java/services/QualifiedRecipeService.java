@@ -36,15 +36,15 @@ public class QualifiedRecipeService {
     public Collection<QualifiedRecipe> findQualifiedRecipesByContest(int id){
         return qualifiedRecipeRepository.findQualifiedRecipesByContest(id);
     }
-/*
+
     public Collection<Recipe> findWinnersRecipesByContestId(int id){
         Collection<Recipe> result;
 
-        result = qualifiedRecipeRepository.findWinnersRecipesByContestId(id);
+        result = qualifiedRecipeRepository.findWinnersByContestId(id);
         Assert.notNull(result);
 
         return result;
-    }*/
+    }
 
     public Collection<Recipe> findRecipesByContestId(int id){
         Collection<Recipe> result;

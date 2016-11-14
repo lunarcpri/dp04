@@ -1,19 +1,17 @@
 package services;
 
-import domain.*;
+import domain.Actor;
+import domain.Likes;
+import domain.Recipe;
+import domain.UserOrNutritionist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.RecipeRepository;
-import repositories.UserRepository;
-import security.Authority;
 import security.UserAccountService;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -23,7 +21,7 @@ public class RecipeService {
     private RecipeRepository recipeRepository;
 
     @Autowired
-    private ActorService actorService;
+    private UserService userService;
 
     @Autowired
     private UserOrNutritionistService userOrNutritionistService;
@@ -78,41 +76,42 @@ public class RecipeService {
         recipeRepository.save(recipe);
     }
 
-    public Recipe newRecipe(String ticker, String title,
-                            String picture,
-                            String summary,
-                            String hits,
-                            Collection<Quantity> quantities,
-                            Collection<Step> steps,
-                            User author,
-                            Category category){
+    public Recipe newRecipe(Recipe recip){
 
         userAccountService.assertRole("USER");
         Date createdAt = new Date();
         Recipe recipe = create();
 
         recipe.setCreated_at(createdAt);
-        recipe.setTicker(ticker);
-        recipe.setTitle(title);
-        recipe.setSummary(summary);
-        recipe.setHits(hits);
-        Assert.notNull(quantities);
-        recipe.setQuantities(quantities);
-        Assert.notNull(steps);
-        recipe.setSteps(steps);
-        Assert.notNull(author);
-        recipe.setAuthor(author);
-        Assert.notNull(category);
-        recipe.setCategory(category);
+        recipe.setTicker(generateTicker(recip));
+        recipe.setTitle(recip.getTitle());
+        recipe.setSummary(recip.getSummary());
+        recipe.setHits(recip.getHits());
+        recipe.setQuantities(recip.getQuantities());
+        recipe.setSteps(recip.getSteps());
+        recipe.setAuthor(recip.getAuthor());
+        recipe.setCategory(recip.getCategory());
 
         save(recipe);
         return recipe;
     }
 
+    private String generateTicker(Recipe recipe){
+        String result="";
+        Date date = new Date();
+        for(int i=0;i<3;i++){
+            Random r = new Random();
+            char c = (char)(r.nextInt(26) + 'a');
+            result=result+String.valueOf(c);
+        }
+        return result;
+
+    }
+
     public Collection<Recipe> findUserRecipes(){
         Collection<Recipe> recipe;
 
-        recipe = findAllRecipesByUser(actorService.findByPrincipal().getId());
+        recipe = findAllRecipesByUser(userService.findByPrincipal().getId());
 
         return recipe;
 
@@ -152,9 +151,8 @@ public class RecipeService {
 
     public void addLike(int id, boolean like){
         Recipe recipe = findOne(id);
-        Actor actor = actorService.findByPrincipal();
-        UserOrNutritionist userOrNutritionist = userOrNutritionistService.findUserOrNutritionistByActor(actor);
-        Assert.isTrue(!isActorAuthoredRecipe(actor.getId(),id));
+        UserOrNutritionist userOrNutritionist = userService.findByPrincipal();
+        Assert.isTrue(!isActorAuthoredRecipe(userOrNutritionist.getId(),id));
         List<Likes> likes = new ArrayList<Likes>(likesService.findRecipeLikeByActor(userOrNutritionist.getId(),id));
         if (likes.size()>0){
             Likes likeRecipe = likes.get(0);
@@ -173,7 +171,7 @@ public class RecipeService {
 
     public boolean isActorAuthoredRecipe(int actorid, int recipeid){
         Recipe recipe = findOne(recipeid);
-        Actor actor = actorService.findOne(actorid);
+        Actor actor = userOrNutritionistService.findOne(actorid);
         return recipe.getAuthor() == actor;
     }
 

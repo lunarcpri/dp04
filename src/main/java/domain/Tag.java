@@ -7,7 +7,6 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Entity

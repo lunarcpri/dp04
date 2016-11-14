@@ -1,10 +1,6 @@
 package services;
 
-import domain.Actor;
-import domain.Recipe;
-import domain.SocialIdentity;
 import domain.User;
-import org.hibernate.validator.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,7 +75,7 @@ public class UserService {
     public User edit(String name, String surnames, String address, String email, String phone) {
         User result;
 
-        result = (User) actorService.findByPrincipal();
+        result =  findByPrincipal();
         Assert.notNull(result);
         result.setName(name);
         result.setSurnames(surnames);
@@ -117,5 +113,15 @@ public class UserService {
         return userRepository.findAllByLikes();
     }
 
+    public User findByPrincipal() {
+        User result;
+        UserAccount userAccount;
+
+        userAccount = LoginService.getPrincipal();
+        Assert.notNull(userAccount);
+        result = userRepository.findByUserAccountId(userAccount.getId());
+
+        return result;
+    }
 
 }

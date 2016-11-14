@@ -1,6 +1,9 @@
 package services;
 
-import domain.*;
+import domain.Actor;
+import domain.Recipe;
+import domain.User;
+import domain.UserOrNutritionist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,9 +27,7 @@ public class UserOrNutritionistService {
 
     @Autowired
     private UserAccountService userAccountService;
-    
-    @Autowired
-    private ActorService actorService;
+
 
 
     public UserOrNutritionistService(){
@@ -74,7 +75,7 @@ public class UserOrNutritionistService {
 
     public Boolean isFollowing(int id){
 
-        Assert.isTrue(!userOrNutritionistRepository.following(actorService.findByPrincipal().getId(), id).isEmpty());
+        Assert.isTrue(!userOrNutritionistRepository.following(userService.findByPrincipal().getId(), id).isEmpty());
 
         return true;
     }
@@ -86,7 +87,7 @@ public class UserOrNutritionistService {
         Assert.isTrue(!isFollowing(userOrNutritionist.getId()));
         userAccountService.assertRole("USER,NUTRITIONIST");
 
-        UserOrNutritionist followingUser = (UserOrNutritionist) actorService.findByPrincipal();
+        UserOrNutritionist followingUser = (UserOrNutritionist) userService.findByPrincipal();
 
         Collection<UserOrNutritionist> followers = followingUser.getFollower();
         Collection<UserOrNutritionist> following =  userOrNutritionist.getFollowing();
@@ -109,7 +110,7 @@ public class UserOrNutritionistService {
         Assert.isTrue(isFollowing(userOrNutritionist.getId()));
         userAccountService.assertRole("USER,NUTRITIONIST");
 
-        UserOrNutritionist followingUser = (UserOrNutritionist) actorService.findByPrincipal();
+        UserOrNutritionist followingUser = (UserOrNutritionist) userService.findByPrincipal();
 
         Collection<UserOrNutritionist> followers = followingUser.getFollower();
         Collection<UserOrNutritionist> following =  userOrNutritionist.getFollowing();
@@ -135,7 +136,7 @@ public class UserOrNutritionistService {
     }
 
     public Collection<Recipe> findAllRecipesByFollowingActors(){
-        UserOrNutritionist userOrNutritionist = findUserOrNutritionistByActor(actorService.findByPrincipal());
+        UserOrNutritionist userOrNutritionist = findUserOrNutritionistByActor(userService.findByPrincipal());
         Collection<UserOrNutritionist> followers= userOrNutritionist.getFollowing();
         List<Recipe> list = new ArrayList<Recipe>();
         for(UserOrNutritionist e: followers){

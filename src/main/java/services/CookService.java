@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.CookRepository;
-import repositories.UserRepository;
+import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
 
@@ -36,6 +36,17 @@ public class CookService {
         userAccountServiceServic.assertRole("COOK");
         return c.getMasterClasses();
 
+    }
+
+    public Cook findByPrincipal() {
+        Cook result;
+        UserAccount userAccount;
+
+        userAccount = LoginService.getPrincipal();
+        Assert.notNull(userAccount);
+        result =cookRepository.findByCookAccountId(userAccount.getId());
+
+        return result;
     }
 
 

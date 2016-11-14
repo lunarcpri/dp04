@@ -18,13 +18,16 @@ public class MasterClassService {
     private MasterClassRepository masterClassRepository;
 
     @Autowired
-    private ActorService actorService;
+    private CookService cookService;
 
     @Autowired
     private UserAccountService userAccountService;
 
     @Autowired
     private MessageService messageService;
+
+    @Autowired
+    private UserService userService;
 
 
 
@@ -61,7 +64,7 @@ public class MasterClassService {
         userAccountService.assertRole("COOK");
         MasterClass result = masterClass;
 
-        result.setCook((Cook) actorService.findByPrincipal());
+        result.setCook((Cook) cookService.findByPrincipal());
 
         save(result);
 
@@ -105,7 +108,7 @@ public class MasterClassService {
     public void attendMasterClass(MasterClass masterClass){
 
         userAccountService.assertRole("USER");
-        User user = (User) actorService.findByPrincipal();
+        User user = userService.findByPrincipal();
         Assert.isTrue(!masterClass.getAttendingUsers().contains(user));
 
         MasterClass result = masterClass;

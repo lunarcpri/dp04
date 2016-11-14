@@ -1,14 +1,11 @@
 package services;
 
 import domain.SocialIdentity;
-import domain.User;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.SocialIdentityRepository;
-import repositories.UserRepository;
 
 import java.util.Collection;
 

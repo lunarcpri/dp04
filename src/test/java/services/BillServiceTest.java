@@ -32,7 +32,7 @@ public class BillServiceTest extends AbstractTest {
 
         for (Bill bill: bills){
 
-            Assert.isTrue(bill.getSponsor().equals(billService.sponsorService.getActualSponsor()));
+            Assert.isTrue(bill.getSponsor().equals(billService.sponsorService.findByPrincipal()));
 
         }
 

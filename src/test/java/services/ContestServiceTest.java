@@ -1,7 +1,6 @@
 package services;
 
 import domain.Contest;
-import domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,10 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-        "classpath:spring/datasource.xml",
-        "classpath:spring/config/packages.xml"
+        "classpath*:spring/datasource.xml",
+        "classpath*:spring/config/packages.xml"
 })
+
 @Transactional
 public class ContestServiceTest extends AbstractTest {
 

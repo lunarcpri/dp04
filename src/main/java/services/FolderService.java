@@ -3,13 +3,11 @@ package services;
 import domain.Actor;
 import domain.Folder;
 import domain.Message;
-import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.FolderRepository;
-import repositories.UserRepository;
 
 import java.util.Collection;
 
@@ -21,7 +19,7 @@ public class FolderService {
     private FolderRepository folderRepository;
 
     @Autowired
-    private ActorService actorService;
+    private UserService userService;
 
 
     public FolderService(){
@@ -68,7 +66,7 @@ public class FolderService {
 
     public Folder createCustomFolder(Folder folder){
 
-        Actor user = actorService.findByPrincipal();
+        Actor user = userService.findByPrincipal();
         Assert.notNull(user);
         folder.setActor(user);
         folder.setFolderType(Folder.FolderType.CUSTOM);

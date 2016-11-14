@@ -10,7 +10,6 @@ import repositories.CampaignRepository;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 @Service
 @Transactional
@@ -38,7 +37,7 @@ public class CampaignService {
         Assert.notNull(c);
 
 
-        c.setSponsor(sponsorService.getActualSponsor());
+        c.setSponsor(this.getActualSponsor());
 
         return campaignRepository.save(c);
 
@@ -47,7 +46,7 @@ public class CampaignService {
     public Campaign modify(int ID, Campaign c){
 
 
-        Assert.isTrue(c.getSponsor().equals(sponsorService.getActualSponsor()));
+        Assert.isTrue(c.getSponsor().equals(this.getActualSponsor()));
         Assert.isTrue(!isActive(c) && !hasPassed(c));
 
         Campaign campaign = campaignRepository.findOne(ID);
@@ -65,7 +64,7 @@ public class CampaignService {
 
         Campaign campaign = campaignRepository.findOne(ID);
 
-        Assert.isTrue(campaign.getSponsor().equals(sponsorService.getActualSponsor()));
+        Assert.isTrue(campaign.getSponsor().equals(this.getActualSponsor()));
         Assert.isTrue(!isActive(campaign) && !hasPassed(campaign));
 
         campaignRepository.delete(ID);
@@ -74,10 +73,14 @@ public class CampaignService {
 
     public Collection<Campaign> list(){
 
-        return sponsorService.getActualSponsor().getCampaigns();
+        return this.getActualSponsor().getCampaigns();
 
     }
 
+    private Sponsor getActualSponsor(){
+
+        return sponsorService.findByPrincipal();
+    }
 
     private boolean isActive(Campaign c){
 

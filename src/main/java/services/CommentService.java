@@ -1,6 +1,5 @@
 package services;
 
-import domain.Actor;
 import domain.Comment;
 import domain.UserOrNutritionist;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,7 @@ public class CommentService {
     private UserAccountService userAccountService;
 
     @Autowired
-    private ActorService actorService;
-
+    private UserService userService;
     @Autowired
     private UserOrNutritionistService userOrNutritionistService;
 
@@ -74,7 +72,7 @@ public class CommentService {
     public void newComment(Comment comment){
         userAccountService.assertRole("USER,NUTRITIONIST");
         UserOrNutritionist actor = userOrNutritionistService
-                .findUserOrNutritionistByActor(actorService.findByPrincipal());
+                .findUserOrNutritionistByActor(userService.findByPrincipal());
         comment.setAutor(actor);
         comment.setCreated_at(new Date());
 

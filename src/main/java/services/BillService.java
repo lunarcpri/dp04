@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.BillRepository;
 
-import java.time.Month;
 import java.util.Collection;
 import java.util.Date;
 
@@ -21,18 +20,18 @@ public class BillService {
     @Autowired
     public SponsorService sponsorService;
 
-    public BillService(BillRepository billRepository){
+    public BillService(){
        super();
     }
 
     public Collection<Bill> list(){
 
-        return billRepository.getMonthlyBills(sponsorService.getActualSponsor().getId(), new Date());
+        return billRepository.getMonthlyBills(sponsorService.findByPrincipal().getId(), new Date());
     }
 
     public Collection<Bill> list(Date date){
 
-        return billRepository.getMonthlyBills(sponsorService.getActualSponsor().getId(), date);
+        return billRepository.getMonthlyBills(sponsorService.findByPrincipal().getId(), date);
     }
 
     public void paid(Collection<Bill> bills){

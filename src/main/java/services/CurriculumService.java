@@ -3,16 +3,12 @@ package services;
 import domain.Actor;
 import domain.Curriculum;
 import domain.Nutritionist;
-import domain.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.CurriculumRepository;
-import security.Authority;
 import security.UserAccountService;
-
-import java.util.Collection;
 
 @Service
 @Transactional
@@ -20,9 +16,6 @@ public class CurriculumService {
 
     @Autowired
     private CurriculumRepository curriculumRepository;
-
-    @Autowired
-    private ActorService actorService;
 
     @Autowired
     private NutritionistService nutritionistService;
@@ -59,7 +52,7 @@ public class CurriculumService {
     }
 
     public void deleteCurriculum(int id){
-        Actor a = actorService.findByPrincipal();
+        Actor a = nutritionistService.findByPrincipal();
         Curriculum curriculum = findOne(id);
 
         if (curriculum.getNutritionist() == a){
@@ -82,8 +75,7 @@ public class CurriculumService {
 
     public void newCurriculum(Curriculum curriculum){
         userAccountService.assertRole("NUTRITIONIST");
-        Actor actor = actorService.findByPrincipal();
-        Nutritionist nutritionist = (Nutritionist) actor;
+        Nutritionist nutritionist = nutritionistService.findByPrincipal();
         curriculum.setNutritionist(nutritionist);
         save(curriculum);
 
@@ -91,8 +83,7 @@ public class CurriculumService {
 
     public void modify(int id, Curriculum curr){
         userAccountService.assertRole("NUTRITIONIST");
-        Actor actor = actorService.findByPrincipal();
-        Nutritionist nutritionist = (Nutritionist) actor;
+        Nutritionist nutritionist = nutritionistService.findByPrincipal();
         Curriculum curriculum = findOne(id);
         curriculum.setEducational(curr.getEducational());
         curriculum.setExperience(curr.getExperience());

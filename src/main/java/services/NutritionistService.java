@@ -1,12 +1,13 @@
 package services;
 
-import domain.Actor;
 import domain.Nutritionist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.NutritionistRepository;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
@@ -28,11 +29,13 @@ public class NutritionistService {
         return result;
     }
 
-    public Nutritionist findNutritionistByActor(Actor actor){
+    public Nutritionist findByPrincipal() {
         Nutritionist result;
+        UserAccount userAccount;
 
-        result = findOne(actor.getId());
-        Assert.notNull(result);
+        userAccount = LoginService.getPrincipal();
+        Assert.notNull(userAccount);
+        result = nutritionistRepository.findByNutritionistAccountId(userAccount.getId());
 
         return result;
     }

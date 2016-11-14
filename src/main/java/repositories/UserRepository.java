@@ -14,6 +14,10 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 
+
+    @Query("select c from User c where c.userAccount.id=?1")
+    User findByUserAccountId(int userAccountId);
+
     @Query("select u from User u where u.name like '%?1%' or u.surnames like '%?1%'")
     Collection<User> findByKeyword(String key);
 

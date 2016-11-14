@@ -1,16 +1,13 @@
 package services;
 
 import domain.Contest;
-import domain.QualifiedRecipe;
 import domain.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.ContestRepository;
-import security.Authority;
 import security.UserAccountService;
-import utilities.DateUtility;
 
 import java.util.Collection;
 import java.util.Date;
@@ -67,14 +64,14 @@ public class ContestService {
 
         return result;
     }
-/*
+
     public Collection<Recipe> findWinners(int id){
         Collection<Recipe> result;
 
         result = qualifiedRecipeService.findWinnersRecipesByContestId(id);
 
         return result;
-    }*/
+    }
 
     public Collection<Recipe> findRecipes(int id){
         Collection<Recipe> result;

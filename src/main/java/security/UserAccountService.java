@@ -44,7 +44,7 @@ public class UserAccountService {
 	}
 
 	public void assertRole(String role) {
-		Actor actor = actorService.findByPrincipal();
+		Actor actor = userService.findByPrincipal();
 		String[] roles = role.split(",");
 		for (String e : roles) {
 			Authority authority = new Authority();

@@ -24,9 +24,9 @@ public class CreditCardService {
     public CreditCard change(CreditCard card){
 
         Assert.notNull(card);
-        Assert.isTrue(card.getSponsor().equals(sponsorService.getActualSponsor()));
+        Assert.isTrue(card.getSponsor().equals(sponsorService.findByPrincipal()));
 
-        CreditCard actualCard = sponsorService.getActualSponsor().getCredidCard();
+        CreditCard actualCard = sponsorService.findByPrincipal().getCredidCard();
 
         actualCard.setBrand_name(card.getBrand_name());
         actualCard.setCcv(card.getCcv());

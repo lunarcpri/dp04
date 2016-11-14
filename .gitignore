@@ -1,2 +1,5 @@
 /.idea
 Acme-Pad-Thai.iml
+target/generated-sources/
+target/generated-test-sources/
+target/test-classes/utilities/Statistics.class

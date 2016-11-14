@@ -1,13 +1,12 @@
 package utilities;
 
-         import org.junit.Before;
-         import org.springframework.beans.factory.annotation.Autowired;
-         import org.springframework.security.authentication.TestingAuthenticationToken;
-         import org.springframework.security.core.context.SecurityContext;
-         import org.springframework.security.core.context.SecurityContextHolder;
-         import org.springframework.security.core.userdetails.UserDetails;
-
-         import security.LoginService;
+import org.junit.Before;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.TestingAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import security.LoginService;
 
 public class AbstractTest {
 

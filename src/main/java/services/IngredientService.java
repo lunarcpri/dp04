@@ -2,13 +2,11 @@ package services;
 
 import domain.Ingredient;
 import domain.Property;
-import org.apache.taglibs.standard.extra.spath.ASCII_CharStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.IngredientRepository;
-import security.Authority;
 import security.UserAccountService;
 
 import java.util.Collection;

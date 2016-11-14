@@ -11,8 +11,6 @@
 package utilities;
 
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.Hibernate;
-import org.hibernate.dialect.function.StandardSQLFunction;
 import utilities.internal.ConsoleReader;
 import utilities.internal.CustomToStringBuilder;
 import utilities.internal.DatabaseUtil;

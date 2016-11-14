@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import repositories.FolderRepository;
 import repositories.MessageRepository;
-import repositories.UserRepository;
 
 import java.util.Collection;
 import java.util.Date;
@@ -21,9 +19,6 @@ public class MessageService {
 
     @Autowired
     private MessageRepository messageRepository;
-
-    @Autowired
-    private ActorService actorService;
 
     @Autowired
     private FolderService folderService;
@@ -65,7 +60,7 @@ public class MessageService {
     }
 
     public void deleteById(int messageId){
-        Actor actor = actorService.findByPrincipal();
+        Actor actor = userService.findByPrincipal();
         Message message = findOne(messageId);
         Folder folder = null;
         if (message.getSender() == actor || message.getRecipient() == actor){
@@ -85,7 +80,7 @@ public class MessageService {
         Message result;
 
         Date sendedAt = new Date();
-        Actor senderActor = actorService.findByPrincipal();
+        Actor senderActor = userService.findByPrincipal();
         Assert.notNull(senderActor);
         Actor recipientActor = userService.findOne(recipientId);
         Assert.notNull(recipientActor);
@@ -114,7 +109,7 @@ public class MessageService {
     public void moveMessage(int messageId,int folderId){
         Folder newFolder = folderService.findOne(folderId);
         Message message = findOne(messageId);
-        Actor actor = actorService.findByPrincipal();
+        Actor actor = userService.findByPrincipal();
         Assert.notNull(newFolder);
         Assert.notNull(message);
         Assert.notNull(actor);
