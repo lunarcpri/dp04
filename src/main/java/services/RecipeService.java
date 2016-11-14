@@ -23,7 +23,7 @@ public class RecipeService {
     private RecipeRepository recipeRepository;
 
     @Autowired
-    private UserService userService;
+    private ActorService actorService;
 
     @Autowired
     private UserOrNutritionistService userOrNutritionistService;
@@ -109,7 +109,7 @@ public class RecipeService {
     public Collection<Recipe> findUserRecipes(){
         Collection<Recipe> recipe;
 
-        recipe = findAllRecipesByUser(userService.findByPrincipal().getId());
+        recipe = findAllRecipesByUser(actorService.findByPrincipal().getId());
 
         return recipe;
 
@@ -124,7 +124,7 @@ public class RecipeService {
                              User author,
                              Category category){
 
-        Assert.isTrue(recipe.getId() == userService.findByPrincipal().getId());
+        Assert.isTrue(recipe.getId() == actorService.findByPrincipal().getId());
         userAccountService.assertRole("USER");
         Recipe modified = recipe;
 
@@ -159,7 +159,7 @@ public class RecipeService {
 
     public void addLike(int id, boolean like){
         Recipe recipe = findOne(id);
-        Actor actor = userService.findByPrincipal();
+        Actor actor = actorService.findByPrincipal();
         UserOrNutritionist userOrNutritionist = userOrNutritionistService.findUserOrNutritionistByActor(actor);
         Assert.isTrue(!isActorAuthoredRecipe(actor.getId(),id));
         List<Likes> likes = new ArrayList<Likes>(likesService.findRecipeLikeByActor(userOrNutritionist.getId(),id));
@@ -180,7 +180,7 @@ public class RecipeService {
 
     public boolean isActorAuthoredRecipe(int actorid, int recipeid){
         Recipe recipe = findOne(recipeid);
-        Actor actor = userService.findOne(actorid);
+        Actor actor = actorService.findOne(actorid);
         return recipe.getAuthor() == actor;
     }
 

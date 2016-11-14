@@ -108,4 +108,8 @@ public class UserService {
 
         return result;
     }
+
+    public List<User> findAllByPopularity(){
+        return userRepository.findAllByPopularity();
+    }
 }

@@ -30,6 +30,8 @@ public class RecipeServiceTest extends AbstractTest {
     public void testFindStdevAvgStepsPerRecipe(){
         List<Object[]> list = recipeService.findStdevAvgStepsPerRecipe();
         Object[] arr = list.get(0);
+        Collection<Recipe> recipes = recipeService.findAll();
+        double[] datos;
 
         System.out.println(arr[1]);
     }

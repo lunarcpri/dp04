@@ -2,6 +2,7 @@ package repositories;
 
 import domain.Likes;
 import domain.Recipe;
+import domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -30,6 +31,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 
     @Query("select stddev(r.quantities.size), avg(r.quantities.size) from Recipe r")
     List<Object[]> findStdevAvgIngredientsPerRecipe();
+
 
 
 }

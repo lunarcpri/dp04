@@ -23,4 +23,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("select u from User u where u.recipes.size = (select max(u2.recipes.size) from User u2)")
     User findUserWithMoreRecipes();
+
+    @Query("select u from User u order by u.follower.size DESC")
+    List<User> findAllByPopularity();
 }
