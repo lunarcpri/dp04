@@ -177,22 +177,6 @@ public class MessageService {
         return result;
     }
 
-    public void broadcastMessage(){
-
-        userAccountService.assertRole("ADMINISTRATOR");
-
-        Collection<Bill> bills = billRepository.getUnpaidBills();
-
-        Message message = new Message();
-
-        message.setBody("Notice of default: You have unpaid bills");
-        for (Bill b:bills){
-
-            this.newMessage(b.getSponsor().getId(), message);
-        }
-
-
-    }
 
 
 }

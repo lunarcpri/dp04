@@ -13,12 +13,14 @@ import java.util.Collection;
 public interface CampaignRepository extends JpaRepository<Campaign, Integer>{
 
     // DASHBOARD
-    // - The minimum, the average, and the maximum number of campaigns per sponsor.  V
-    @Query("select min(s.campaigns.size), max (s.campaigns.size), avg (s.campaigns.size) FROM Sponsor s")
-    Collection<Bill> statisticsPerSponsor();
+    // - The minimum, the average, and the maximum number of campaigns per sponsor.
+    @Query("select min(s.campaigns.size), max (s.campaigns.size), avg (s.campaigns.size) from Sponsor s")
+    Object statisticsPerSponsor();
 
-    // - The ranking of companies according the number of campaigns that they?ve organised via their sponsors.
-    @Query("select min(s.campaigns.size),max(s.campaigns.size),avg(s.campaigns.size) FROM Sponsor s JOIN s.campaigns c WHERE CURRENT_DATE BETWEEN c.start_at and c.end_at")
-    Collection<Bill> statisticsActivePerSponsor();
+    // - The minimum, the average, and the maximum number of active campaigns per sponsor.
+    @Query("select min(s.campaigns.size),max(s.campaigns.size),avg(s.campaigns.size) from Sponsor s join s.campaigns c where CURRENT_DATE BETWEEN c.start_at and c.end_at")
+    Object statisticsActivePerSponsor();
+
+
 
 }

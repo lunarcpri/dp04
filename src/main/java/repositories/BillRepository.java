@@ -19,10 +19,9 @@ public interface BillRepository extends JpaRepository<Bill, Integer> {
 
 
     // DASHBOARD
+
     // - The average and the standard deviation of paid and unpaid monthly bills.
-    @Query("select avg(s1.bills.size), avg(s2.bills.size), sttdev(s1.bills.size), sttdev(s2.bills.size) From Sponsor s join s.bills b1 join s.bills b2 WHERE b1.paid_at is null and b2.paid_at is not null")
-    Collection<Bill> statiticsPaidUnpaidBills();
-
-
+    @Query("select avg(s1.bills.size), avg(s2.bills.size), stddev(s1.bills.size), stddev(s2.bills.size) from Sponsor s1 join s1.bills b1 , Sponsor s2 join s2.bills b2 where b1.paid_at is null and b2.paid_at is not null")
+    Object statiticsPaidUnpaidBills();
 
 }

@@ -1,14 +1,12 @@
 package services;
 
-import domain.Actor;
-import domain.Administrator;
-import domain.Cook;
-import domain.MasterClass;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.AdministratorRepository;
+import repositories.SponsorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
@@ -30,7 +28,13 @@ public class AdministratorService {
     private UserAccountService userAccountService;
 
     @Autowired
+    private MessageService messageService;
+
+    @Autowired
     private MasterClassService masterClassService;
+
+    @Autowired
+    private SponsorRepository sponsorRepository;
 
     @Autowired
     private ActorService actorService;
@@ -58,6 +62,20 @@ public class AdministratorService {
         result = administratorRepository.findByAdministratorAccountId(userAccount.getId());
 
         return result;
+    }
+
+
+    public void notifyToSponsorsWithUnpaidBills(){
+
+        userAccountService.assertRole("ADMINISTRATOR");
+
+        Collection<Sponsor> sponsors = sponsorRepository.getSponsorsWithUpaidBills();
+
+        Message message = new Message();
+        message.setBody("You have unpaid bills");
+        messageService.newMessage(sponsors,message);
+
+
     }
 
 
