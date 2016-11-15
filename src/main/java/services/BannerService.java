@@ -12,8 +12,8 @@ public class BannerService {
     @Autowired
     private BannerRepository bannerRepository;
 
-    @Autowired
-    public BannerService(BannerRepository bannerRepository){
+
+    public BannerService(){
         super();
     }
 }
