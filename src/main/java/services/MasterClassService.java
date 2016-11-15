@@ -107,7 +107,8 @@ public class MasterClassService {
             Message message = new Message();
 
             message.setPriority(Message.Priority.HIGH);
-            message.setBody("SYSTEM MESSAGE: The master class "+masterClass.getTitle()+" was deleted.");
+            message.setBody("The master class "+masterClass.getTitle()+" was deleted by its owner. We are really sorry");
+            message.setSubject("SYSTEM MESSAGE: The master class "+masterClass.getTitle()+" was deleted.");
             message.setRecipients(masterClass.getAttendingUsers());
             messageService.saveMessage(message);
     }

@@ -165,7 +165,7 @@ public class RecipeService {
                 likesService.save(likeRecipe);
             }
         }else{
-            likesService.like(recipe,userOrNutritionist,like);
+            likesService.like(recipe,like);
         }
     }
 
@@ -193,6 +193,24 @@ public class RecipeService {
         Assert.notNull(result);
 
         return  result;
+    }
+
+    public Integer getNumberOfDisLike(Recipe r){
+        Integer result;
+
+        result = recipeRepository.getNumberOfDisLike(r.getId());
+        Assert.notNull(result);
+
+        return result;
+    }
+
+    public Integer getNumberOfLike(Recipe r){
+        Integer result;
+
+        result = recipeRepository.getNumberOfLike(r.getId());
+        Assert.notNull(result);
+
+        return result;
     }
 
 }

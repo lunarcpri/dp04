@@ -54,7 +54,6 @@ public class Category extends domain.DomainEntity{
 
     //Relationships
 
-    @Valid
     @ManyToMany
     public Collection<Tag> getTags() {
         return tags;

@@ -61,39 +61,30 @@ public class IngredientService {
     }
 
 
-    private void delete(Ingredient ingredient){
+
+    public void newIngredient(Ingredient ingredient){
+        userAccountService.assertRole("NUTRITIONIST");
         Assert.notNull(ingredient);
 
-        ingredientRepository.delete(ingredient);
+        save(ingredient);
     }
 
-    public void newIngredient(String description, String name, Collection<Property> properties){
+    public void modify(Ingredient ingredient){
         userAccountService.assertRole("NUTRITIONIST");
-        Ingredient ingredient = create();
-        ingredient.setDescription(description);
-        ingredient.setName(name);
-        ingredient.setProperties(properties);
+        Ingredient ingredientModified = findOne(ingredient.getId());
+        ingredientModified.setDescription(ingredient.getDescription());
+        ingredientModified.setName(ingredient.getName());
+        ingredientModified.setProperties(ingredient.getProperties());
 
         save(ingredient);
     }
 
-    public void modify(int id,String description, String name, Collection<Property> properties){
-        userAccountService.assertRole("NUTRITIONIST");
-        Ingredient ingredient = findOne(id);
-        ingredient.setDescription(description);
-        ingredient.setName(name);
-        ingredient.setProperties(properties);
-
-        save(ingredient);
-    }
-
-     public void delete(int id){
-         Ingredient ingredient = ingredientRepository.findOne(id);
+     public void delete(Ingredient ingredient){
          userAccountService.assertRole("NUTRITIONIST");
 
          Assert.isTrue(ingredient.getQuantities().size()==0);
 
-         delete(ingredient);
+         ingredientRepository.delete(ingredient);
      }
 
 }

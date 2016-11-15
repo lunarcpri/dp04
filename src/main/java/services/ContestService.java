@@ -28,8 +28,12 @@ public class ContestService {
 
     @Autowired UserService userService;
 
+
     @Autowired
     AdministratorService administratorService;
+
+    @Autowired
+    RecipeService recipeService;
 
 
     public ContestService(){
@@ -77,6 +81,30 @@ public class ContestService {
         save(contest);
     }
 
+    public void qualifyRecipe(Recipe r, Contest c){
+        Assert.notNull(r);
+        Assert.notNull(c);
+        Assert.isTrue(recipeService.getNumberOfDisLike(r)==0 && recipeService.getNumberOfLike(r)>=5);
+        Collection<Recipe> recipeCollection = c.getRecipesQualified();
+        recipeCollection.add(r);
+        c.setRecipesQualified(recipeCollection);
+
+        save(c);
+    }
+
+    public void modify(Contest c){
+        Contest modified = findOne(c.getId());
+        if(c.getRecipesQualified().size()==0){
+            modified.setTitle(c.getTitle());
+            modified.setOpened_at(c.getOpened_at());
+            modified.setClosed_at(c.getClosed_at());
+            save(modified);
+        }else if(c.getClosed_at().after(new Date())){
+            modified.setClosed_at(c.getClosed_at());
+            save(modified);
+        }
+    }
+
 
     public void processWinner(){
         Collection<Contest> result;
@@ -98,6 +126,8 @@ public class ContestService {
         }
 
     }
+
+
 
     public List<Recipe> findContestRecipesOrderByLikes(int id){
         List<Recipe> result = new ArrayList<Recipe>();
