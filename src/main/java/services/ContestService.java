@@ -20,8 +20,6 @@ public class ContestService {
     @Autowired
     private ContestRepository contestRepository;
 
-    @Autowired
-    private QualifiedRecipeService qualifiedRecipeService;
 
     @Autowired
     private UserAccountService userAccountService;
@@ -64,23 +62,7 @@ public class ContestService {
 
         return result;
     }
-
-    public Collection<Recipe> findWinners(int id){
-        Collection<Recipe> result;
-
-        result = qualifiedRecipeService.findWinnersRecipesByContestId(id);
-
-        return result;
-    }
-
-    public Collection<Recipe> findRecipes(int id){
-        Collection<Recipe> result;
-
-        result = qualifiedRecipeService.findRecipesByContestId(id);
-
-        return result;
-    }
-
+    
 
 
     public void newContest(Contest contest){
@@ -91,23 +73,7 @@ public class ContestService {
         save(contest);
     }
 
-    public void modify(Contest contest){
-        userAccountService.assertRole("ADMIN");
-        if (contest.getQualifiedRecipes().isEmpty()){
-            Contest result = findOne(contest.getId());
-            result.setClosed_at(contest.getClosed_at());
-        }else{
-            save(contest);
-        }
 
-    }
-
-    public void delete(Contest contest){
-        userAccountService.assertRole("ADMIN");
-        if (contest.getQualifiedRecipes().isEmpty()){
-            delete(contest);
-        }
-    }
 
     public void processWinner(){
         Collection<Contest> contests = contestRepository.findClosedContests();

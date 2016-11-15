@@ -42,6 +42,7 @@ public class UserServiceTest extends AbstractTest {
             avg+=e.getRecipes().size();
         }
         avg = avg / users.size();
+        System.out.println(result[0]);
         Assert.isTrue(min == result[0]);
         Assert.isTrue(max == result[1]);
     }

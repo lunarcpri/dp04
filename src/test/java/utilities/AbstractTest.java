@@ -1,5 +1,6 @@
 package utilities;
 
+import domain.User;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.TestingAuthenticationToken;
@@ -7,6 +8,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import security.LoginService;
+import services.UserService;
 
 public class AbstractTest {
 
@@ -14,6 +16,9 @@ public class AbstractTest {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    protected UserService userService;
 
     // Set up and tear down -------------------------------
 

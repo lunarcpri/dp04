@@ -46,6 +46,7 @@ public class UserService {
         return result;
     }
 
+
     public Collection<User> findAll()
     {
         Collection<User> result;
@@ -72,16 +73,17 @@ public class UserService {
 
     /* Other methdos */
 
-    public User edit(String name, String surnames, String address, String email, String phone) {
+    public User edit(User user) {
         User result;
 
         result =  findByPrincipal();
         Assert.notNull(result);
-        result.setName(name);
-        result.setSurnames(surnames);
-        result.setAddress(address);
-        result.setEmail(email);
-        result.setPhone(phone);
+        result.setName(user.getName());
+        result.setSurnames(user.getSurnames());
+        result.setAddress(user.getAddress());
+        result.setEmail(user.getEmail());
+        result.setPhone(user.getPhone());
+        result.setSocialIdentities(user.getSocialIdentities());
         save(result);
 
         return result;
@@ -124,4 +126,13 @@ public class UserService {
         return result;
     }
 
+
+    Collection<User> findByKeyword(String key){
+        Collection<User> result;
+
+        result = userRepository.findByKeyword(key);
+        Assert.notNull(result);
+
+        return result;
+    }
 }

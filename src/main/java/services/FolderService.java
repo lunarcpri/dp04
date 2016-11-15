@@ -3,13 +3,16 @@ package services;
 import domain.Actor;
 import domain.Folder;
 import domain.Message;
+import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.FolderRepository;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
@@ -32,6 +35,15 @@ public class FolderService {
         Folder result;
 
         result = folderRepository.findOne(folderId);
+        Assert.notNull(result);
+
+        return result;
+    }
+
+    public Collection<Folder> findAll(){
+        Collection<Folder> result;
+
+        result = folderRepository.findAll();
         Assert.notNull(result);
 
         return result;
@@ -80,7 +92,33 @@ public class FolderService {
         folder.setName(name);
 
         save(folder);
+    }
 
+    public void createDefaultFolders(User u){
+        Folder inbox = create();
+        inbox.setName("Inbox");
+        inbox.setFolderType(Folder.FolderType.INBOX);
+        Folder outbox = create();
+        outbox.setName("Outbox");
+        outbox.setFolderType(Folder.FolderType.OUTBOX);
+        Folder spambox = create();
+        spambox.setName("Spambox");
+        outbox.setFolderType(Folder.FolderType.SPAMBOX);
+        Folder trashbox = create();
+        trashbox.setName("Trashbox");
+        outbox.setFolderType(Folder.FolderType.THRASHBOX);
+        inbox.setActor(u);
+        outbox.setActor(u);
+        spambox.setActor(u);
+        trashbox.setActor(u);
+        u.setFolders(new ArrayList<Folder>());
+        List<Folder> folderList = new ArrayList<Folder>();
+        folderList.add(inbox);
+        folderList.add(outbox);
+        folderList.add(spambox);
+        folderList.add(trashbox);
+        u.setFolders(folderList);
+        userService.save(u);
     }
 
     public Folder findFolderByMessageAndActor(Message message, Actor actor){
@@ -98,6 +136,7 @@ public class FolderService {
         Folder result;
 
         result = folderRepository.findInboxFolderByActorId(id);
+        System.out.println(id);
         Assert.notNull(result);
 
         return result;
@@ -115,6 +154,7 @@ public class FolderService {
     public Folder findOutbox(int id){
         Folder result;
 
+        System.out.println(userService.findOne(id).getFolders());
         result = folderRepository.findOutboxFolderByActorId(id);
         Assert.notNull(result);
 
@@ -132,6 +172,7 @@ public class FolderService {
 
     public void addMessage(int id, Message message){
         Folder folder = folderRepository.findOne(id);
+        Assert.notNull(folder);
         folder.getMessages().add(message);
         Collection<Message> newMessages = folder.getMessages();
         folder.setMessages(newMessages);

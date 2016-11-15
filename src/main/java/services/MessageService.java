@@ -88,7 +88,7 @@ public class MessageService {
         message.setSender(senderActor);
         message.setSended_at(sendedAt);
         setFolder(message,senderActor,recipientActor);
-
+        save(message);
         return message;
     }
 
@@ -119,7 +119,7 @@ public class MessageService {
     }
 
     private void setFolder(Message message, Actor senderActor, Actor recipientActor){
-        Folder folderSender = folderService.findInbox(senderActor.getId());
+        Folder folderSender = folderService.findOutbox(senderActor.getId());
         Assert.notNull(folderSender);
         Folder folderRecipient = folderService.findInbox(recipientActor.getId());
         if (isMessageSpam(message)) {
@@ -140,6 +140,16 @@ public class MessageService {
                 result = true;
             }
         }
+        return result;
+    }
+
+    public Collection<Message> findAllPrincipal(){
+        Collection<Message> result;
+
+        Actor a = userService.findByPrincipal();
+        result = messageRepository.findAllByActor(a.getId());
+        Assert.notNull(result);
+
         return result;
     }
 

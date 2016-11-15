@@ -30,8 +30,9 @@ public class Recipe  extends DomainEntity {
     private User author;
     private Collection<Likes> likes;
     private Category category;
-    private Collection<QualifiedRecipe> qualifiedRecipes;
+    private Collection<Contest> contests;
     private Collection<Comment> comments;
+    private Collection<Contest> winnedContests;
 
     public Recipe() {
         super();
@@ -160,13 +161,13 @@ public class Recipe  extends DomainEntity {
         this.category = category;
     }
 
-    @OneToMany(mappedBy = "recipe")
-    public Collection<QualifiedRecipe> getQualifiedRecipes() {
-        return qualifiedRecipes;
+    @ManyToMany
+    public Collection<Contest> getContests() {
+        return contests;
     }
 
-    public void setQualifiedRecipes(Collection<QualifiedRecipe> qualifiedRecipes) {
-        this.qualifiedRecipes = qualifiedRecipes;
+    public void setContests(Collection<Contest> contests) {
+        this.contests = contests;
     }
 
     @OneToMany(mappedBy = "recipe")
@@ -185,6 +186,15 @@ public class Recipe  extends DomainEntity {
 
     public void setRead_only(boolean read_only) {
         this.read_only = read_only;
+    }
+
+    @ManyToMany
+    public Collection<Contest> getWinnedContests() {
+        return winnedContests;
+    }
+
+    public void setWinnedContests(Collection<Contest> winnedContests) {
+        this.winnedContests = winnedContests;
     }
 }
 
