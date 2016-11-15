@@ -34,6 +34,14 @@ public class CookService {
         super();
     }
 
+    public Cook save(Cook cook){
+
+        Assert.notNull(cook);
+
+        return cookRepository.save(cook);
+
+    }
+
     public Collection<MasterClass> findCookMasterClasses(Cook c){
 
         userAccountServiceServic.assertRole("COOK");
