@@ -11,6 +11,7 @@ import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -37,6 +38,9 @@ public class AdministratorService {
 
     @Autowired
     private ActorService actorService;
+
+    @Autowired
+    private FolderService folderService;
     // Constructors -----------------------------------------------------------
 
     public AdministratorService(){
@@ -69,14 +73,21 @@ public class AdministratorService {
         userAccountService.assertRole("ADMINISTRATOR");
 
         Collection<Sponsor> sponsors = sponsorRepository.getSponsorsWithUpaidBills();
+        Collection<Actor> actors = new ArrayList<Actor>(sponsors);
 
         Message message = new Message();
         message.setBody("You have unpaid bills");
-        messageService.newMessage(sponsors,message);
-
-
+        messageService.newMessage(actors,message);
     }
 
+
+    public void create(Administrator administrator){
+        Assert.notNull(administrator);
+        administrator = administratorRepository.save(administrator);
+        Assert.notNull(administrator);
+
+        folderService.createDefaultFolders(administrator);
+    }
 
 
 

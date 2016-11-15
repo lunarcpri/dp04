@@ -23,6 +23,9 @@ public class UserService {
     @Autowired
     private ActorService actorService;
 
+    @Autowired
+    private FolderService folderService;
+
     public UserService(){
         super();
     }
@@ -134,5 +137,12 @@ public class UserService {
         Assert.notNull(result);
 
         return result;
+    }
+
+    public void create(User u){
+        Assert.notNull(u);
+        u = userRepository.save(u);
+        Assert.notNull(u);
+        folderService.createDefaultFolders(u);
     }
 }

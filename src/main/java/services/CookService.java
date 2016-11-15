@@ -33,6 +33,9 @@ public class CookService {
     @Autowired
     private UserAccountService userAccountService;
 
+    @Autowired
+    private FolderService folderService;
+
     public CookService(){
 
         super();
@@ -76,26 +79,13 @@ public class CookService {
         return result;
     }
 
-    public void registerNewCook(Actor actor){
+    public void registerNewCook(Cook cook){
 
         userAccountService.assertRole("ADMINISTRATOR");
-        Assert.notNull(actor);
+        Assert.notNull(cook);
+        actorService.save(cook);
 
-        Actor result = actor;
-
-        Collection<Authority> authorities = result.getUserAccount().getAuthorities();
-        Assert.isTrue(!authorities.contains("COOK"));
-
-        Authority authority = new Authority();
-        authority.setAuthority("COOK");
-
-        authorities.add(authority);
-        actor.getUserAccount().setAuthorities(authorities);
-
-        actorService.save(result);
-
-//          Cook cook = (Cook) actor;
-//          return cookService.save(cook);
+        folderService.createDefaultFolders(cook);
 
     }
 

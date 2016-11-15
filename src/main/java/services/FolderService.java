@@ -103,7 +103,7 @@ public class FolderService {
         save(folder);
     }
 
-    public void createDefaultFolders(User u){
+    public void createDefaultFolders(Actor u){
         Folder inbox = create();
         inbox.setName("Inbox");
         inbox.setFolderType(Folder.FolderType.INBOX);
@@ -120,14 +120,11 @@ public class FolderService {
         outbox.setActor(u);
         spambox.setActor(u);
         trashbox.setActor(u);
-        u.setFolders(new ArrayList<Folder>());
-        List<Folder> folderList = new ArrayList<Folder>();
-        folderList.add(inbox);
-        folderList.add(outbox);
-        folderList.add(spambox);
-        folderList.add(trashbox);
-        u.setFolders(folderList);
-        userService.save(u);
+        save(inbox);
+        save(outbox);
+        save(spambox);
+        save(trashbox);
+
     }
 
     public Folder findFolderByMessageAndActor(int actorid, int messageid){

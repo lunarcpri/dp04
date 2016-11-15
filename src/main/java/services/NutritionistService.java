@@ -16,6 +16,8 @@ public class NutritionistService {
     @Autowired
     private NutritionistRepository nutritionistRepository;
 
+    @Autowired
+    private FolderService folderService;
 
     public NutritionistService(){
         super();
@@ -38,5 +40,15 @@ public class NutritionistService {
         result = nutritionistRepository.findByNutritionistAccountId(userAccount.getId());
 
         return result;
+    }
+
+    public Nutritionist save(Nutritionist n){
+        Assert.notNull(n);
+
+        return nutritionistRepository.save(n);
+    }
+    public void create(Nutritionist n){
+        Assert.notNull(save(n));
+        folderService.createDefaultFolders(n);
     }
 }

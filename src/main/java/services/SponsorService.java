@@ -16,6 +16,9 @@ public class SponsorService {
     @Autowired
     private SponsorRepository sponsorRepository;
 
+    @Autowired
+    FolderService folderService;
+
     public SponsorService(){
         super();
     }
@@ -29,5 +32,17 @@ public class SponsorService {
         result = sponsorRepository.findBySponsorAccountId(userAccount.getId());
 
         return result;
+    }
+
+    public void create(Sponsor s){
+        Assert.notNull(save(s));
+
+        folderService.createDefaultFolders(s);
+    }
+
+    public Sponsor save(Sponsor s){
+        Assert.notNull(s);
+
+        return sponsorRepository.save(s);
     }
 }
