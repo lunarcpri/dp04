@@ -16,7 +16,7 @@ public class MasterClass extends DomainEntity{
     private Cook cook;
     private Collection<LearningMaterial> learningMaterials;
     private boolean promoted;
-    private Collection<User> attendingUsers;
+    private Collection<Actor> attendingUsers;
 
     public MasterClass()
     {
@@ -73,11 +73,11 @@ public class MasterClass extends DomainEntity{
     }
 
     @ManyToMany
-    public Collection<User> getAttendingUsers() {
+    public Collection<Actor> getAttendingUsers() {
         return attendingUsers;
     }
 
-    public void setAttendingUsers(Collection<User> attendingUsers) {
+    public void setAttendingUsers(Collection<Actor> attendingUsers) {
         this.attendingUsers = attendingUsers;
     }
 }

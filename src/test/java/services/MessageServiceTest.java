@@ -1,5 +1,6 @@
 package services;
 
+import domain.Actor;
 import domain.Folder;
 import domain.Message;
 import domain.User;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import utilities.AbstractTest;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,12 +37,14 @@ public class MessageServiceTest extends AbstractTest{
         super.authenticate("user1");
         int recipient = 14;
         User recipientUser = userService.findOne(recipient);
+        List<Actor> recipients = new ArrayList<Actor>();
+        recipients.add(recipientUser);
         Message m = new Message();
         m.setSubject("Prueba");
         m.setBody("Prueba body");
         m.setSender(userService.findByPrincipal());
         m.setPriority(Message.Priority.HIGH);
-        Message savedMessage = messageService.newMessage(recipient, m);
+        Message savedMessage = messageService.newMessage(recipients, m);
         System.out.print(savedMessage.getFolders());
     }
 
@@ -49,7 +53,7 @@ public class MessageServiceTest extends AbstractTest{
         super.authenticate("user1");
         User u = userService.findByPrincipal();
         Folder folder = folderService.findInbox(u.getId());
-        Folder folder1 = folderService.findFolderByMessageAndActor(153,u.getId());
+        Folder folder1 = folderService.findFolderByMessageAndActor(u.getId(),154);
         System.out.println("Carpeta donde estalmente el mensaje: "+folder1.getMessages());
         System.out.println("Carpeta donde no estaba el mensaje: "+ folder.getMessages());
         messageService.moveMessage(153,folder.getId());
@@ -73,12 +77,14 @@ public class MessageServiceTest extends AbstractTest{
         super.authenticate("user1");
         int recipient = 14;
         User recipientUser = userService.findOne(recipient);
+        List<Actor> recipients = new ArrayList<Actor>();
+        recipients.add(recipientUser);
         Message m = new Message();
         m.setSubject("Prueba");
         m.setBody("culo");
         m.setSender(userService.findByPrincipal());
         m.setPriority(Message.Priority.HIGH);
-        Message savedMessage = messageService.newMessage(recipient, m);
+        Message savedMessage = messageService.newMessage(recipients, m);
         for(Folder f : savedMessage.getFolders()){
             System.out.println(f.getFolderType());
         }

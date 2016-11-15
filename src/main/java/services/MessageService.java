@@ -65,7 +65,7 @@ public class MessageService {
         Actor actor = userService.findByPrincipal();
         Message message = findOne(messageId);
         Folder folder = null;
-        if (message.getSender() == actor || message.getRecipient() == actor){
+        if (message.getSender() == actor || message.getRecipients().contains(actor)){
             folder = folderService.findFolderByMessageAndActor(message.getId(),actor.getId());
             if (folder.getFolderType() != Folder.FolderType.THRASHBOX){
                 folder.setFolderType(Folder.FolderType.THRASHBOX);
@@ -79,18 +79,17 @@ public class MessageService {
 
 
 
-    public Message newMessage(int recipientId, Message message){
+    public Message newMessage(Collection<Actor> actors, Message message){
         Message result;
 
         Date sendedAt = new Date();
         Actor senderActor = userService.findByPrincipal();
         Assert.notNull(senderActor);
-        Actor recipientActor = userService.findOne(recipientId);
-        Assert.notNull(recipientActor);
-        message.setRecipient(recipientActor);
+        Assert.notNull(actors);
+        message.setRecipients(actors);
         message.setSender(senderActor);
         message.setSended_at(sendedAt);
-        List<Folder> folders = setFolders(message,senderActor,recipientActor);
+        List<Folder> folders = setFolders(message,senderActor,actors);
         message.setFolders(folders);
         return save(message);
     }
@@ -121,18 +120,20 @@ public class MessageService {
         folderService.addMessage(newFolder.getId(),message);
     }
 
-    private List<Folder> setFolders(Message message, Actor senderActor, Actor recipientActor){
+    private List<Folder> setFolders(Message message, Actor senderActor, Collection<Actor> recipientsActor){
         List<Folder> result = new ArrayList<Folder>();
         Folder folderSender = folderService.findOutbox(senderActor.getId());
         Assert.notNull(folderSender);
-        Folder folderRecipient = folderService.findInbox(recipientActor.getId());
-        if (isMessageSpam(message)) {
-            folderRecipient = folderService.findSpambox(recipientActor.getId());
+        for(Actor e : recipientsActor){
+            Folder folderRecipient = folderService.findInbox(e.getId());
+            if (isMessageSpam(message)) {
+                folderRecipient = folderService.findSpambox(e.getId());
+            }
+            Assert.notNull(folderRecipient);
+            result.add(folderRecipient);
+            folderService.addMessage(folderRecipient.getId(),message);
         }
-        Assert.notNull(folderRecipient);
-        result.add(folderRecipient);
         result.add(folderSender);
-        folderService.addMessage(folderRecipient.getId(),message);
         folderService.addMessage(folderSender.getId(),message);
         return result;
     }

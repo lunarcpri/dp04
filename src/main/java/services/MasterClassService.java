@@ -104,15 +104,12 @@ public class MasterClassService {
         userAccountService.assertRole("COOK");
         delete(masterClass);
 
-        Message message = new Message();
+            Message message = new Message();
 
-        message.setPriority(Message.Priority.HIGH);
-        message.setBody("SYSTEM MESSAGE: The master class "+masterClass.getTitle()+" was deleted.");
-
-        for(User u:masterClass.getAttendingUsers()) {
-            message.setRecipient(u);
+            message.setPriority(Message.Priority.HIGH);
+            message.setBody("SYSTEM MESSAGE: The master class "+masterClass.getTitle()+" was deleted.");
+            message.setRecipients(masterClass.getAttendingUsers());
             messageService.saveMessage(message);
-        }
     }
 
     public void attendMasterClass(MasterClass masterClass){
@@ -123,7 +120,7 @@ public class MasterClassService {
 
         MasterClass result = masterClass;
 
-        Collection<User> currentlyAttending = result.getAttendingUsers();
+        Collection<Actor> currentlyAttending = result.getAttendingUsers();
         currentlyAttending.add(user);
         result.setAttendingUsers(currentlyAttending);
 

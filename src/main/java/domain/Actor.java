@@ -34,6 +34,7 @@ public abstract class Actor extends DomainEntity {
     private UserAccount userAccount;
     private Collection<Star> starses;
 	private Collection<Folder> folders;
+	private Collection<MasterClass> masterClasses;
 
 
 	@NotBlank
@@ -94,7 +95,7 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	@Valid
-    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "recipients", cascade = CascadeType.ALL)
 	public Collection<Message> getReceivedMessages() {
 		return ReceivedMessages;
 	}
@@ -143,4 +144,13 @@ public abstract class Actor extends DomainEntity {
     public void setFolders(Collection<Folder> folders) {
         this.folders = folders;
     }
+
+	@ManyToMany
+	public Collection<MasterClass> getMasterClasses() {
+		return masterClasses;
+	}
+
+	public void setMasterClasses(Collection<MasterClass> masterClasses) {
+		this.masterClasses = masterClasses;
+	}
 }

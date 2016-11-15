@@ -23,7 +23,7 @@ public class Message  extends domain.DomainEntity{
     private Date sended_at;
     private String subject;
     private Priority priority;
-    private Actor recipient;
+    private Collection<Actor> recipients;
     private Actor sender;
     private Collection<Folder> folders;
 
@@ -75,13 +75,13 @@ public class Message  extends domain.DomainEntity{
     //Relationships
 
     @Valid
-    @ManyToOne (optional = false)
-    public Actor getRecipient() {
-        return recipient;
+    @ManyToMany
+    public Collection<Actor> getRecipients() {
+        return recipients;
     }
 
-    public void setRecipient(Actor recipient) {
-        this.recipient = recipient;
+    public void setRecipients(Collection<Actor> recipients) {
+        this.recipients = recipients;
     }
 
     @Valid
