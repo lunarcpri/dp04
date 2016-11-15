@@ -28,23 +28,6 @@ public class ContestServiceTest extends AbstractTest {
 
 
 
-    @Test
-    public void TestFindMinMaxAvgRecipesPerContest(){
-        List<Object[]> list = contestService.findMinMaxAvgRecipesPerContest();
-        Object[] result = list.get(0);
-        Collection<Contest> contests = contestService.findAll();
-        int max=0,min=1000000;
-        for (Contest e:contests){
-            if (e.getRecipesQualified().size()>max){
-                max = e.getRecipesQualified().size();
-            }
-            if (e.getRecipesQualified().size()<min){
-                min = e.getRecipesQualified().size();
-            }
-        }
-        Assert.isTrue(min == result[0]);
-        Assert.isTrue(max == result[1]);
-    }
 
     @Test
     public void testfindContestWithMoreRecipes(){
