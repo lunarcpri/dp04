@@ -9,11 +9,11 @@ import repositories.BannerRepository;
 @Transactional
 public class BannerService {
 
-
+    @Autowired
     private BannerRepository bannerRepository;
 
     @Autowired
     public BannerService(BannerRepository bannerRepository){
-        this.bannerRepository = bannerRepository;
+        super();
     }
 }

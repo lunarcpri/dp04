@@ -60,55 +60,9 @@ public class AdministratorService {
         return result;
     }
 
-    public void registerNewCook(Actor actor){
-
-        userAccountService.assertRole("ADMINISTRATOR");
-        Assert.notNull(actor);
-
-        Actor result = actor;
-
-        Collection<Authority> authorities = result.getUserAccount().getAuthorities();
-        Assert.isTrue(!authorities.contains("COOK"));
-
-        Authority authority = new Authority();
-        authority.setAuthority("COOK");
-
-        authorities.add(authority);
-        actor.getUserAccount().setAuthorities(authorities);
-
-        actorService.save(result);
-
-//          Cook cook = (Cook) actor;
-//          return cookService.save(cook);
-
-    }
-
-    public void promoteMasterClass(MasterClass masterClass){
-
-        userAccountService.assertRole("ADMINISTRATOR");
-        Assert.notNull(masterClass);
-        Assert.isTrue(!masterClass.isPromoted());
-
-        MasterClass result = masterClass;
-        result.setPromoted(true);
-
-        masterClassService.save(result);
 
 
-    }
 
-    public void demoteMasterClass(MasterClass masterClass){
-
-
-        userAccountService.assertRole("ADMINISTRATOR");
-        Assert.notNull(masterClass);
-        Assert.isTrue(masterClass.isPromoted());
-
-        MasterClass result = masterClass;
-        result.setPromoted(false);
-
-        masterClassService.save(result);
-    }
 
 }
 

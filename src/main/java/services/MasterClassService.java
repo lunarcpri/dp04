@@ -164,5 +164,32 @@ public class MasterClassService {
         return result;
     }
 
+    public void promoteMasterClass(MasterClass masterClass){
+
+        userAccountService.assertRole("ADMINISTRATOR");
+        Assert.notNull(masterClass);
+        Assert.isTrue(!masterClass.isPromoted());
+
+        MasterClass result = masterClass;
+        result.setPromoted(true);
+
+        save(result);
+
+
+    }
+
+    public void demoteMasterClass(MasterClass masterClass){
+
+
+        userAccountService.assertRole("ADMINISTRATOR");
+        Assert.notNull(masterClass);
+        Assert.isTrue(masterClass.isPromoted());
+
+        MasterClass result = masterClass;
+        result.setPromoted(false);
+
+        save(result);
+    }
+
 
 }

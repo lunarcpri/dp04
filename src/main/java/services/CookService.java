@@ -1,5 +1,6 @@
 package services;
 
+import domain.Actor;
 import domain.Cook;
 import domain.DomainEntity;
 import domain.MasterClass;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.CookRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
@@ -28,6 +30,9 @@ public class CookService {
 
     @Autowired
     private ActorService actorService;
+
+    @Autowired
+    private UserAccountService userAccountService;
 
     public CookService(){
 
@@ -70,6 +75,29 @@ public class CookService {
         Assert.notNull(result);
 
         return result;
+    }
+
+    public void registerNewCook(Actor actor){
+
+        userAccountService.assertRole("ADMINISTRATOR");
+        Assert.notNull(actor);
+
+        Actor result = actor;
+
+        Collection<Authority> authorities = result.getUserAccount().getAuthorities();
+        Assert.isTrue(!authorities.contains("COOK"));
+
+        Authority authority = new Authority();
+        authority.setAuthority("COOK");
+
+        authorities.add(authority);
+        actor.getUserAccount().setAuthorities(authorities);
+
+        actorService.save(result);
+
+//          Cook cook = (Cook) actor;
+//          return cookService.save(cook);
+
     }
 
 
