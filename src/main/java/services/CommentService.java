@@ -1,7 +1,7 @@
 package services;
 
 import domain.Comment;
-import domain.UserOrNutritionist;
+import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,9 +71,8 @@ public class CommentService {
 
     public void newComment(Comment comment){
         userAccountService.assertRole("USER,NUTRITIONIST");
-        UserOrNutritionist actor = userOrNutritionistService
-                .findUserOrNutritionistByActor(userService.findByPrincipal());
-        comment.setAutor(actor);
+        User u = userService.findByPrincipal();
+        comment.setAutor(u);
         comment.setCreated_at(new Date());
 
         save(comment);

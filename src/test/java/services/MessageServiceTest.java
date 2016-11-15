@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import utilities.AbstractTest;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)

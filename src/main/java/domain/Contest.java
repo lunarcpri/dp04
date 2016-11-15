@@ -1,15 +1,10 @@
 package domain;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.data.annotation.*;
-import org.springframework.data.jpa.repository.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.persistence.Temporal;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 

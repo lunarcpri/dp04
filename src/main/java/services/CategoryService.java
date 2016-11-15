@@ -1,7 +1,6 @@
 package services;
 
 import domain.Category;
-import domain.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,26 +55,20 @@ public class CategoryService {
 
 
 
-    public void create(String name, String description, Category parent, String picture, Collection<Tag> tags){
+    public void create(Category category){
         userAccountService.assertRole("ADMIN");
-        Category category = create();
-        category.setName(name);
-        category.setDescription(description);
-        category.setParent(parent);
-        category.setPicture(picture);
-        category.setTags(tags);
 
         save(category);
     }
 
-    public void modify(int id, String name, String description, Category parent, String picture, Collection<Tag> tags){
+    public void modify(Category category){
         userAccountService.assertRole("ADMIN");
-        Category category = findOne(id);
-        category.setName(name);
-        category.setDescription(description);
-        category.setParent(parent);
-        category.setPicture(picture);
-        category.setTags(tags);
+        Category categoryModified = findOne(category.getId());
+        categoryModified.setName(category.getName());
+        categoryModified.setDescription(category.getDescription());
+        categoryModified.setParent(category.getParent());
+        categoryModified.setPicture(category.getPicture());
+        categoryModified.setTags(category.getTags());
 
         save(category);
     }

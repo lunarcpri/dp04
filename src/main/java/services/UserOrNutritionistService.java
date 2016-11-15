@@ -87,7 +87,7 @@ public class UserOrNutritionistService {
         Assert.isTrue(!isFollowing(userOrNutritionist.getId()));
         userAccountService.assertRole("USER,NUTRITIONIST");
 
-        UserOrNutritionist followingUser = (UserOrNutritionist) userService.findByPrincipal();
+        UserOrNutritionist followingUser =  userService.findByPrincipal();
 
         Collection<UserOrNutritionist> followers = followingUser.getFollower();
         Collection<UserOrNutritionist> following =  userOrNutritionist.getFollowing();
@@ -123,7 +123,15 @@ public class UserOrNutritionistService {
 
         save(followingUser);
         save(userOrNutritionist);
+    }
 
+    public Collection<Recipe> latestFollowingUserRecipes(){
+       Collection<Recipe> result;
+        User u = userService.findByPrincipal();
+        result = userOrNutritionistRepository.streamRecipesFollowingUsers(u.getId());
+        Assert.notNull(result);
+
+        return result;
     }
 
     public UserOrNutritionist findUserOrNutritionistByActor(Actor actor){

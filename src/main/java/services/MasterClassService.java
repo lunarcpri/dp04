@@ -1,6 +1,9 @@
 package services;
 
-import domain.*;
+import domain.Actor;
+import domain.MasterClass;
+import domain.Message;
+import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -107,7 +110,8 @@ public class MasterClassService {
             Message message = new Message();
 
             message.setPriority(Message.Priority.HIGH);
-            message.setBody("SYSTEM MESSAGE: The master class "+masterClass.getTitle()+" was deleted.");
+            message.setBody("The master class "+masterClass.getTitle()+" was deleted by its owner. We are really sorry");
+            message.setSubject("SYSTEM MESSAGE: The master class "+masterClass.getTitle()+" was deleted.");
             message.setRecipients(masterClass.getAttendingUsers());
             messageService.saveMessage(message);
     }

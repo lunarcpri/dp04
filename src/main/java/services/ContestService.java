@@ -9,7 +9,6 @@ import org.springframework.util.Assert;
 import repositories.ContestRepository;
 import security.UserAccountService;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -28,8 +27,12 @@ public class ContestService {
 
     @Autowired UserService userService;
 
+
     @Autowired
     AdministratorService administratorService;
+
+    @Autowired
+    RecipeService recipeService;
 
 
     public ContestService(){
@@ -77,6 +80,32 @@ public class ContestService {
         save(contest);
     }
 
+    public void qualifyRecipe(Recipe r, Contest c){
+        Assert.notNull(r);
+        Assert.notNull(c);
+        Assert.isTrue(recipeService.getNumberOfDisLike(r)==0 && recipeService.getNumberOfLike(r)>=5);
+        Collection<Recipe> recipeCollection = c.getRecipesQualified();
+        recipeCollection.add(r);
+        c.setRecipesQualified(recipeCollection);
+        Recipe r2 = recipeService.findOne(r.getId());
+        r2.setRead_only(true);
+        recipeService.save(r2);
+        save(c);
+    }
+
+    public void modify(Contest c){
+        Contest modified = findOne(c.getId());
+        if(c.getRecipesQualified().size()==0){
+            modified.setTitle(c.getTitle());
+            modified.setOpened_at(c.getOpened_at());
+            modified.setClosed_at(c.getClosed_at());
+            save(modified);
+        }else if(c.getClosed_at().after(new Date())){
+            modified.setClosed_at(c.getClosed_at());
+            save(modified);
+        }
+    }
+
 
     public void processWinner(){
         Collection<Contest> result;
@@ -86,7 +115,7 @@ public class ContestService {
         result = contestRepository.findClosedContests();
         Assert.notNull(result);
         for(Contest e: result) {
-           List<Recipe> recipes =findContestRecipesOrderByLikes(e.getId());
+           List<Recipe> recipes = findContestRecipesOrderByLikes(e.getId());
             if (recipes.size()>0){
                 int winners = (recipes.size()>3) ? 3 : recipes.size();
                 List<Recipe> winnersList = recipes.subList(0,winners);
@@ -94,10 +123,27 @@ public class ContestService {
             }
             e.setEnded(true);
             save(e);
+            for(Recipe f : e.getRecipesQualified()){
+                if (findOpenContestsByRecipe(f).size()==0){
+                    f.setRead_only(false);
+                    recipeService.save(f);
+                }
+            }
 
         }
-
     }
+
+
+
+    public Collection<Contest> findOpenContestsByRecipe(Recipe r){
+        Collection<Contest> result;
+
+        result = contestRepository.findOpenContestsByRecipe(r.getId());
+        Assert.notNull(result);
+
+        return  result;
+    }
+
 
     public List<Recipe> findContestRecipesOrderByLikes(int id){
         List<Recipe> result = new ArrayList<Recipe>();

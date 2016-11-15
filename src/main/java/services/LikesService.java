@@ -2,7 +2,7 @@ package services;
 
 import domain.Likes;
 import domain.Recipe;
-import domain.UserOrNutritionist;
+import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +17,9 @@ public class LikesService {
 
     @Autowired
     private LikesRepository likesRepository;
+
+    @Autowired
+    private UserService userService;
 
 
     public LikesService(){
@@ -55,11 +58,12 @@ public class LikesService {
         likesRepository.save(likes);
     }
 
-    public void like(Recipe recipe, UserOrNutritionist actor, boolean islike){
+    public void like(Recipe recipe, boolean islike){
+        User u = userService.findByPrincipal();
         Likes likes = create();
         likes.setIsLike(islike);
         likes.setRecipe(recipe);
-        likes.setUserOrNutritionist(actor);
+        likes.setUserOrNutritionist(u);
 
         save(likes);
     }

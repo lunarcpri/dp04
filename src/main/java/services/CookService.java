@@ -2,7 +2,6 @@ package services;
 
 import domain.Actor;
 import domain.Cook;
-import domain.DomainEntity;
 import domain.MasterClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

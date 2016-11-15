@@ -33,6 +33,11 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     @Query("select r from Recipe r where r.category.id=?1")
     Collection<Recipe> findAllByCategory(int id);
 
+    @Query("select l.size from Recipe r join r.likes l where r.id=?1 and l.isLike=true")
+    Integer getNumberOfLike(int id);
 
+
+    @Query("select l.size from Recipe r join r.likes l where r.id=?1 and l.isLike=0")
+    Integer getNumberOfDisLike(int id);
 
 }

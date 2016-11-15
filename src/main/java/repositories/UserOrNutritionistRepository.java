@@ -1,5 +1,6 @@
 package repositories;
 
+import domain.Recipe;
 import domain.UserOrNutritionist;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,5 +14,6 @@ public interface UserOrNutritionistRepository extends JpaRepository<UserOrNutrit
     @Query("select u.following from UserOrNutritionist u join u.following f where u.id= ?1 and f.id=?2 ")
     Collection<UserOrNutritionist> following(int idPrincipal, int idFollower);
 
-
+    @Query("select f.recipes from User u join u.following f where u.id=?1")
+    Collection<Recipe> streamRecipesFollowingUsers(int id);
 }

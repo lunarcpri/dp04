@@ -1,7 +1,5 @@
 package utilities;
 
-import domain.Administrator;
-import domain.User;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.TestingAuthenticationToken;
