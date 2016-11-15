@@ -14,4 +14,15 @@ public interface BillRepository extends JpaRepository<Bill, Integer> {
     @Query("select b from Bill b where  b.sponsor.id = ?1 and MONTH(b.created_at) = MONTH(?2) and YEAR(b.created_at) = YEAR(current_date)")
     Collection<Bill> getMonthlyBills(int sponsorID, Date date);
 
+    @Query("select b from Bill b where  b.paid_at is null and datediff(current_date, b.created_at)>30")
+    Collection<Bill> getUnpaidBills();
+
+
+    // DASHBOARD
+    // - The average and the standard deviation of paid and unpaid monthly bills.
+    @Query("select avg(s1.bills.size), avg(s2.bills.size), sttdev(s1.bills.size), sttdev(s2.bills.size) From Sponsor s join s.bills b1 join s.bills b2 WHERE b1.paid_at is null and b2.paid_at is not null")
+    Collection<Bill> statiticsPaidUnpaidBills();
+
+
+
 }

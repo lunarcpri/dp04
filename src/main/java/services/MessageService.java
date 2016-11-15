@@ -1,14 +1,14 @@
 package services;
 
-import domain.Actor;
-import domain.Folder;
-import domain.Message;
-import domain.SpamTags;
+
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import repositories.BillRepository;
 import repositories.MessageRepository;
+import security.UserAccountService;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,6 +23,9 @@ public class MessageService {
     private MessageRepository messageRepository;
 
     @Autowired
+    private BillRepository billRepository;
+
+    @Autowired
     private FolderService folderService;
 
     @Autowired
@@ -30,6 +33,10 @@ public class MessageService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserAccountService userAccountService;
+
 
 
     public MessageService(){
@@ -167,6 +174,23 @@ public class MessageService {
         Assert.notNull(result);
 
         return result;
+    }
+
+    public void broadcastMessage(){
+
+        userAccountService.assertRole("ADMINISTRATOR");
+
+        Collection<Bill> bills = billRepository.getUnpaidBills();
+
+        Message message = new Message();
+
+        message.setBody("Notice of default: You have unpaid bills");
+        for (Bill b:bills){
+
+            this.newMessage(b.getSponsor().getId(), message);
+        }
+
+
     }
 
 
