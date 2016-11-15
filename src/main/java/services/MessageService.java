@@ -115,7 +115,7 @@ public class MessageService {
         Assert.notNull(newFolder);
         Assert.notNull(message);
         Assert.notNull(actor);
-        Folder actualFolder = folderService.findFolderByMessageAndActor(message.getId(),actor.getId());
+        Folder actualFolder = folderService.findFolderByMessageAndActor(actor.getId(),message.getId());
         folderService.removeMessage(actualFolder.getId(),message);
         folderService.addMessage(newFolder.getId(),message);
     }

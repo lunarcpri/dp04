@@ -56,7 +56,7 @@ public class MessageServiceTest extends AbstractTest{
         Folder folder1 = folderService.findFolderByMessageAndActor(u.getId(),154);
         System.out.println("Carpeta donde estalmente el mensaje: "+folder1.getMessages());
         System.out.println("Carpeta donde no estaba el mensaje: "+ folder.getMessages());
-        messageService.moveMessage(153,folder.getId());
+        messageService.moveMessage(154,folder.getId());
         System.out.println("Carpeta donde se mueve el mensaje: "+ folder.getMessages());
         System.out.println("Carpeta donde estaba el mensaje: "+ folder1.getMessages());
     }

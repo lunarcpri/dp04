@@ -133,7 +133,6 @@ public class FolderService {
     public Folder findFolderByMessageAndActor(int actorid, int messageid){
         Folder result;
 
-        System.out.println(messageid);
         result = folderRepository.findFolderByMessageAndActor(actorid,messageid);
         Assert.notNull(result);
 
