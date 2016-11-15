@@ -530,6 +530,14 @@
         <property name="masterClass" ref="masterClass3"/>
     </bean>
 
+    <bean id="videoMaterial4" class="domain.VideoMaterial">
+        <property name="title" value="title3" />
+        <property name="resume" value="resume3" />
+        <property name="attachments" ref="attachment1" />
+        <property name="youtube_id" value="youtube_id3" />
+        <property name="masterClass" ref="masterClass3"/>
+    </bean>
+
     <!-- TextMaterial -->
 
     <bean id="textMaterial1" class="domain.TextMaterial">
@@ -1046,33 +1054,73 @@
         <property name="closed_at" value="01/02/2015 23:59"/>
         <property name="opened_at" value="01/02/2015 23:59" />
         <property name="title" value="Contest 1" />
-        <property name="numberOfWinners" value="5" />
+        <property name="recipesQualified">
+            <list>
+                <ref bean="recipe1"/>
+                <ref bean="recipe2"/>
+                <ref bean="recipe3"/>
+            </list>
+        </property>
+        <property name="winnerRecipes">
+            <list>
+                <ref bean="recipe1"/>
+                <ref bean="recipe2"/>
+            </list>
+        </property>
+
     </bean>
 
     <bean id="contest2" class="domain.Contest">
         <property name="closed_at" value="01/02/2015 23:59"/>
         <property name="opened_at" value="01/02/2015 23:59" />
         <property name="title" value="Contest 1" />
-        <property name="numberOfWinners" value="5" />
+        <property name="recipesQualified">
+            <list>
+                <ref bean="recipe5"/>
+                <ref bean="recipe6"/>
+                <ref bean="recipe7"/>
+            </list>
+        </property>
+        <property name="winnerRecipes">
+            <list>
+                <ref bean="recipe5"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="contest3" class="domain.Contest">
         <property name="closed_at" value="01/02/2015 23:59"/>
         <property name="opened_at" value="01/02/2015 23:59" />
         <property name="title" value="Contest 1" />
-        <property name="numberOfWinners" value="5" />
+        <property name="recipesQualified">
+            <list>
+                <ref bean="recipe1"/>
+                <ref bean="recipe8"/>
+                <ref bean="recipe2"/>
+                <ref bean="recipe3"/>
+            </list>
+        </property>
+        <property name="winnerRecipes">
+            <list>
+                <ref bean="recipe8"/>
+            </list>
+        </property>
     </bean>
     <bean id="contest4" class="domain.Contest">
         <property name="closed_at" value="01/02/2015 23:59"/>
         <property name="opened_at" value="01/02/2015 23:59" />
         <property name="title" value="Contest 1" />
-        <property name="numberOfWinners" value="5" />
+
     </bean>
     <bean id="contest5" class="domain.Contest">
         <property name="closed_at" value="01/02/2015 23:59"/>
         <property name="opened_at" value="01/02/2015 23:59" />
         <property name="title" value="Contest 1" />
-        <property name="numberOfWinners" value="5" />
+        <property name="recipesQualified">
+            <list>
+                <ref bean="recipe2"/>
+            </list>
+        </property>
     </bean>
 
     
@@ -1272,34 +1320,64 @@
         <property name="sponsor" ref="sponsor3" />
     </bean>
 
-    <bean id="qualifiedRecipe1" class="domain.QualifiedRecipe">
-        <property name="winner" value="false"/>
-        <property name="contest" ref="contest1"/>
-        <property name="recipe" ref="recipe1" />
+    <bean id="message1" class="domain.Message">
+        <property name="body" value="Body value"/>
+        <property name="subject" value="subject value" />
+        <property name="sended_at" value="01/07/2016 23:59" />
+        <property name="sender" ref="user1"/>
+        <property name="recipient" ref="user2"/>
+        <property name="priority" value="HIGH"/>
     </bean>
 
-    <bean id="qualifiedRecipe2" class="domain.QualifiedRecipe">
-        <property name="winner" value="false"/>
-        <property name="contest" ref="contest2"/>
-        <property name="recipe" ref="recipe5" />
+    <bean id="folder1" class="domain.Folder">
+        <property name="name" value="Folder 1" />
+        <property name="folderType" value="INBOX"/>
+        <property name="actor" ref="user2"/>
+        <property name="messages">
+            <list>
+                <ref bean="message1"/>
+            </list>
+        </property>
     </bean>
 
-    <bean id="qualifiedRecipe3" class="domain.QualifiedRecipe">
-        <property name="winner" value="false"/>
-        <property name="contest" ref="contest1"/>
-        <property name="recipe" ref="recipe4" />
+
+    <bean id="folder2" class="domain.Folder">
+        <property name="name" value="Folder 1" />
+        <property name="folderType" value="OUTBOX"/>
+        <property name="actor" ref="user1"/>
+        <property name="messages">
+            <list>
+                <ref bean="message1"/>
+            </list>
+        </property>
     </bean>
 
-    <bean id="qualifiedRecipe4" class="domain.QualifiedRecipe">
-        <property name="winner" value="false"/>
-        <property name="contest" ref="contest2"/>
-        <property name="recipe" ref="recipe3" />
+    <bean id="folder3" class="domain.Folder">
+        <property name="name" value="Folder 1" />
+        <property name="folderType" value="THRASHBOX"/>
+        <property name="actor" ref="user2"/>
     </bean>
 
-    <bean id="qualifiedRecipe5" class="domain.QualifiedRecipe">
-        <property name="winner" value="false"/>
-        <property name="contest" ref="contest1"/>
-        <property name="recipe" ref="recipe2" />
+    <bean id="folder4" class="domain.Folder">
+        <property name="name" value="Folder 1" />
+        <property name="folderType" value="INBOX"/>
+        <property name="actor" ref="user1"/>
+    </bean>
+
+    <bean id="folder5" class="domain.Folder">
+        <property name="name" value="Folder 1" />
+        <property name="folderType" value="THRASHBOX"/>
+        <property name="actor" ref="user1"/>
+    </bean>
+
+    <bean id="folder6" class="domain.Folder">
+        <property name="name" value="Folder 1" />
+        <property name="folderType" value="SPAMBOX"/>
+        <property name="actor" ref="user2"/>
+    </bean>
+
+    <bean id="spamtag1" class="domain.SpamTags">
+        <property name="name" value="culo"/>
     </bean>
 
 </beans>

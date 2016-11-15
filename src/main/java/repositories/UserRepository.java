@@ -31,7 +31,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findAllByPopularity();
 
 
-    @Query("select u, (select avg(l.size) from User u2 join u2.recipes r join r.likes l where u2.id=u.id) as averagel " +
-            "from User u order by averagel DESC")
+    @Query("select u, (select avg(l.size) from User u2 join u2.recipes r join r.likes l where u2.id=u.id and l.isLike=true) as averagel, " +
+            " (select avg(l.size) from User u2 join u2.recipes r join r.likes l where u2.id=u.id and l.isLike=false) as average2 " +
+            "from User u order by averagel DESC, average2 ASC")
     List<User> findAllByLikes();
 }

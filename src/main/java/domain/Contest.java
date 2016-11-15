@@ -1,10 +1,15 @@
 package domain;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.data.annotation.*;
+import org.springframework.data.jpa.repository.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.persistence.Temporal;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -15,8 +20,8 @@ public class Contest extends DomainEntity {
     private String title;
     private Date opened_at;
     private Date closed_at;
-    private int numberOfWinners;
-    private Collection<QualifiedRecipe> qualifiedRecipes;
+    private Collection<Recipe> recipesQualified;
+    private Collection<Recipe> winnerRecipes;
     private boolean ended;
 
     public Contest() {
@@ -55,20 +60,6 @@ public class Contest extends DomainEntity {
         this.closed_at = closed_at;
     }
 
-    public int getNumberOfWinners() {
-        return numberOfWinners;
-    }
-
-    public void setNumberOfWinners(int winners) {this.numberOfWinners = winners;}
-
-    @OneToMany(mappedBy = "contest")
-    public Collection<QualifiedRecipe> getQualifiedRecipes() {
-        return qualifiedRecipes;
-    }
-
-    public void setQualifiedRecipes(Collection<QualifiedRecipe> qualifiedRecipes) {
-        this.qualifiedRecipes = qualifiedRecipes;
-    }
 
     @Column(columnDefinition="bit default 0")
     public boolean isEnded() {
@@ -77,5 +68,23 @@ public class Contest extends DomainEntity {
 
     public void setEnded(boolean ended) {
         this.ended = ended;
+    }
+
+    @ManyToMany
+    public Collection<Recipe> getRecipesQualified() {
+        return recipesQualified;
+    }
+
+    public void setRecipesQualified(Collection<Recipe> recipesQualified) {
+        this.recipesQualified = recipesQualified;
+    }
+
+    @ManyToMany(mappedBy = "winnedContests")
+    public Collection<Recipe> getWinnerRecipes() {
+        return winnerRecipes;
+    }
+
+    public void setWinnerRecipes(Collection<Recipe> winnerRecipes) {
+        this.winnerRecipes = winnerRecipes;
     }
 }

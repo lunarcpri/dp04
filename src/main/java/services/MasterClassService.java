@@ -9,6 +9,7 @@ import repositories.MasterClassRepository;
 import security.UserAccountService;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
@@ -34,6 +35,15 @@ public class MasterClassService {
     public MasterClassService(){
 
         super();
+    }
+
+    public MasterClass findOne(int id){
+        MasterClass result;
+
+        result = masterClassRepository.findOne(id);
+        Assert.notNull(result);
+
+        return result;
     }
 
     public void save(MasterClass masterClass){
@@ -64,7 +74,7 @@ public class MasterClassService {
         userAccountService.assertRole("COOK");
         MasterClass result = masterClass;
 
-        result.setCook((Cook) cookService.findByPrincipal());
+        result.setCook(cookService.findByPrincipal());
 
         save(result);
 
@@ -72,16 +82,16 @@ public class MasterClassService {
 
     }
 
-    public MasterClass modifyMasterClass(MasterClass masterClass, String title, String description, Collection<LearningMaterial> learningMaterials){
+    public MasterClass modifyMasterClass(int id, MasterClass masterClass){
 
 
         userAccountService.assertRole("COOK");
         Assert.notNull(masterClass);
-        MasterClass modified = masterClass;
+        MasterClass modified = findOne(id);
 
-        modified.setTitle(title);
-        modified.setDescription(description);
-        modified.setLearningMaterials(learningMaterials);
+        modified.setTitle(masterClass.getTitle());
+        modified.setDescription(masterClass.getDescription());
+        modified.setLearningMaterials(masterClass.getLearningMaterials());
 
         save(modified);
 
@@ -119,6 +129,42 @@ public class MasterClassService {
 
         save(result);
 
+    }
+
+    public List<Object[]> findMinMaxAvgStddevMasterClassesPerCook(){
+        List<Object[]> result;
+
+        result = masterClassRepository.findMinMaxAvgStddevMasterClassesPerCook();
+        Assert.notNull(result);
+
+        return result;
+    }
+
+    public   Integer numberOfPromotedMasterClasses(){
+        Integer result;
+
+        result = masterClassRepository.numberOfPromotedMasterClasses();
+        Assert.notNull(result);
+
+        return result;
+    }
+
+    List<Double> AvgLearningMaterialsPerMasterClassGroupByLearningMaterialKind(){
+        List<Double> result;
+
+        result = masterClassRepository.AvgLearningMaterialsPerMasterClassGroupByLearningMaterialKind();
+        Assert.notNull(result);
+
+        return  result;
+    }
+
+    Double[] findAvgPromotedDemotedMasterClasses(){
+        Double[] result;
+
+        result = masterClassRepository.findAvgPromotedDemotedMasterClasses();
+        Assert.notNull(result);
+
+        return result;
     }
 
 

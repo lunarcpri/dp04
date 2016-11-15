@@ -50,20 +50,6 @@ public class SocialIdentityService {
         return result;
     }
 
-    public SocialIdentity edit(int id, String nick, String name, String link, String picture){
-        SocialIdentity result;
-
-        Assert.isTrue(socialIdentityRepository.exists(id));
-
-        result = socialIdentityRepository.findOne(id);
-        result.setName(name);
-        result.setNick(nick);
-        result.setLink(link);
-        result.setPicture(picture);
-        save(result);
-
-        return result;
-    }
 
     public void save(SocialIdentity socialIdentity){
         Assert.notNull(socialIdentity);

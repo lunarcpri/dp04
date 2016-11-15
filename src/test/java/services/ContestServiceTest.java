@@ -27,6 +27,7 @@ public class ContestServiceTest extends AbstractTest {
     private ContestService contestService;
 
 
+
     @Test
     public void TestFindMinMaxAvgRecipesPerContest(){
         List<Object[]> list = contestService.findMinMaxAvgRecipesPerContest();
@@ -34,11 +35,11 @@ public class ContestServiceTest extends AbstractTest {
         Collection<Contest> contests = contestService.findAll();
         int max=0,min=1000000;
         for (Contest e:contests){
-            if (e.getQualifiedRecipes().size()>max){
-                max = e.getQualifiedRecipes().size();
+            if (e.getRecipesQualified().size()>max){
+                max = e.getRecipesQualified().size();
             }
-            if (e.getQualifiedRecipes().size()<min){
-                min = e.getQualifiedRecipes().size();
+            if (e.getRecipesQualified().size()<min){
+                min = e.getRecipesQualified().size();
             }
         }
         Assert.isTrue(min == result[0]);
@@ -46,15 +47,21 @@ public class ContestServiceTest extends AbstractTest {
     }
 
     @Test
-    public void TestfindContestWithMoreRecipes(){
+    public void testfindContestWithMoreRecipes(){
         Contest result = contestService.findContestWithMoreRecipes();
         Collection<Contest> contests = contestService.findAll();
         Contest aux = null;
         for(Contest e: contests){
-            if (aux==null || aux.getQualifiedRecipes().size()<e.getQualifiedRecipes().size()){
+            if (aux==null || aux.getRecipesQualified().size()<e.getRecipesQualified().size()){
                 aux = e;
             }
         }
         Assert.isTrue(aux==result);
+    }
+
+    @Test
+    public void testProcessWinner(){
+        super.authenticate("admin");
+        contestService.processWinner();
     }
 }

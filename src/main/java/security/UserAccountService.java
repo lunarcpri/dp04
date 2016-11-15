@@ -1,12 +1,14 @@
 package security;
 
 import domain.Actor;
+import domain.Administrator;
+import domain.Nutritionist;
+import domain.Sponsor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import services.ActorService;
-import services.UserService;
+import services.*;
 
 @Service
 @Transactional
@@ -21,8 +23,22 @@ public class UserAccountService {
 	private UserService userService;
 
 	@Autowired
-	private ActorService actorService;
-	
+	private AdministratorService administratorService;
+
+	@Autowired
+	private CookService cookService;
+
+	@Autowired
+	private SponsorService sponsorService;
+
+
+	@Autowired
+	private NutritionistService nutritionistService;
+
+
+
+
+
 	// Supporting services ----------------------------------------------------
 		
 	// Constructors -----------------------------------------------------------
@@ -47,9 +63,23 @@ public class UserAccountService {
 		Actor actor = userService.findByPrincipal();
 		String[] roles = role.split(",");
 		for (String e : roles) {
-			Authority authority = new Authority();
-			authority.setAuthority(e);
-			Assert.isTrue(findByActor(actor).getAuthorities().contains(authority));
+			switch(e){
+				case "USER":
+					Assert.notNull(userService.findByPrincipal());
+					break;
+				case "COOK":
+					Assert.notNull(cookService.findByPrincipal());
+					break;
+				case "NUTRITIONIST":
+					Assert.notNull(nutritionistService.findByPrincipal());
+					break;
+				case "SPONSOR":
+					Assert.notNull(sponsorService.findByPrincipal());
+					break;
+				case "ADMINISTRATOR":
+					Assert.notNull(administratorService.findByPrincipal());
+					break;
+			}
 		}
 	}
 	

@@ -70,36 +70,30 @@ public class RecipeService {
         return result;
     }
 
-    private void save(Recipe recipe){
+    private Recipe save(Recipe recipe){
         Assert.notNull(recipe);
 
-        recipeRepository.save(recipe);
+        return recipeRepository.save(recipe);
     }
 
-    public Recipe newRecipe(Recipe recip){
+    public Recipe newRecipe(Recipe recipe){
 
         userAccountService.assertRole("USER");
         Date createdAt = new Date();
-        Recipe recipe = create();
-
+        recipe.setUpdated_at(createdAt);
         recipe.setCreated_at(createdAt);
-        recipe.setTicker(generateTicker(recip));
-        recipe.setTitle(recip.getTitle());
-        recipe.setSummary(recip.getSummary());
-        recipe.setHits(recip.getHits());
-        recipe.setQuantities(recip.getQuantities());
-        recipe.setSteps(recip.getSteps());
-        recipe.setAuthor(recip.getAuthor());
-        recipe.setCategory(recip.getCategory());
+        recipe.setTicker(generateTicker());
+        recipe.setAuthor(userService.findByPrincipal());
 
-        save(recipe);
-        return recipe;
+        return save(recipe);
     }
 
-    private String generateTicker(Recipe recipe){
-        String result="";
+    private String generateTicker(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        String result=calendar.get(Calendar.YEAR) % 100+""+calendar.get(Calendar.MONTH)+""+calendar.get(Calendar.DAY_OF_MONTH)+"-";
         Date date = new Date();
-        for(int i=0;i<3;i++){
+        for(int i=0;i<4;i++){
             Random r = new Random();
             char c = (char)(r.nextInt(26) + 'a');
             result=result+String.valueOf(c);
@@ -117,9 +111,18 @@ public class RecipeService {
 
     }
 
-    public void modifyRecipe(Recipe recipe, int id){
+    public Collection<Recipe> findByKeyword(String key){
+        Collection<Recipe> result;
+
+        result = recipeRepository.findByKeyword(key);
+        Assert.notNull(result);
+
+        return result;
+    }
+
+    public void modifyRecipe(Recipe recipe){
         userAccountService.assertRole("USER");
-        Recipe old = findOne(id);
+        Recipe old = findOne(recipe.getId());
         Assert.isTrue(!old.isRead_only());
         Date updatedAt = new Date();
 
@@ -152,7 +155,6 @@ public class RecipeService {
     public void addLike(int id, boolean like){
         Recipe recipe = findOne(id);
         UserOrNutritionist userOrNutritionist = userService.findByPrincipal();
-        Assert.isTrue(!isActorAuthoredRecipe(userOrNutritionist.getId(),id));
         List<Likes> likes = new ArrayList<Likes>(likesService.findRecipeLikeByActor(userOrNutritionist.getId(),id));
         if (likes.size()>0){
             Likes likeRecipe = likes.get(0);

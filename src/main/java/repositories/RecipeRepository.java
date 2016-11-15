@@ -15,7 +15,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     @Query("select distinct u.recipes from User u where u.id = ?1")
     Collection<Recipe> findRecipesByUser(int userId);
 
-    @Query("select r from Recipe r where r.ticker like '%?1%' or r.title like '%?1%' or r.summary like '%?1%'")
+    @Query("select r from Recipe r where r.ticker like %?1% or r.title like %?1% or r.summary like %?1%")
     Collection<Recipe> findByKeyword(String key);
 
     @Query("select r.likes from Recipe r join r.likes l where l.isLike=true and r.id= ?1")

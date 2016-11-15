@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.MessageRepository;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Transactional
@@ -64,10 +66,11 @@ public class MessageService {
         Message message = findOne(messageId);
         Folder folder = null;
         if (message.getSender() == actor || message.getRecipient() == actor){
-            folder = folderService.findFolderByMessageAndActor(message,actor);
+            folder = folderService.findFolderByMessageAndActor(message.getId(),actor.getId());
             if (folder.getFolderType() != Folder.FolderType.THRASHBOX){
                 folder.setFolderType(Folder.FolderType.THRASHBOX);
             }else{
+
                 delete(message);
             }
         }
@@ -87,17 +90,17 @@ public class MessageService {
         message.setRecipient(recipientActor);
         message.setSender(senderActor);
         message.setSended_at(sendedAt);
-        setFolder(message,senderActor,recipientActor);
-
-        return message;
+        List<Folder> folders = setFolders(message,senderActor,recipientActor);
+        message.setFolders(folders);
+        return save(message);
     }
 
 
 
-    private void save(Message message){
+    private Message save(Message message){
         Assert.notNull(message);
 
-        messageRepository.save(message);
+        return messageRepository.save(message);
     }
 
     public void saveMessage(Message message){
@@ -113,23 +116,36 @@ public class MessageService {
         Assert.notNull(newFolder);
         Assert.notNull(message);
         Assert.notNull(actor);
-        Folder actualFolder = folderService.findFolderByMessageAndActor(message,actor);
+        Folder actualFolder = folderService.findFolderByMessageAndActor(message.getId(),actor.getId());
         folderService.removeMessage(actualFolder.getId(),message);
         folderService.addMessage(newFolder.getId(),message);
     }
 
-    private void setFolder(Message message, Actor senderActor, Actor recipientActor){
-        Folder folderSender = folderService.findInbox(senderActor.getId());
+    private List<Folder> setFolders(Message message, Actor senderActor, Actor recipientActor){
+        List<Folder> result = new ArrayList<Folder>();
+        Folder folderSender = folderService.findOutbox(senderActor.getId());
         Assert.notNull(folderSender);
         Folder folderRecipient = folderService.findInbox(recipientActor.getId());
         if (isMessageSpam(message)) {
             folderRecipient = folderService.findSpambox(recipientActor.getId());
         }
         Assert.notNull(folderRecipient);
+        result.add(folderRecipient);
+        result.add(folderSender);
         folderService.addMessage(folderRecipient.getId(),message);
         folderService.addMessage(folderSender.getId(),message);
+        return result;
     }
 
+
+   public Collection<Message> findAll(){
+        Collection<Message> result;
+
+        result = messageRepository.findAll();
+        Assert.notNull(result);
+
+        return result;
+    }
     private boolean isMessageSpam(Message message){
         boolean result = false;
         Collection<SpamTags> spamTagses = spamTagsService.findAll();
@@ -140,6 +156,16 @@ public class MessageService {
                 result = true;
             }
         }
+        return result;
+    }
+
+    public Collection<Message> findAllPrincipal(){
+        Collection<Message> result;
+
+        Actor a = userService.findByPrincipal();
+        result = messageRepository.findAllByActor(a.getId());
+        Assert.notNull(result);
+
         return result;
     }
 

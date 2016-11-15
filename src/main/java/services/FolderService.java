@@ -3,13 +3,16 @@ package services;
 import domain.Actor;
 import domain.Folder;
 import domain.Message;
+import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.FolderRepository;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
@@ -36,6 +39,16 @@ public class FolderService {
 
         return result;
     }
+
+    public Collection<Folder> findAll(){
+        Collection<Folder> result;
+
+        result = folderRepository.findAll();
+        Assert.notNull(result);
+
+        return result;
+    }
+
 
     public void delete(int folderIt){
         Folder folder;
@@ -64,10 +77,18 @@ public class FolderService {
     }
 
 
+    public Collection<Folder> findAllCustomFolderByPrincipal(){
+        Collection<Folder> result;
+        Actor user = userService.findByPrincipal();
+        result = folderRepository.findCustomFoldersByActorId(user.getId());
+        Assert.notNull(result);
+
+        return  result;
+    }
+
     public Folder createCustomFolder(Folder folder){
 
         Actor user = userService.findByPrincipal();
-        Assert.notNull(user);
         folder.setActor(user);
         folder.setFolderType(Folder.FolderType.CUSTOM);
         save(folder);
@@ -80,18 +101,42 @@ public class FolderService {
         folder.setName(name);
 
         save(folder);
-
     }
 
-    public Folder findFolderByMessageAndActor(Message message, Actor actor){
-        Collection<Folder> foldersActor = actor.getFolders();
-        Folder folder = null;
-        for(Folder e:foldersActor){
-            if (e.getMessages().contains(message)){
-                folder = e;
-            }
-        }
-        return folder;
+    public void createDefaultFolders(User u){
+        Folder inbox = create();
+        inbox.setName("Inbox");
+        inbox.setFolderType(Folder.FolderType.INBOX);
+        Folder outbox = create();
+        outbox.setName("Outbox");
+        outbox.setFolderType(Folder.FolderType.OUTBOX);
+        Folder spambox = create();
+        spambox.setName("Spambox");
+        outbox.setFolderType(Folder.FolderType.SPAMBOX);
+        Folder trashbox = create();
+        trashbox.setName("Trashbox");
+        outbox.setFolderType(Folder.FolderType.THRASHBOX);
+        inbox.setActor(u);
+        outbox.setActor(u);
+        spambox.setActor(u);
+        trashbox.setActor(u);
+        u.setFolders(new ArrayList<Folder>());
+        List<Folder> folderList = new ArrayList<Folder>();
+        folderList.add(inbox);
+        folderList.add(outbox);
+        folderList.add(spambox);
+        folderList.add(trashbox);
+        u.setFolders(folderList);
+        userService.save(u);
+    }
+
+    public Folder findFolderByMessageAndActor(int actorid, int messageid){
+        Folder result;
+
+        result = folderRepository.findFolderByMessageAndActor(actorid,messageid);
+        Assert.notNull(result);
+
+        return result;
     }
 
     public Folder findInbox(int id){
@@ -132,6 +177,7 @@ public class FolderService {
 
     public void addMessage(int id, Message message){
         Folder folder = folderRepository.findOne(id);
+        Assert.notNull(folder);
         folder.getMessages().add(message);
         Collection<Message> newMessages = folder.getMessages();
         folder.setMessages(newMessages);
@@ -145,5 +191,7 @@ public class FolderService {
         folder.setMessages(newMessages);
         save(folder);
     }
+
+
 
 }
