@@ -9,7 +9,6 @@ import org.springframework.util.Assert;
 import repositories.ContestRepository;
 import security.UserAccountService;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;

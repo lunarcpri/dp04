@@ -1,9 +1,6 @@
 package security;
 
 import domain.Actor;
-import domain.Administrator;
-import domain.Nutritionist;
-import domain.Sponsor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

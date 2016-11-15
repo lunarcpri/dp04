@@ -1,15 +1,11 @@
 package services;
 
-import domain.Actor;
 import domain.Administrator;
-import domain.Cook;
-import domain.MasterClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.AdministratorRepository;
-import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;

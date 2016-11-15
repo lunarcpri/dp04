@@ -1,6 +1,9 @@
 package services;
 
-import domain.*;
+import domain.Actor;
+import domain.MasterClass;
+import domain.Message;
+import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

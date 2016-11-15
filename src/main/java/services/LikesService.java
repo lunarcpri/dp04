@@ -3,13 +3,11 @@ package services;
 import domain.Likes;
 import domain.Recipe;
 import domain.User;
-import domain.UserOrNutritionist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.LikesRepository;
-import repositories.UserRepository;
 
 import java.util.Collection;
 

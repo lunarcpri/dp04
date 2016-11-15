@@ -4,7 +4,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import java.util.Collection;
 
 @Entity
