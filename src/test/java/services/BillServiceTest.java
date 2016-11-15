@@ -23,13 +23,16 @@ public class BillServiceTest extends AbstractTest {
     @Autowired
     private BillService billService;
 
+    @Autowired
+    private SponsorService sponsorService;
+
     @Test
     public void testGetMonthlyBills(){
 
         super.authenticate("user3");
 
         Collection<Bill> bills = billService.list();
-
+        System.out.println(sponsorService.findByPrincipal());
         for (Bill bill: bills){
 
             Assert.isTrue(bill.getSponsor().equals(billService.sponsorService.findByPrincipal()));

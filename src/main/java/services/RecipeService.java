@@ -76,22 +76,14 @@ public class RecipeService {
         return recipeRepository.save(recipe);
     }
 
-    public Recipe newRecipe(Recipe recip){
+    public Recipe newRecipe(Recipe recipe){
 
         userAccountService.assertRole("USER");
         Date createdAt = new Date();
-        Recipe recipe = create();
         recipe.setUpdated_at(createdAt);
         recipe.setCreated_at(createdAt);
         recipe.setTicker(generateTicker());
-        recipe.setTitle(recip.getTitle());
-        recipe.setSummary(recip.getSummary());
-        recipe.setHits(recip.getHits());
-        recipe.setQuantities(recip.getQuantities());
-        recipe.setSteps(recip.getSteps());
-        recipe.setAuthor(recip.getAuthor());
-        recipe.setCategory(recip.getCategory());
-
+        recipe.setAuthor(userService.findByPrincipal());
 
         return save(recipe);
     }

@@ -27,6 +27,7 @@ public class ContestServiceTest extends AbstractTest {
     private ContestService contestService;
 
 
+
     @Test
     public void TestFindMinMaxAvgRecipesPerContest(){
         List<Object[]> list = contestService.findMinMaxAvgRecipesPerContest();
@@ -46,7 +47,7 @@ public class ContestServiceTest extends AbstractTest {
     }
 
     @Test
-    public void TestfindContestWithMoreRecipes(){
+    public void testfindContestWithMoreRecipes(){
         Contest result = contestService.findContestWithMoreRecipes();
         Collection<Contest> contests = contestService.findAll();
         Contest aux = null;
@@ -56,5 +57,11 @@ public class ContestServiceTest extends AbstractTest {
             }
         }
         Assert.isTrue(aux==result);
+    }
+
+    @Test
+    public void testProcessWinner(){
+        super.authenticate("admin");
+        contestService.processWinner();
     }
 }

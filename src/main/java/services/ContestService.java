@@ -9,6 +9,8 @@ import org.springframework.util.Assert;
 import repositories.ContestRepository;
 import security.UserAccountService;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +27,9 @@ public class ContestService {
     private UserAccountService userAccountService;
 
     @Autowired UserService userService;
+
+    @Autowired
+    AdministratorService administratorService;
 
 
     public ContestService(){
@@ -62,7 +67,6 @@ public class ContestService {
 
         return result;
     }
-    
 
 
     public void newContest(Contest contest){
@@ -74,10 +78,38 @@ public class ContestService {
     }
 
 
-
     public void processWinner(){
-        Collection<Contest> contests = contestRepository.findClosedContests();
+        Collection<Contest> result;
 
+        userAccountService.assertRole("ADMIN");
+
+        result = contestRepository.findClosedContests();
+        Assert.notNull(result);
+        for(Contest e: result) {
+           List<Recipe> recipes =findContestRecipesOrderByLikes(e.getId());
+            if (recipes.size()>0){
+                int winners = (recipes.size()>3) ? 3 : recipes.size();
+                List<Recipe> winnersList = recipes.subList(0,winners);
+                e.setWinnerRecipes(winnersList);
+            }
+            e.setEnded(true);
+            save(e);
+
+        }
+
+    }
+
+    public List<Recipe> findContestRecipesOrderByLikes(int id){
+        List<Recipe> result = new ArrayList<Recipe>();
+
+        Collection<Object[]> collection = contestRepository.findContestRecipesOrderByLikes(id);
+        Assert.notNull(collection);
+
+        for(Object[] e: collection){
+            result.add((Recipe) e[0]);
+        }
+
+        return  result;
     }
 
     public List<Object[]> findMinMaxAvgRecipesPerContest(){

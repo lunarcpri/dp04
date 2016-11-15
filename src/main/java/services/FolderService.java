@@ -49,6 +49,7 @@ public class FolderService {
         return result;
     }
 
+
     public void delete(int folderIt){
         Folder folder;
 
@@ -76,10 +77,18 @@ public class FolderService {
     }
 
 
+    public Collection<Folder> findAllCustomFolderByPrincipal(){
+        Collection<Folder> result;
+        Actor user = userService.findByPrincipal();
+        result = folderRepository.findCustomFoldersByActorId(user.getId());
+        Assert.notNull(result);
+
+        return  result;
+    }
+
     public Folder createCustomFolder(Folder folder){
 
         Actor user = userService.findByPrincipal();
-        Assert.notNull(user);
         folder.setActor(user);
         folder.setFolderType(Folder.FolderType.CUSTOM);
         save(folder);
@@ -121,22 +130,19 @@ public class FolderService {
         userService.save(u);
     }
 
-    public Folder findFolderByMessageAndActor(Message message, Actor actor){
-        Collection<Folder> foldersActor = actor.getFolders();
-        Folder folder = null;
-        for(Folder e:foldersActor){
-            if (e.getMessages().contains(message)){
-                folder = e;
-            }
-        }
-        return folder;
+    public Folder findFolderByMessageAndActor(int actorid, int messageid){
+        Folder result;
+
+        result = folderRepository.findFolderByMessageAndActor(actorid,messageid);
+        Assert.notNull(result);
+
+        return result;
     }
 
     public Folder findInbox(int id){
         Folder result;
 
         result = folderRepository.findInboxFolderByActorId(id);
-        System.out.println(id);
         Assert.notNull(result);
 
         return result;
@@ -154,7 +160,6 @@ public class FolderService {
     public Folder findOutbox(int id){
         Folder result;
 
-        System.out.println(userService.findOne(id).getFolders());
         result = folderRepository.findOutboxFolderByActorId(id);
         Assert.notNull(result);
 

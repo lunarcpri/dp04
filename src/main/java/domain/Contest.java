@@ -21,7 +21,6 @@ public class Contest extends DomainEntity {
     private Date opened_at;
     private Date closed_at;
     private Collection<Recipe> recipesQualified;
-    private int numberOfWinners;
     private Collection<Recipe> winnerRecipes;
     private boolean ended;
 
@@ -60,12 +59,6 @@ public class Contest extends DomainEntity {
     public void setClosed_at(Date closed_at) {
         this.closed_at = closed_at;
     }
-
-    public int getNumberOfWinners() {
-        return numberOfWinners;
-    }
-
-    public void setNumberOfWinners(int winners) {this.numberOfWinners = winners;}
 
 
     @Column(columnDefinition="bit default 0")
