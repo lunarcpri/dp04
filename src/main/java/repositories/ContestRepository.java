@@ -26,4 +26,7 @@ public interface ContestRepository extends JpaRepository<Contest, Integer> {
             "(select distinct  l2.size from Recipe r2 join r2.likes l2 where r2.id=r.id and isLike=false) as dislikes  " +
             " from Contest c join c.recipesQualified r join r.likes l where c.id=?1 order by likes asc, dislikes desc")
     Collection<Object[]> findContestRecipesOrderByLikes(int id);
+
+    @Query("select c from Contest c join c.recipesQualified r where c.ended=false and r.id=?1")
+    Collection<Contest> findOpenContestsByRecipe(int recipeid);
 }

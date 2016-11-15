@@ -70,7 +70,7 @@ public class RecipeService {
         return result;
     }
 
-    private Recipe save(Recipe recipe){
+    public Recipe save(Recipe recipe){
         Assert.notNull(recipe);
 
         return recipeRepository.save(recipe);

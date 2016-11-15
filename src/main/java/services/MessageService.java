@@ -188,7 +188,7 @@ public class MessageService {
         message.setBody("Notice of default: You have unpaid bills");
         for (Bill b:bills){
 
-            this.newMessage(b.getSponsor().getId(), message);
+           // this.newMessage(b.getSponsor().getId(), message);
         }
 
 

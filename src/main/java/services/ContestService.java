@@ -88,7 +88,9 @@ public class ContestService {
         Collection<Recipe> recipeCollection = c.getRecipesQualified();
         recipeCollection.add(r);
         c.setRecipesQualified(recipeCollection);
-
+        Recipe r2 = recipeService.findOne(r.getId());
+        r2.setRead_only(true);
+        recipeService.save(r2);
         save(c);
     }
 
@@ -114,7 +116,7 @@ public class ContestService {
         result = contestRepository.findClosedContests();
         Assert.notNull(result);
         for(Contest e: result) {
-           List<Recipe> recipes =findContestRecipesOrderByLikes(e.getId());
+           List<Recipe> recipes = findContestRecipesOrderByLikes(e.getId());
             if (recipes.size()>0){
                 int winners = (recipes.size()>3) ? 3 : recipes.size();
                 List<Recipe> winnersList = recipes.subList(0,winners);
@@ -122,11 +124,26 @@ public class ContestService {
             }
             e.setEnded(true);
             save(e);
+            for(Recipe f : e.getRecipesQualified()){
+                if (findOpenContestsByRecipe(f).size()==0){
+                    f.setRead_only(false);
+                    recipeService.save(f);
+                }
+            }
 
         }
-
     }
 
+
+
+    public Collection<Contest> findOpenContestsByRecipe(Recipe r){
+        Collection<Contest> result;
+
+        result = contestRepository.findOpenContestsByRecipe(r.getId());
+        Assert.notNull(result);
+
+        return  result;
+    }
 
 
     public List<Recipe> findContestRecipesOrderByLikes(int id){
