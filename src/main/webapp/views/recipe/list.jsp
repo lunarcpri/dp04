@@ -21,25 +21,27 @@
 
 <!-- Listing grid -->
 
+<h1>List of Recipes</h1>
+
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="actors" requestURI="actor/administrator/list.do" id="row">
+	name="actors" requestURI="recipe/list.do" id="row">
 	
 	<!-- Attributes -->
 
-	<spring:message code="name" var="nameHeader" />
-	<display:column property="name" title="${nameHeader}" sortable="true" />
+	<spring:message code="recipe.ticker" var="tickerHeader" />
+	<display:column property="ticker" title="${tickerHeader}" sortable="true" />
 
-	<spring:message code="surnames" var="surnamesHeader" />
-	<display:column property="name" title="${surnamesHeader}" sortable="true" />
+	<spring:message code="recipe.title" var="titleHeader" />
+	<display:column property="title" title="${titleHeader}" sortable="true" />
 
-	<spring:message code="email" var="emailHeader" />
-	<display:column property="email" title="${emailHeader}" sortable="true" />
+	<spring:message code="recipe.summary" var="summaryHeader" />
+	<display:column property="summary" title="${summaryHeader}" sortable="true" />
 
-	<spring:message code="phone" var="phoneHeader" />
-	<display:column property="phone" title="${phoneHeader}" sortable="true" />
+	<spring:message code="recipe.createdAt" var="createdAtHeader" />
+	<display:column property="created_at" title="${createdAtHeader}" sortable="true" />
 
-	<spring:message code="address" var="addressHeader" />
-	<display:column property="address" title="${addressHeader}"	sortable="false" />
+	<spring:message code="recipe.actor" var="authorHeader" />
+	<display:column property="author.userAccount.username" title="${authorHeader}"	sortable="true" />
 
 </display:table>
 

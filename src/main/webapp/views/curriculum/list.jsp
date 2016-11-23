@@ -1,8 +1,7 @@
 <%--
- * dropdown.jsp
+ * list.jsp
  *
  * Copyright (C) 2016 Universidad de Sevilla
- * Author (A) 2012 Rafael Corchuelo (corchu@us.es)
  * 
  * The use of this project is hereby constrained to the conditions of the 
  * TDG Licence, a copy of which you may download from 
@@ -19,9 +18,25 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<form:select id="examsDropdown" path="exams">
-	<form:option value="0" label="----"/>
-	<form:options items="${exams}" itemValue="id" itemLabel="title" />
-</form:select>
+<h1>Curriculum</h1>
+<a href="curriculum/edit.do"><spring:message code="edit"/> </a>
 
+<h2><spring:message code="educational"/> </h2>
+<p>${curriculum.educational}</p>
+
+
+<h2><spring:message code="experience"/> </h2>
+<p>${curriculum.experience}</p>
+
+
+<h2><spring:message code="hobbies"/> </h2>
+<p>${curriculum.hobbies}</p>
+
+<h2><spring:message code="references" /> </h2>
+<ul>
+<c:forEach var="itemValue" items="${curriculum.references}">
+	<li><a href="${itemValue.homepage}" target="_blank" >${itemValue.name}</a></li>
+</c:forEach>
+</ul>

@@ -22,23 +22,25 @@
 <!-- Listing grid -->
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="certifications" requestURI="${requestURI}" id="row">
-	
-	<!-- Action links -->
+	name="actors" requestURI="contest/list.do" id="row">
 	
 	<!-- Attributes -->
 
-	<spring:message code="certification.title" var="titleHeader" />
+	<spring:message code="contest.title" var="titleHeader" />
 	<display:column property="title" title="${titleHeader}" sortable="true" />
 
-	<spring:message code="certification.description" var="descriptionHeader" />
-	<display:column property="description" title="${descriptionHeader}" sortable="false" />
+	<spring:message code="contest.openedAt" var="openedAtHeader" />
+	<display:column property="opened_at" title="${openedAtHeader}" sortable="true" />
 
-	<spring:message code="certification.extinctionDate" var="extinctionHeader" />
-	<display:column property="extinctionDate" title="${extinctionHeader}" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
+	<spring:message code="contest.closedAt" var="closedAtHeader" />
+	<display:column property="closed_at" title="${closedAtHeader}" sortable="true" />
 
-	<spring:message code="certification.fee" var="feeHeader" />
-	<display:column property="fee" title="${feeHeader}"	sortable="true" />
-	
+	<spring:message code="contest.qualify"  />
+	<display:column>
+		<form:select path="recipes">
+			<form:options items="${recipes}" itemValue="id" itemLabel="title" />
+		</form:select> }"
+	</display:column>
+
 </display:table>
 

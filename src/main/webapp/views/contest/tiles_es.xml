@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- 
- * tiles.xml
+ * tiles_es.xml
 
  * Copyright (C) 2016 Universidad de Sevilla
  * Author (A) 2012 Rafael Corchuelo (corchu@us.es)
@@ -12,12 +12,14 @@
  -->
 
 <!DOCTYPE tiles-definitions PUBLIC
-       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
-       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-       
+		"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+		"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
 <tiles-definitions>
 
-	<definition name="exam/dropdown" template="/views/exam/dropdown.jsp">
-	</definition>	
-	
+	<definition name="contest/list" extends="master.page">
+		<put-attribute name="title" value="Lista de concursos" />
+		<put-attribute name="body" value="/views/contest/list.jsp" />
+	</definition>
+
 </tiles-definitions>

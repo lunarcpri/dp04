@@ -14,17 +14,12 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-       
+
 <tiles-definitions>
 
-	<definition name="announcement/list" extends="master.page">	
-		<put-attribute name="title" value="Lista de convocatorias" />
-		<put-attribute name="body" value="/views/announcement/list.jsp" />
-	</definition>
-	
-	<definition name="announcement/edit" extends="master.page">
-		<put-attribute name="title" value="Edición de convocatoria" />
-		<put-attribute name="body" value="/views/announcement/edit.jsp" />
+	<definition name="recipe/list" extends="master.page">
+		<put-attribute name="title" value="Lista de recetas" />
+		<put-attribute name="body" value="/views/recipe/list.jsp" />
 	</definition>
 
 </tiles-definitions>

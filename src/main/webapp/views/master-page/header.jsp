@@ -19,7 +19,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <div>
-	<img src="images/logo.png" alt="ACME, Inc.  Your certification Company" />
+	<img src="images/logo.png" alt="ACME Pad Thai - Your favourite site for Recipes" />
 </div>
 
 <div>
