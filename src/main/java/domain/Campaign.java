@@ -17,6 +17,10 @@ public class Campaign extends DomainEntity {
     private boolean star_campaign;
     private Collection<Banner> banners;
     private Sponsor sponsor;
+    private Integer max_time_banners;
+
+
+
 
     public Campaign()
     {
@@ -73,4 +77,13 @@ public class Campaign extends DomainEntity {
     public void setSponsor(Sponsor sponsor) {
         this.sponsor = sponsor;
     }
+
+    public Integer getMax_time_banners() {
+        return max_time_banners;
+    }
+
+    public void setMax_time_banners(Integer max_time_banners) {
+        this.max_time_banners = max_time_banners;
+    }
 }
+

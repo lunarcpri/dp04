@@ -11,6 +11,7 @@
 
 
 <form:form action="actor/register.do" modelAttribute="actor" method="POST">
+
     <form:label path="userAccount.username">
         <spring:message code="userAccount.username" />:
     </form:label>

@@ -28,6 +28,9 @@
 		<value>/views/announcement/messages</value>
 		<value>/views/certification/messages</value>
 		<value>/views/exam/messages</value>
+		<value>/views/campaign/messages</value>
+		<value>/views/bill/messages</value>
+		<value>/views/master-class/messages</value>
 	</util:list>
 
 </beans>
