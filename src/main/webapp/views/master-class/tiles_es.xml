@@ -14,4 +14,5 @@
         <put-attribute name="body" value="/views/master-class/edit.jsp" />
     </definition>
 
+
 </tiles-definitions>

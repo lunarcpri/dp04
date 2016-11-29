@@ -25,6 +25,7 @@
 		<value>/views/campaign/tiles.xml</value>
 		<value>/views/bill/tiles.xml</value>
 		<value>/views/master-class/tiles.xml</value>
+		<value>/views/cook/tiles.xml</value>
 	</util:list>
 
 </beans>

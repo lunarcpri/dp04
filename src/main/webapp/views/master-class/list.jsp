@@ -34,4 +34,6 @@
     <spring:message code="masterClass.attendingUsers" var="attendingUsersHeader" />
     <display:column property="attendingUsers" title="${attendingUsersHeader}" sortable="true" />
 
+    <a href="#"> <spring:message code="masterClass.attend"/> </a>
+
     </display:table>

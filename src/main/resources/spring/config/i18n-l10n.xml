@@ -31,6 +31,7 @@
 		<value>/views/campaign/messages</value>
 		<value>/views/bill/messages</value>
 		<value>/views/master-class/messages</value>
+		<value>/views/cook/messages</value>
 	</util:list>
 
 </beans>
