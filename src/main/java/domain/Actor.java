@@ -64,8 +64,7 @@ public abstract class Actor extends DomainEntity {
 		this.surnames = surnames;
 	}
 
-	@NotBlank
-	@Pattern(regexp = "^((\\+[0-9]{1,3})?\\s*(\\([0-9]{3}\\))?\\s*([a-zA-Z0-9\\- ]{4,}))$")
+	@Pattern(regexp = "^((\\+[0-9]{1,3})?\\s*(\\([0-9]{3}\\))?\\s*([a-zA-Z0-9\\- ]{4,}))?$")
 	public String getPhone() {
 		return phone;
 	}

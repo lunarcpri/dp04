@@ -40,14 +40,14 @@ public class RecipeService {
         super();
     }
 
-    Collection<Recipe> findAllRecipesByUser(int userId)
+    public Collection<Recipe> findAllRecipesByUser(int userId)
     {
 
         return recipeRepository.findRecipesByUser(userId);
     }
 
 
-    Collection<Recipe> findAll()
+    public Collection<Recipe> findAll()
     {
 
         return recipeRepository.findAll();

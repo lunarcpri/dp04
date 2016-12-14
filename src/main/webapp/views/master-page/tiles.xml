@@ -23,4 +23,8 @@
 		<put-attribute name="footer" value="/views/master-page/footer.jsp" />
 	</definition>
 
+	<definition name="header" template="/views/master-page/header.jsp">
+		<put-attribute name="login" value="/views/security/login.jsp" />
+	</definition>
+
 </tiles-definitions>

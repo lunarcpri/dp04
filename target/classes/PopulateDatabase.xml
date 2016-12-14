@@ -435,6 +435,7 @@
         <property name="updated_at" value="01/02/2015 23:59"/>
         <property name="ticker" value="150201-ABCD"/>
         <property name="author" ref="user1" />
+        <property name="picture" value="http://www.hogarmania.com/archivos/201611/arroz_cubana-416x236x80xX.jpg?1"/>
         <property name="category" ref="category1"/>
         <property name="steps">
             <list>
@@ -616,6 +617,7 @@
         <property name="ticker" value="150201-ABCE"/>
         <property name="author" ref="user1" />
         <property name="category" ref="category1"/>
+        <property name="picture" value="http://www.recetapuchero.com/ImagenesRecetaPuchero/ImagenesRecetaPuchero/receta-puchero-fideos.jpg"/>
         <property name="steps">
             <list>
                 <ref bean="recipe2step1" />
@@ -675,6 +677,7 @@
     <bean id="recipe3" class="domain.Recipe">
         <property name="hits" value="hint 1" />
         <property name="title" value="Title 1" />
+        <property name="picture" value="https://recetassaboresypasiones.files.wordpress.com/2014/10/calamares-a-la-romana.jpg"/>
         <property name="summary" value="summary" />
         <property name="created_at" value="01/02/2015 23:59"/>
         <property name="updated_at" value="01/02/2015 23:59"/>

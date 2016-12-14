@@ -20,51 +20,114 @@
 	<util:list id="converters">	
 		<bean class="converters.AuthorityToStringConverter" />
 		<bean class="converters.StringToAuthorityConverter" />
-		
+
 		<bean class="converters.ActorToStringConverter" />
 		<bean class="converters.StringToActorConverter" />
-		
+
 		<bean class="converters.AdministratorToStringConverter" />
 		<bean class="converters.StringToAdministratorConverter" />
-		
-		<bean class="converters.AnnouncementToStringConverter" />
-		<bean class="converters.StringToAnnouncementConverter" />
-		
-		<bean class="converters.AnswerToStringConverter" />
-		<bean class="converters.StringToAnswerConverter" />
-		
-		<bean class="converters.CertificationToStringConverter" />
-		<bean class="converters.StringToCertificationConverter" />
-				
-		<bean class="converters.CustomerToStringConverter" />
-		<bean class="converters.StringToCustomerConverter" />
-		
-		<bean class="converters.ExamToStringConverter" />
-		<bean class="converters.StringToExamConverter" />
-		
-		<bean class="converters.ExamPaperToStringConverter" />
-		<bean class="converters.StringToExamPaperConverter" />
-		
-		<bean class="converters.OpenAnswerToStringConverter" />
-		<bean class="converters.StringToOpenAnswerConverter" />
-		
-		<bean class="converters.OpenQuestionToStringConverter" />
-		<bean class="converters.StringToOpenQuestionConverter" />
-		
-		<bean class="converters.QuestionToStringConverter" />
-		<bean class="converters.StringToQuestionConverter" />
-		
-		<bean class="converters.RegistrationToStringConverter" />
-		<bean class="converters.StringToRegistrationConverter" />
-		
-		<bean class="converters.ReviewerToStringConverter" />
-		<bean class="converters.StringToReviewerConverter" />
-		
-		<bean class="converters.TestAnswerToStringConverter" />
-		<bean class="converters.StringToTestAnswerConverter" />
-		
-		<bean class="converters.TestQuestionToStringConverter" />
-		<bean class="converters.StringToTestQuestionConverter" />
+
+		<bean class="converters.AttachmentToStringConverter" />
+		<bean class="converters.StringToAttachmentConverter" />
+
+		<bean class="converters.BannerToStringConverter" />
+		<bean class="converters.StringToBannerConverter" />
+
+		<bean class="converters.BillToStringConverter" />
+		<bean class="converters.StringToBillConverter" />
+
+		<bean class="converters.CampaignToStringConverter" />
+		<bean class="converters.StringToCampaignConverter" />
+
+		<bean class="converters.CategoryToStringConverter" />
+		<bean class="converters.StringToCategoryConverter" />
+
+		<bean class="converters.CommentToStringConverter" />
+		<bean class="converters.StringToCommentConverter" />
+
+		<bean class="converters.ConfigurationToStringConverter" />
+		<bean class="converters.StringToConfigurationConverter" />
+
+		<bean class="converters.ContestToStringConverter" />
+		<bean class="converters.StringToContestConverter" />
+
+		<bean class="converters.CookToStringConverter" />
+		<bean class="converters.StringToCookConverter" />
+
+		<bean class="converters.CreditCardToStringConverter" />
+		<bean class="converters.StringToCreditCardConverter" />
+
+		<bean class="converters.CurriculumToStringConverter" />
+		<bean class="converters.StringToCurriculumConverter" />
+
+		<bean class="converters.DomainEntityToStringConverter" />
+		<bean class="converters.StringToDomainEntityConverter" />
+
+		<bean class="converters.FolderToStringConverter" />
+		<bean class="converters.StringToFolderConverter" />
+
+		<bean class="converters.IngredientToStringConverter" />
+		<bean class="converters.StringToIngredientConverter" />
+
+		<bean class="converters.LearningMaterialToStringConverter" />
+		<bean class="converters.StringToLearningMaterialConverter" />
+
+		<bean class="converters.LikesToStringConverter" />
+		<bean class="converters.StringToLikesConverter" />
+
+		<bean class="converters.MasterClassToStringConverter" />
+		<bean class="converters.StringToMasterClassConverter" />
+
+		<bean class="converters.MessageToStringConverter" />
+		<bean class="converters.StringToMessageConverter" />
+
+		<bean class="converters.NutritionistToStringConverter" />
+		<bean class="converters.StringToNutritionistConverter" />
+
+		<bean class="converters.PresentationMaterialToStringConverter" />
+		<bean class="converters.StringToPresentationMaterialConverter" />
+
+		<bean class="converters.PropertyToStringConverter" />
+		<bean class="converters.StringToPropertyConverter" />
+
+		<bean class="converters.QuantityToStringConverter" />
+		<bean class="converters.StringToQuantityConverter" />
+
+		<bean class="converters.RecipeToStringConverter" />
+		<bean class="converters.StringToRecipeConverter" />
+
+		<bean class="converters.ReferenceToStringConverter" />
+		<bean class="converters.StringToReferenceConverter" />
+
+		<bean class="converters.SocialIdentityToStringConverter" />
+		<bean class="converters.StringToSocialIdentityConverter" />
+
+		<bean class="converters.SpamTagsToStringConverter" />
+		<bean class="converters.StringToSpamTagsConverter" />
+
+		<bean class="converters.SponsorToStringConverter" />
+		<bean class="converters.StringToSponsorConverter" />
+
+		<bean class="converters.StarToStringConverter" />
+		<bean class="converters.StringToStarConverter" />
+
+		<bean class="converters.StepToStringConverter" />
+		<bean class="converters.StringToStepConverter" />
+
+		<bean class="converters.TagToStringConverter" />
+		<bean class="converters.StringToTagConverter" />
+
+		<bean class="converters.TextMaterialToStringConverter" />
+		<bean class="converters.StringToTextMaterialConverter" />
+
+		<bean class="converters.UserToStringConverter" />
+		<bean class="converters.StringToUserConverter" />
+
+		<bean class="converters.UserOrNutritionistToStringConverter" />
+		<bean class="converters.StringToUserOrNutritionistConverter" />
+
+		<bean class="converters.VideoMaterialToStringConverter" />
+		<bean class="converters.StringToVideoMaterialConverter" />
 	</util:list>
 
 	

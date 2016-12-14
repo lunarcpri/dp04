@@ -21,6 +21,32 @@
 
 <jsp:useBean id="date" class="java.util.Date" />
 
-<hr />
-
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> ACME, Inc.</b>
+<footer>
+	<article>
+		<ul>
+			<li><h3><i class="fa fa-list"></i> Sections</h3></li>
+			<li><a href="#">Recipes</a></li>
+			<li><a href="#">Contests</a></li>
+			<li><a href="#">Master Classes</a></li>
+		</ul>
+	</article>
+	<article>
+		<ul>
+			<li><h3><i class="fa fa-user"></i> User</h3></li>
+			<li><a href="http://localhost:8080/">Profile</a></li>
+			<li><a href="#">Messages</a></li>
+			<li><a href="http://localhost:8080/security/login.do">Login</a></li>
+			<li><a href="http://localhost:8080/security/j_spring_security_logout" > Logout</a></li>
+		</ul>
+	</article>
+	<article>
+		<ul>
+			<li><h3><i class="fa fa-phone"></i> About</h3></li>
+			<li><a href="#">Contact us</a></li>
+			<li><a href="#">About Acme Pad Thai</a></li>
+			<li><a href="#">Advertising</a></li>
+			<li><a href="#">Cook</a></li>
+		</ul>
+	</article>
+	<div class="copyright">Copyright <i class="fa fa-copyright"></i> 2016 ACME, Inc.</div>
+</footer>

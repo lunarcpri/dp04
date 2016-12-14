@@ -30,22 +30,12 @@
 
 <link rel="shortcut icon" href="favicon.ico"/> 
 
-<script type="text/javascript" src="scripts/jquery.js"></script>
-<script type="text/javascript" src="scripts/jquery-ui.js"></script>
-<script type="text/javascript" src="scripts/jmenu.js"></script>
 
-<link rel="stylesheet" href="styles/common.css" type="text/css">
-<link rel="stylesheet" href="styles/jmenu.css" media="screen"
-	type="text/css" />
-<link rel="stylesheet" href="styles/displaytag.css" type="text/css">
+<link rel="stylesheet" href="assets/style.css" type="text/css">
 
 <title><tiles:insertAttribute name="title" /></title>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#jMenu").jMenu();
-	});
-
 	function relativeRedir(loc) {	
 		var b = document.getElementsByTagName('base');
 		if (b && b[0] && b[0].href) {
@@ -60,23 +50,16 @@
 </head>
 
 <body>
-
-	<div>
+<div class="wrapper">
 		<tiles:insertAttribute name="header" />
-	</div>
-	<div>
-		<h1>
-			<tiles:insertAttribute name="title" />
-		</h1>
-		<tiles:insertAttribute name="body" />	
+	<main>
+		<tiles:insertAttribute name="body" />
 		<jstl:if test="${message != null}">
 			<br />
 			<span class="error"><spring:message code="${message}" /></span>
-		</jstl:if>	
-	</div>
-	<div>
+		</jstl:if>
+	</main>
 		<tiles:insertAttribute name="footer" />
-	</div>
-
+</div>
 </body>
 </html>

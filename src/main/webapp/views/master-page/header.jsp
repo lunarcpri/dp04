@@ -18,65 +18,46 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<div>
-	<img src="images/logo.png" alt="ACME Pad Thai - Your favourite site for Recipes" />
-</div>
-
-<div>
-	<ul id="jMenu">		
-
-		<security:authorize access="hasRole('ADMIN')">
-			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="actor/administrator/list.do"><spring:message code="master.page.administrator.actors" /></a></li>
-					<li><a href="announcement/administrator/list.do"><spring:message code="master.page.administrator.announcements" /></a></li>
-					<li><a href="certification/administrator/list.do"><spring:message code="master.page.administrator.certifications" /></a></li>
-				</ul>
+<header>
+	<h1>Acme Pad Thai</h1>
+	<nav>
+		<ul>
+			<li class="search-section">
+				<form method="GET" name="form_search" id="form_search">
+					<input type="search" name="search" title="Search" placeholder="Busca un receta...">
+					<button class="fa fa-search" form="form_search"></button>
+				</form>
 			</li>
-		</security:authorize>		
-
-		<security:authorize access="hasRole('CUSTOMER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+			<li class="user-section">
+			<div class="user-section-menu">
+				<a href="#" class="icon"><i class="fa fa-user"></i> Account</a>
 				<ul>
-					<li class="arrow"></li>
-					<li><a href="announcement/customer/list.do"><spring:message code="master.page.customer.announcements" /></a></li>										
-					<li><a href="certification/customer/list.do"><spring:message code="master.page.customer.certifications" /></a></li>
-				</ul>
-			</li>
-		</security:authorize>
+					<security:authorize access="isAuthenticated()">
+							<li>Profile</li>
+							<li>Messages</li>
+							<li>Preferences</li>
+						<li><a href="http://localhost:8080/security/j_spring_security_logout" > Logout</a></li>
+					</security:authorize>
+					<security:authorize access="!isAuthenticated()">
+						<li><a href="http://localhost:8080/security/login.do">Login</a></li>
+						<li><a href="http://localhost:8080/register.do">Signup</a></li>
 
-		<security:authorize access="hasRole('REVIEWER')">
-			<li><a class="fNiv"><spring:message	code="master.page.reviewer" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="announcement/reviewer/list-to-review.do"><spring:message code="master.page.customer.list-to-review" /></a></li>
-					<li><a href="announcement/reviewer/list-reviewed.do"><spring:message code="master.page.customer.list-reviewed" /></a></li>
-				</ul>
-			</li>
-		</security:authorize>
-		
-		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
-		</security:authorize>
-		
-		<security:authorize access="isAuthenticated()">
-			<li>
-				<a class="fNiv"> 
-					<spring:message code="master.page.profile" /> 
-			        (<security:authentication property="principal.username" />)
-				</a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="j_spring_security_logout"><spring:message code="master.page.profile.logout" /> </a></li>
-				</ul>
-			</li>
-		</security:authorize>
-		
-	</ul>
-</div>
+					</security:authorize>
 
-<div>
-	<a href="?language=en">en</a> | <a href="?language=es">es</a>
-</div>
-
+						</ul>
+			</div>
+				<a href="#" class="icon"><i class="fa fa-trophy"></i> Contests</a>
+				<a href="#" class="icon"><i class="fa fa-envira"></i> Recipes </a>
+				<a href="#" class="icon"><i class="fa fa-book"></i> Master Classes </a>
+			</li>
+		</ul>
+	</nav>
+</header>
+<section class="banners">
+	<article>
+		<img src="assets/img/banner1.jpg">
+		<img src="assets/img/banner2.jpg">
+		<img src="assets/img/banner3.jpg">
+		<img src="assets/img/banner4.jpg">
+	</article>
+</section>

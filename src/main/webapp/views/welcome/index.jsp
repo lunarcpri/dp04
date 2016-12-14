@@ -15,7 +15,20 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<section class="main">
 
-<p>
-	<spring:message code="welcome.greeting" />	
-</p>
+	<h1>Welcome to Acme Pad Thai</h1>
+
+	<article>
+		<h2>Latest Recipes</h2>
+		<ul class="list">
+			<jstl:forEach var="item" items="${recipes}">
+			<li class="card">
+				<h3>${item.title}</h3>
+				<img src="${item.picture}">
+				<p>${item.summary}</p>
+			</li>
+			</jstl:forEach>
+		</ul>
+	</article>
+</section>

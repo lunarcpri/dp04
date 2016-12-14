@@ -22,25 +22,24 @@
 <!-- Listing grid -->
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="actors" requestURI="contest/list.do" id="row">
+	name="actors" requestURI="actor/administrator/list.do" id="row">
 	
 	<!-- Attributes -->
 
-	<spring:message code="contest.title" var="titleHeader" />
-	<display:column property="title" title="${titleHeader}" sortable="true" />
+	<spring:message code="name" var="nameHeader" />
+	<display:column property="name" title="${nameHeader}" sortable="true" />
 
-	<spring:message code="contest.openedAt" var="openedAtHeader" />
-	<display:column property="opened_at" title="${openedAtHeader}" sortable="true" />
+	<spring:message code="surnames" var="surnamesHeader" />
+	<display:column property="name" title="${surnamesHeader}" sortable="true" />
 
-	<spring:message code="contest.closedAt" var="closedAtHeader" />
-	<display:column property="closed_at" title="${closedAtHeader}" sortable="true" />
+	<spring:message code="email" var="emailHeader" />
+	<display:column property="email" title="${emailHeader}" sortable="true" />
 
-	<spring:message code="contest.qualify"  />
-	<display:column>
-		<form:select path="recipes">
-			<form:options items="${recipes}" itemValue="id" itemLabel="title" />
-		</form:select> }"
-	</display:column>
+	<spring:message code="phone" var="phoneHeader" />
+	<display:column property="phone" title="${phoneHeader}" sortable="true" />
+
+	<spring:message code="address" var="addressHeader" />
+	<display:column property="address" title="${addressHeader}"	sortable="false" />
 
 </display:table>
 

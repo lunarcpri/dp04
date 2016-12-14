@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.UserRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -141,6 +143,11 @@ public class UserService {
 
     public void create(User u){
         Assert.notNull(u);
+        List<Authority> authorities = new ArrayList<Authority>();
+        Authority a = new Authority();
+        a.setAuthority("USER");
+        authorities.add(a);
+        u.getUserAccount().setAuthorities(authorities);
         u = userRepository.save(u);
         Assert.notNull(u);
         folderService.createDefaultFolders(u);

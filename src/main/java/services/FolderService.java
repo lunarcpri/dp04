@@ -112,10 +112,10 @@ public class FolderService {
         outbox.setFolderType(Folder.FolderType.OUTBOX);
         Folder spambox = create();
         spambox.setName("Spambox");
-        outbox.setFolderType(Folder.FolderType.SPAMBOX);
+        spambox.setFolderType(Folder.FolderType.SPAMBOX);
         Folder trashbox = create();
         trashbox.setName("Trashbox");
-        outbox.setFolderType(Folder.FolderType.THRASHBOX);
+        trashbox.setFolderType(Folder.FolderType.THRASHBOX);
         inbox.setActor(u);
         outbox.setActor(u);
         spambox.setActor(u);
