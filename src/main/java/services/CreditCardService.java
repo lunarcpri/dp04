@@ -24,12 +24,12 @@ public class CreditCardService {
     public CreditCard change(CreditCard card){
 
         Assert.notNull(card);
-        Assert.isTrue(card.getSponsor().equals(sponsorService.findByPrincipal()));
+        Assert.isTrue(card == sponsorService.findByPrincipal().getCreditCard());
 
-        CreditCard actualCard = sponsorService.findByPrincipal().getCredidCard();
+        CreditCard actualCard = sponsorService.findByPrincipal().getCreditCard();
 
         actualCard.setBrand_name(card.getBrand_name());
-        actualCard.setCcv(card.getCcv());
+        actualCard.setCvv(card.getCvv());
         actualCard.setExpired_month(card.getExpired_month());
         actualCard.setExpired_year(card.getExpired_year());
         actualCard.setNumber(card.getNumber());

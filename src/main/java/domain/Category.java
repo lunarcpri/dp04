@@ -13,7 +13,7 @@ public class Category extends domain.DomainEntity{
     private String name;
     private String description;
     private String picture;
-    private Collection<Tag> tags;
+    private String tags;
     private Category parent;
     private Collection<Category> childrens;
     private Collection<Recipe> recipes;
@@ -53,12 +53,12 @@ public class Category extends domain.DomainEntity{
 
     //Relationships
 
-    @ManyToMany
-    public Collection<Tag> getTags() {
+    
+    public String getTags() {
         return tags;
     }
 
-    public void setTags(Collection<Tag> tags) {
+    public void setTags(String tags) {
         this.tags = tags;
     }
 

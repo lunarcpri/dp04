@@ -38,7 +38,7 @@ public class WelcomeController extends AbstractController {
 	// Index ------------------------------------------------------------------		
 
 	@RequestMapping(value = "/index")
-	public ModelAndView index(@RequestParam(required=false, defaultValue="John Doe") String name) {
+	public ModelAndView index() {
 		ModelAndView result;
 		Collection<Recipe> recipeCollection;
 

@@ -114,9 +114,6 @@
 		<bean class="converters.StepToStringConverter" />
 		<bean class="converters.StringToStepConverter" />
 
-		<bean class="converters.TagToStringConverter" />
-		<bean class="converters.StringToTagConverter" />
-
 		<bean class="converters.TextMaterialToStringConverter" />
 		<bean class="converters.StringToTextMaterialConverter" />
 

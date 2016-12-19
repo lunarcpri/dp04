@@ -1,0 +1,39 @@
+
+.button{
+  @extend .basic-button;
+  font-family:Roboto-Medium;
+  color:$white1!important;
+  &:hover{
+    color:$white1!important;
+    box-shadow: $normal-box-shadow;
+  }
+}
+
+
+.basic-button{
+  font-size:14pt;
+  border:0;
+  background-color: $black-4;
+  overflow:hidden;
+  color:$black-1;
+  position:relative;
+  padding-top:4px;
+  padding-bottom:4px;
+  padding-left:16px;
+  padding-right:16px;
+  display:inline-block;
+  border-radius:2px;
+  transition: all 0.3s ease;
+  cursor:pointer;
+  &:focus{
+    outline:0;
+  }
+}
+
+button{
+  border:0;
+  outline:0;
+  &:focus{
+    outline:0;
+  }
+}

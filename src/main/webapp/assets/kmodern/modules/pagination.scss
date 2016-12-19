@@ -1,0 +1,31 @@
+.pagination{
+  margin:20px;
+  @media screen and (max-width: 500px) {
+    font-size: 0.8em;
+    margin:10px;
+  }
+  .page-link{
+    display:inline-table!important;
+    margin-right:6px;
+    border-radius:2px;
+    color:$black-2;
+    box-shadow: $normal-box-shadow;
+    padding:10px;
+    @media screen and (max-width: 500px) {
+      padding:5px!important;
+      margin-right:2px;
+    }
+    background-color: $white1;
+    &:hover{
+      background-color: $blue-grey4;
+    }
+  }
+  .active{
+    background-color: $indigo2;
+    color: $white1;
+    cursor:default;
+    &:hover{
+      background-color: $indigo1;
+    }
+  }
+}

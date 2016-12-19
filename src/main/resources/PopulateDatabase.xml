@@ -337,37 +337,33 @@
         <property name="userAccount" ref="userAccount5" />
     </bean>
 
-    <!-- Tags -->
-
-    <bean id="tag1" class="domain.Tag">
-        <property name="name" value="tag1" />
-    </bean>
-
-    <bean id="tag2" class="domain.Tag">
-        <property name="name" value="tag2" />
-    </bean>
-    <bean id="tag3" class="domain.Tag">
-        <property name="name" value="tag3" />
-    </bean>
-    <bean id="tag4" class="domain.Tag">
-        <property name="name" value="tag4" />
-    </bean>
-    <bean id="tag5" class="domain.Tag">
-        <property name="name" value="tag5" />
-    </bean>
 
     <!-- Categories -->
 
     <bean id="category1" class="domain.Category">
         <property name="description" value="description" />
-        <property name="name" value="name" />
-        <property name="tags">
-            <list>
-                <ref bean="tag1" />
-                <ref bean="tag2" />
-            </list>
-        </property>
+        <property name="name" value="Almuerzos" />
+        <property name="tags" value="Tag1,Tag2" />
     </bean>
+
+    <bean id="category2" class="domain.Category">
+        <property name="description" value="description" />
+        <property name="name" value="Guisos" />
+        <property name="tags" value="Tag1,Tag2" />
+        <property name="parent" ref="category1"/>
+    </bean>
+    <bean id="category3" class="domain.Category">
+        <property name="description" value="description" />
+        <property name="name" value="Guisos vegetarianos" />
+        <property name="tags" value="Tag1,Tag2" />
+        <property name="parent" ref="category2"/>
+    </bean>
+    <bean id="category4" class="domain.Category">
+        <property name="description" value="description" />
+        <property name="name" value="Cenas" />
+        <property name="tags" value="Tag1,Tag2" />
+    </bean>
+
 
     <!-- Ingredients -->
 
@@ -429,7 +425,7 @@
 
     <bean id="recipe1" class="domain.Recipe">
         <property name="hits" value="hint 1" />
-        <property name="title" value="Title 1" />
+        <property name="title" value="Title " />
         <property name="summary" value="summary" />
         <property name="created_at" value="01/02/2015 23:59"/>
         <property name="updated_at" value="01/02/2015 23:59"/>

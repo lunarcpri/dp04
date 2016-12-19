@@ -6,8 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.NutritionistRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -48,7 +52,14 @@ public class NutritionistService {
         return nutritionistRepository.save(n);
     }
     public void create(Nutritionist n){
-        Assert.notNull(save(n));
+        Assert.notNull(n);
+        List<Authority> authorities = new ArrayList<Authority>();
+        Authority a = new Authority();
+        a.setAuthority("NUTRITIONIST");
+        authorities.add(a);
+        n.getUserAccount().setAuthorities(authorities);
+        n = nutritionistRepository.save(n);
+        Assert.notNull(n);
         folderService.createDefaultFolders(n);
     }
 }

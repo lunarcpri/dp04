@@ -1,0 +1,41 @@
+.overlay{
+  background-color: $black-4;
+  overflow: hidden;
+  position:fixed;
+  top:0;
+  z-index:4;
+  display:none;
+  bottom:0;
+  width:101%;
+  height:101%;
+}
+.overlay-d{
+  background-color: $black-4;
+  overflow: hidden;
+  position:fixed;
+  top:0;
+  z-index:13;
+  display:none;
+  bottom:0;
+  width:101%;
+  height:101%;
+}
+
+.overlay-t{
+  background-color: transparent;
+  overflow: hidden;
+  position:fixed;
+  top:0;
+  display:none;
+  bottom:0;
+  width:101%;
+  height:101%;
+}
+
+.relative{
+  position:relative;
+}
+
+.right{
+  float:right;
+}

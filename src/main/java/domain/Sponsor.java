@@ -11,7 +11,7 @@ import java.util.Collection;
 public class Sponsor extends Actor {
 
     private String company;
-    private CreditCard credidCard;
+    private CreditCard creditCard;
     private Collection<Bill> bills;
     private Collection<Campaign> campaigns;
 
@@ -31,13 +31,13 @@ public class Sponsor extends Actor {
 
 
     @Valid
-    @OneToOne(optional = true)
-    public CreditCard getCredidCard() {
-        return credidCard;
+    @OneToOne
+    public CreditCard getCreditCard() {
+        return creditCard;
     }
 
-    public void setCredidCard(CreditCard credidCard) {
-        this.credidCard = credidCard;
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
     }
 
     @Valid

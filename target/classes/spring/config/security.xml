@@ -35,7 +35,9 @@
 		<security:intercept-url pattern="/security/login.do" access="permitAll" />
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" />
 		<security:intercept-url pattern="/user/*" access="permitAll" />
-		<security:intercept-url pattern="/nutritionist/*" access="permitAll" />
+		<security:intercept-url pattern="/recipe/list.do" access="permitAll" />
+		<security:intercept-url pattern="/nutritionist/register.do" access="permitAll" />
+		<security:intercept-url pattern="/sponsor/register.do" access="permitAll" />
 		<security:intercept-url pattern="/admin/*" access="permitAll" />
 		<security:intercept-url pattern="/actor/register.do" access="permitAll" />
 		<security:intercept-url pattern="/register.do" access="permitAll" />

@@ -1,0 +1,32 @@
+
+.dialog{
+  position:fixed;
+  width:50%;
+  min-height:40%;
+  @media screen and (max-width: 500px) {
+    width:100%;
+    min-width:40%;
+    max-width:99%;
+  }
+  overflow-y:auto;
+  max-height: 100%;
+  top:50%;
+  left:50%;
+  border-radius:2px;
+  z-index:15;
+  background-color: white;
+  color:$black-1;
+  transform: translate(-50%, -50%);
+  border:1px solid $blue-grey3;
+  box-shadow: $normal-box-shadow;
+  .close-dialog{
+    padding:10px;
+    color:$red1;
+    font-size:1.5em;
+    float:right;
+  }
+  .dialog-content{
+    padding:20px;
+    font-size:0.9em;
+  }
+}

@@ -1,0 +1,1 @@
+body:before{white-space:pre;font-family:monospace;content:"Error: Undefined variable: \"$blue-grey4\".\A         on line 3 of badge.scss\A \A 1: .badge{\A 2:   padding:10px;\A 3:   background-color: $blue-grey4;\A 4:   color:$black-2;\A 5: }"}

@@ -8,6 +8,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -16,10 +17,10 @@ public class CreditCard extends DomainEntity {
 
     private String holder_name;
     private String brand_name;
-    private int Number;
+    private String number;
     private int  expired_month;
     private int expired_year;
-    private String ccv;
+    private int cvv;
     private Sponsor sponsor;
 
     public CreditCard()
@@ -46,15 +47,16 @@ public class CreditCard extends DomainEntity {
     }
 
     @CreditCardNumber
-    public int getNumber() {
-        return Number;
+    public String getNumber() {
+        return number;
     }
 
-    public void setNumber(int number) {
-        Number = number;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     @Range(min=0, max=12)
+    @NotNull
     public int getExpired_month() {
         return expired_month;
     }
@@ -63,7 +65,7 @@ public class CreditCard extends DomainEntity {
         this.expired_month = expired_month;
     }
 
-
+    @NotNull
     public int getExpired_year() {
         return expired_year;
     }
@@ -73,12 +75,13 @@ public class CreditCard extends DomainEntity {
     }
 
     @Range(min=100, max=999)
-    public String getCcv() {
-        return ccv;
+    @NotNull
+    public int getCvv() {
+        return cvv;
     }
 
-    public void setCcv(String ccv) {
-        this.ccv = ccv;
+    public void setCvv(int cvv) {
+        this.cvv = cvv;
     }
 
     @OneToOne
@@ -89,4 +92,6 @@ public class CreditCard extends DomainEntity {
     public void setSponsor(Sponsor sponsor) {
         this.sponsor = sponsor;
     }
+
+
 }

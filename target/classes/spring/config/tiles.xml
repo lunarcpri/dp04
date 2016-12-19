@@ -12,10 +12,13 @@
 	<util:list id="tiles">
 		<value>/views/actor/tiles.xml</value>
 		<value>/views/user/tiles.xml</value>
+		<value>/views/sponsor/tiles.xml</value>
+		<value>/views/nutritionist/tiles.xml</value>
 		<value>/views/master-page/tiles.xml</value>		
 		<value>/views/misc/tiles.xml</value>
 		<value>/views/security/tiles.xml</value>
 		<value>/views/welcome/tiles.xml</value>
+		<value>/views/recipe/tiles.xml</value>
 	</util:list>
 
 </beans>

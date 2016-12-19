@@ -24,10 +24,13 @@
 		<value>/views/security/messages</value>		
 		<value>/views/welcome/messages</value>
 		<value>/views/actor/messages</value>
+		<value>/views/nutritionist/messages</value>
+		<value>/views/sponsor/messages</value>
 		<value>/views/campaign/messages</value>
 		<value>/views/bill/messages</value>
 		<value>/views/master-class/messages</value>
 		<value>/views/cook/messages</value>
+		<value>/views/recipe/messages</value>
 	</util:list>
 
 </beans>

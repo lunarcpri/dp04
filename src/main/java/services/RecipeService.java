@@ -1,9 +1,7 @@
 package services;
 
-import domain.Actor;
-import domain.Likes;
-import domain.Recipe;
-import domain.UserOrNutritionist;
+import com.sun.org.apache.regexp.internal.RE;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -203,6 +201,7 @@ public class RecipeService {
 
         return result;
     }
+
 
     public Integer getNumberOfLike(Recipe r){
         Integer result;

@@ -1,0 +1,45 @@
+$black-1:rgba(0,0,0,0.87);
+$black-2:rgba(0,0,0,0.67);
+$black-3:rgba(0,0,0,0.47);
+$black-4:rgba(0,0,0,0.27);
+$black-5:rgba(0,0,0,0.17);
+
+$base-box-shadow: 0 10px 20px $black-3, 0 6px 6px $black-4;
+$normal-box-shadow: 0 4px 5px $black-3;
+
+$blue-grey1: #263238;
+$blue-grey2: #607D8B;
+$blue-grey3: #B0BEC5;
+$blue-grey4: #ECEFF1;
+$blue-grey5: #f4f7f9;
+
+$indigo1:#1A237E;
+$indigo2:#3F51B5;
+$indigo3:#7986CB;
+
+$red1: #bc7b00;
+$red2: #de9523;
+$red3: #f49c00;
+
+$white1: rgb(255, 255, 255);
+$white2:rgba(255,255,255,.67);
+$white3:rgba(255,255,255,.47);
+
+
+$blue1:#0D47A1;
+$blue2:#1976D2;
+$blue3:#2196F3;
+$blue4:#42A5F5;
+$blue5:#90CAF9;
+
+$grey1:#EEE;
+$grey2:#BBB;
+$grey3:#999;
+$grey4:#555;
+$grey5:#333;
+
+
+.white-1{
+  background-color: $white1!important;
+  color:$black-1!important;
+}

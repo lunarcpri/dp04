@@ -47,11 +47,6 @@ public class CategoryService {
         categoryRepository.save(category);
     }
 
-    private void delete(Category category){
-        Assert.notNull(categoryRepository);
-
-        categoryRepository.delete(category);
-    }
 
 
 
@@ -73,12 +68,15 @@ public class CategoryService {
         save(category);
     }
 
-    public void delete(int id){
+    public void delete(Category category){
         userAccountService.assertRole("ADMIN");
-        Category category = findOne(id);
+
         Assert.notNull(category);
         Assert.isTrue(category.getRecipes().size()==0);
-        delete(category);
+            for(Category e:category.getChildrens()){
+               Assert.isTrue(e.getRecipes().size()>0);
+        }
+        categoryRepository.delete(category);
     }
 
 

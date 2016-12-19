@@ -1,0 +1,45 @@
+
+.card{
+  border-radius:2px;
+  clear:both;
+  margin:0;
+  padding:15px;
+  border-bottom:1px solid $blue-grey4;
+  background-color: $white1;
+  color:$black-1;
+  &:hover{
+    background-color: $blue-grey4;
+  }
+  h1{
+    font-size:1.2em;
+    @media screen and (max-width: 500px) {
+      font-size:1.3em;
+      font-weight:bold;
+    }
+  }
+  .info{
+    font-size:1.1em!important;
+    width:80%;
+    margin:10px;
+    .date{
+      margin-bottom:10px;
+      color:$black-3;
+      display:inline-block;
+      width:40%;
+    }
+    .author{
+      display:inline-block;
+      width:40%;
+      a{
+        color:$indigo2;
+      }
+    }
+    .pagination{
+      width:100%;
+    }
+  }
+  a{
+    color:$black-2;
+  }
+
+}

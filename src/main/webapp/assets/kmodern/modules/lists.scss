@@ -1,0 +1,21 @@
+ul{
+  margin:0;
+  padding:0;
+}
+
+li{
+  list-style: none;
+}
+
+ul.horizontal-list{
+  li{
+    display:inline-block;
+  }
+}
+
+
+ul.vertical-list{
+  li{
+    display:block;
+  }
+}

@@ -19,7 +19,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <header>
-	<h1>Acme Pad Thai</h1>
+	<h1><a href="http://localhost:8080/">Acme Pad Thai</a></h1>
 	<nav>
 		<ul>
 			<li class="search-section">
