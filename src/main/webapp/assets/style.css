@@ -2673,6 +2673,9 @@ button {
 .hidden {
   display: none; }
 
+.block {
+  display: block; }
+
 .dropdown {
   font-size: 12pt !important;
   min-width: 200px;
@@ -2759,7 +2762,7 @@ label {
 
 input {
   margin: 5px;
-  display: block;
+  display: inline-block;
   padding: 10px;
   color: #607D8B;
   background-color: white;
@@ -3005,5 +3008,31 @@ table {
     background-color: #f4f7f9;
     border-bottom: 1px solid #BBB;
     display: list-item; }
+
+.folder-list ul li a {
+  padding: 15px;
+  display: list-item;
+  background-color: #ECEFF1;
+  color: rgba(0, 0, 0, 0.47);
+  font-size: 1.3em;
+  transition: all 0.1s ease-out; }
+  .folder-list ul li a:hover {
+    background-color: #f49c00;
+    color: white; }
+
+.message-list {
+  margin-left: 10px; }
+
+.message-list-options {
+  margin: 10px; }
+  .message-list-options li a {
+    padding: 8px;
+    border-radius: 6px;
+    color: rgba(0, 0, 0, 0.67);
+    background-color: #f4f7f9;
+    margin-left: 4px; }
+    .message-list-options li a:hover {
+      color: rgba(0, 0, 0, 0.87);
+      background-color: #B0BEC5; }
 
 /*# sourceMappingURL=style.css.map */

@@ -20,6 +20,9 @@ import java.util.List;
 public class MessageService {
 
     @Autowired
+    private ActorService actorService;
+
+    @Autowired
     private MessageRepository messageRepository;
 
     @Autowired
@@ -89,7 +92,7 @@ public class MessageService {
     public Message newMessage(Message message){
 
         Date sendedAt = new Date();
-        Actor senderActor = userService.findByPrincipal();
+        Actor senderActor = actorService.findActorByPrincipal();
         Assert.notNull(senderActor);
         message.setSender(senderActor);
         message.setSended_at(sendedAt);

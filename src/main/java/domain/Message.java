@@ -102,5 +102,16 @@ public class Message  extends domain.DomainEntity{
         this.folders = folders;
     }
 
-
+    @Override
+    public String toString() {
+        return "Message{" +
+                "body='" + body + '\'' +
+                ", sended_at=" + sended_at +
+                ", subject='" + subject + '\'' +
+                ", priority=" + priority +
+                ", recipients=" + recipients +
+                ", sender=" + sender +
+                ", folders=" + folders +
+                '}';
+    }
 }

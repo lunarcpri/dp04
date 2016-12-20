@@ -257,3 +257,42 @@ table{
     }
   }
 }
+
+.folder-list{
+  ul{
+    li{
+      a{
+        padding: 15px;
+        display: list-item;
+        background-color: $blue-grey4;
+        color:$black-3;
+        font-size:1.3em;
+        transition: all 0.1s ease-out;
+        &:hover{
+          background-color: $red3;
+          color:$white1;
+        }
+      }
+    }
+  }
+}
+
+.message-list{
+  margin-left:10px;
+}
+.message-list-options{
+    margin:10px;
+    li{
+      a{
+        padding:8px;
+        border-radius: 6px;
+        color:$black-2;
+        background-color: $blue-grey5;
+        margin-left:4px;
+        &:hover{
+          color:$black-1;
+          background-color: $blue-grey3;
+        }
+      }
+    }
+}

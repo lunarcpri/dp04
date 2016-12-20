@@ -21,4 +21,15 @@
 		<put-attribute name="body" value="/views/message/new.jsp" />
 	</definition>
 
+
+	<definition name="message/list" extends="master.page">
+		<put-attribute name="title" value="Lista de Mensajes" />
+		<put-attribute name="body" value="/views/message/list.jsp" />
+	</definition>
+
+
+	<definition name="message/index" extends="master.page">
+		<put-attribute name="title" value="Mensaje" />
+		<put-attribute name="body" value="/views/message/index.jsp" />
+	</definition>
 </tiles-definitions>

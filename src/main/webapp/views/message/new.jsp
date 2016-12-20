@@ -14,8 +14,8 @@
 
     <div class="form-group-1">
 <form:form action="message/new.do" modelAttribute="newMessage" method="POST">
-    <form:label path="subject">
-        <spring:message code="message.subject" />:
+    <form:label path="recipients">
+        <spring:message code="recipients" />:
     </form:label>
     <form:select path="recipients">
         <form:options items="${actors}" itemValue="id"
@@ -32,12 +32,12 @@
     </form:select>
     <form:errors cssClass="error" path="priority"  />
         <form:label path="subject">
-            <spring:message code="message.subject" />
+            <spring:message code="subject" />
         </form:label>
         <form:input class="s8" path="subject" required="required" />
         <form:errors cssClass="error" path="subject" />
     <form:label path="body">
-        <spring:message code="message.body" />:
+        <spring:message code="body" />:
     </form:label>
     <form:textarea class="s8" path="body" />
     <form:errors cssClass="error" path="body" />
