@@ -39,7 +39,10 @@
     }
   }
   a{
-    color:$black-2;
+    color:$blue-grey2;
+    &:hover{
+      text-decoration: underline;
+    }
   }
 
 }

@@ -10,7 +10,19 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <section class="main">
-    <article class="col s2 folder-list">
-        <h1></h1>
+    <article class="col s12">
+        <div class="messageView">
+            <h1><spring:message code="message"/> </h1>
+        <h2><spring:message code="subject" /></h2>
+        <p>${message1.subject}</p>
+        <h2><spring:message code="recipients" /></h2>
+        <p><jstl:forEach items="${message1.recipients}" var="recipient">
+            <a href="${contextPath}/actor/${recipient.id}.do">${recipient.userAccount.username}</a>,
+        </jstl:forEach></p>
+        <h2><spring:message code="sendedat"/></h2>
+        <p>${message1.sended_at}</p>
+        <h2><spring:message code="body"/> </h2>
+        <p >${message1.body}</p>
+        </div>
     </article>
 </section>

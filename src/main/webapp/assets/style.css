@@ -2627,7 +2627,9 @@ button {
     .card .info .pagination {
       width: 100%; }
   .card a {
-    color: rgba(0, 0, 0, 0.67); }
+    color: #607D8B; }
+    .card a:hover {
+      text-decoration: underline; }
 
 .overlay {
   background-color: rgba(0, 0, 0, 0.27);
@@ -2875,6 +2877,12 @@ header {
       header .user-section ul li:hover > ul {
         display: block; }
 
+a, a:visited, a:link {
+  color: #607D8B; }
+  a:hover, a:visited:hover, a:link:hover {
+    color: #B0BEC5;
+    text-decoration: underline; }
+
 .wrapper {
   margin-left: 8%;
   margin-right: 8%;
@@ -2950,6 +2958,18 @@ footer {
 .message {
   color: red;
   font-weight: bolder; }
+
+.messageView {
+  margin-left: 15%;
+  margin-right: 15%;
+  width: 70%;
+  max-width: 70%;
+  min-width: 70%;
+  background-color: #EEE;
+  padding: 15px; }
+  .messageView p {
+    padding: 15px;
+    background-color: white; }
 
 table {
   border-collapse: collapse;

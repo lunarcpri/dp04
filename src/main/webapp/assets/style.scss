@@ -70,6 +70,14 @@ header{
   }
 }
 
+a,a:visited,a:link{
+  color:$blue-grey2;
+  &:hover{
+    color:$blue-grey3;
+    text-decoration: underline;
+  }
+}
+
 .wrapper{
   margin-left:8%;
   margin-right:8%;
@@ -169,6 +177,20 @@ footer{
 .message {
   color: red;
   font-weight: bolder;
+}
+
+.messageView{
+  margin-left:15%;
+  margin-right:15%;
+  width:70%;
+  max-width:70%;
+  min-width:70%;
+  background-color: $grey1;
+  padding:15px;
+  p{
+    padding:15px;
+    background-color: $white1;
+  }
 }
 
 table{

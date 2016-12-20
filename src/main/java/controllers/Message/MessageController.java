@@ -10,7 +10,7 @@
 
 package controllers.Message;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Folder;
@@ -19,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.FolderService;
@@ -87,6 +84,19 @@ public class MessageController extends AbstractController {
         result.addObject("requestURI","message/list.do");
 
         return result;
+    }
+
+    @RequestMapping(value="/{message2}")
+    public ModelAndView index(@PathVariable Message message2){
+	    ModelAndView result;
+	    Actor principal = actorService.findActorByPrincipal();
+	    Assert.notNull(message2);
+	    Assert.isTrue(message2.getRecipients().contains(principal) || message2.getSender() == principal);
+
+	    result = new ModelAndView("message/index");
+	    result.addObject("message1",message2);
+
+	    return result;
     }
 
 	@RequestMapping(value = "/new",method = RequestMethod.POST,params = "send")
