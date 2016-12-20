@@ -67,7 +67,7 @@ public class MessageController extends AbstractController {
         try{
             messageService.newMessage(message);
 
-            return  new ModelAndView("redirect:/");
+            return  new ModelAndView("redirect:/message/new.do");
         }catch (Throwable oops){
             result.addObject("newMessage",message);
             result.addObject("message","message.commit.error");

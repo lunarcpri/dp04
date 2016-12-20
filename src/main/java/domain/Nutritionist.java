@@ -6,7 +6,7 @@ import javax.validation.Valid;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Nutritionist extends Actor {
+public class Nutritionist extends UserOrNutritionist {
 
 
     private Curriculum curriculum;
