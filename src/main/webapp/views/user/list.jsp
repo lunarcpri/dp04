@@ -20,9 +20,17 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <!-- Listing grid -->
+<section class="main">
 
+	<h1>List of Users</h1>
+	<form method="GET" name="search_users_form">
+		<input type="search" name="query" placeholder="Search for a user..."/>
+		<input type="submit" value="Search"/>
+	</form>
+
+	<article>
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="actors" requestURI="actor/administrator/list.do" id="row">
+	name="users" requestURI="user/list.do" id="row">
 	
 	<!-- Attributes -->
 
@@ -41,5 +49,11 @@
 	<spring:message code="address" var="addressHeader" />
 	<display:column property="address" title="${addressHeader}"	sortable="false" />
 
-</display:table>
+	<spring:message code="browse" var="browseHeader" />
+	<display:column title="${browseHeader}">
+		<a href="http://localhost:8080/user/${row.id}.do">${browseHeader}</a>
+	</display:column>
 
+</display:table>
+	</article>
+</section>

@@ -23,11 +23,11 @@
 		<h2>Latest Recipes</h2>
 		<ul class="list">
 			<jstl:forEach var="item" items="${recipes}">
-			<li class="card">
+			<a href="http://localhost:8080/recipe/${item.id}.do"><li class="card">
 				<h3>${item.title}</h3>
 				<img src="${item.picture}">
 				<p>${item.summary}</p>
-			</li>
+			</li></a>
 			</jstl:forEach>
 		</ul>
 	</article>

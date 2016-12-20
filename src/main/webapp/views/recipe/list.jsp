@@ -30,13 +30,17 @@
 
     <spring:message code="recipes.author" var="authorHeader" />
     <display:column title="${authorHeader}">
-        <a href="http://localhost:8080/actor/actor.do?id=${row.author.userAccount.id}">${row.author.userAccount.username}</a>
+        <a href="http://localhost:8080/user/${row.author.id}.do">${row.author.userAccount.username}</a>
     </display:column>
     <spring:message code="recipes.category" var="categoryHeader" />
     <display:column title="${categoryHeader}">
         <a href="http://localhost:8080/recipe/list.do?category=${row.category.id}">${row.category.name}</a>
     </display:column>
 
+    <spring:message code="browse" var="browseHeader" />
+    <display:column title="${browseHeader}">
+        <a href="http://localhost:8080/recipe/${row.id}.do">${browseHeader}</a>
+    </display:column>
 </display:table>
     </article>
 </section>

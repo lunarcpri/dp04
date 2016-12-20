@@ -19,39 +19,39 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <header>
-	<h1><a href="http://localhost:8080/">Acme Pad Thai</a></h1>
-	<nav>
-		<ul>
-			<li class="search-section">
-				<form method="GET" name="form_search" id="form_search">
-					<input type="search" name="search" title="Search" placeholder="Busca un receta...">
-					<button class="fa fa-search" form="form_search"></button>
-				</form>
-			</li>
-			<li class="user-section">
-			<div class="user-section-menu">
-				<a href="#" class="icon"><i class="fa fa-user"></i> Account</a>
-				<ul>
-					<security:authorize access="isAuthenticated()">
-							<li>Profile</li>
-							<li>Messages</li>
-							<li>Preferences</li>
-						<li><a href="http://localhost:8080/security/j_spring_security_logout" > Logout</a></li>
-					</security:authorize>
-					<security:authorize access="!isAuthenticated()">
-						<li><a href="http://localhost:8080/security/login.do">Login</a></li>
-						<li><a href="http://localhost:8080/register.do">Signup</a></li>
+    <h1><a href="#">Acme Pad Thai</a></h1>
+    <article class="search-section">
+        <form name="masterpage-search-form" method="get" action="${contextPath}/recipe/list.do">
+        <input type="search" name="query" placeholder="Search..."/>
+        <input class="button" type="submit"/>
+        </form>
 
-					</security:authorize>
+    </article>
+    <article class="user-section">
+        <ul>
+            <li><a href="#" class="icon"><i class="fa fa-user"></i> Account</a>
+                <ul>
+                    <security:authorize access="isAuthenticated()">
+                        <li><a href="${contextPath}/actor/edit.do?edit=personal"> Profile</a></li>
+                        <li><a href="${contextPath}/message/list.do"> Messages</a></li>
+                        <security:authorize access="hasAnyRole('NUTRITIONIST')">
+                            <li><a href="${contextPath}/actor/edit.do?edit=curriculum"> Curriculum</a></li>
+                        </security:authorize>
+                        <li><a href="${contextPath}/security/j_spring_security_logout" > Logout</a></li>
+                    </security:authorize>
+                    <security:authorize access="!isAuthenticated()">
+                        <li><a href="${contextPath}/security/login.do">Login</a></li>
+                        <li><a href="${contextPath}/register.do">Signup</a></li>
 
-						</ul>
-			</div>
-				<a href="#" class="icon"><i class="fa fa-trophy"></i> Contests</a>
-				<a href="#" class="icon"><i class="fa fa-envira"></i> Recipes </a>
-				<a href="#" class="icon"><i class="fa fa-book"></i> Master Classes </a>
-			</li>
-		</ul>
-	</nav>
+                    </security:authorize>
+
+                </ul></li>
+            <li><a href="${contextPath}/contest/list.do" class="icon"><i class="fa fa-trophy"></i> Contests</a></li>
+            <li><a href="${contextPath}/recipe/list.do" class="icon"><i class="fa fa-envira"></i> Recipes </a></li>
+            <li><a href="${contextPath}/category/list.do" class="icon"><i class="fa fa-tags"></i> Categories </a></li>
+            <li><a href="#" class="icon"><i class="fa fa-book"></i> Master Classes </a></li>
+        </ul>
+    </article>
 </header>
 <section class="banners">
 	<article>

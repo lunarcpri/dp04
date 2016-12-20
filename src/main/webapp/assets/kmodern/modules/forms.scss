@@ -9,6 +9,9 @@
     cursor: pointer;
   }
 input{
+  .large{
+    width:80%!important;
+  }
     margin:5px;
     display:block;
     padding:10px;
@@ -21,22 +24,21 @@ input{
       @extend .button!optional;
       cursor:pointer;
     }
-
+    &[type=text],[type=search],[type=url],[type=email],[type=select],textarea{
+      &:focus{
+        outline: none;
+        border-color: $blue-grey2;
+        background-color: $grey1;
+      }
+    }
     }
   textarea{
     font-family: Roboto-Light;
+    display: block;
     min-height:150px;
     padding:10px;
     font-size:1.2em;
   }
-
-button{
-  @extend input;
-  cursor: pointer;
-  &:hover{
-    background-color: $white3;
-  }
-}
 
 .form-group-1{
   padding:10px;
@@ -48,4 +50,17 @@ button{
   padding:10px;
   display:inline-table;
   width:48%;
+}
+
+
+textarea{
+  min-height:300px;
+  outline: none;
+  border:2px solid $blue-grey3;
+  font-size:1.1em;
+  &:focus{
+    outline: none;
+    border-color: $blue-grey2;
+    background-color: $grey1;
+  }
 }

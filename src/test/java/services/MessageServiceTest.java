@@ -34,7 +34,7 @@ public class MessageServiceTest extends AbstractTest{
     @Test
     public void newMessageTest() {
         super.authenticate("user1");
-        int recipient = 14;
+        int recipient = 23;
         User recipientUser = userService.findOne(recipient);
         List<Actor> recipients = new ArrayList<Actor>();
         recipients.add(recipientUser);
@@ -43,7 +43,8 @@ public class MessageServiceTest extends AbstractTest{
         m.setBody("Prueba body");
         m.setSender(userService.findByPrincipal());
         m.setPriority(Message.Priority.HIGH);
-        Message savedMessage = messageService.newMessage(recipients, m);
+        m.setRecipients(recipients);
+        Message savedMessage = messageService.newMessage(m);
         System.out.print(savedMessage.getFolders());
     }
 
@@ -73,7 +74,7 @@ public class MessageServiceTest extends AbstractTest{
 
     @Test
     public void testIsMessageSpam(){
-        super.authenticate("user1");
+        super.authenticate("Kolter");
         int recipient = 14;
         User recipientUser = userService.findOne(recipient);
         List<Actor> recipients = new ArrayList<Actor>();
@@ -83,7 +84,8 @@ public class MessageServiceTest extends AbstractTest{
         m.setBody("culo");
         m.setSender(userService.findByPrincipal());
         m.setPriority(Message.Priority.HIGH);
-        Message savedMessage = messageService.newMessage(recipients, m);
+        m.setRecipients(recipients);
+        Message savedMessage = messageService.newMessage( m);
         for(Folder f : savedMessage.getFolders()){
             System.out.println(f.getFolderType());
         }

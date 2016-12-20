@@ -77,7 +77,8 @@ public class AdministratorService {
 
         Message message = new Message();
         message.setBody("You have unpaid bills");
-        messageService.newMessage(actors,message);
+        message.setRecipients(actors);
+        messageService.newMessage(message);
     }
 
 

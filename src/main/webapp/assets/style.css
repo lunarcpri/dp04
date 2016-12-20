@@ -2343,43 +2343,55 @@
   font-size: 10pt; }
 
 .col {
-  display: inline-block; }
+  display: inline-table; }
 
 .s1 {
-  width: 8.33%; }
+  width: 8.33%;
+  max-width: 8.33%; }
 
 .s2 {
-  width: 16.66%; }
+  width: 16.66%;
+  max-width: 16.66%; }
 
 .s3 {
-  width: 24.99%; }
+  width: 24.99%;
+  max-width: 24.99%; }
 
 .s4 {
-  width: 33.32%; }
+  width: 33.32%;
+  max-width: 33.32%; }
 
 .s5 {
-  width: 41.65%; }
+  width: 41.65%;
+  max-width: 41.65%; }
 
 .s6 {
-  width: 49.98%; }
+  width: 49.98%;
+  max-width: 49.98%; }
 
 .s7 {
-  width: 58.31%; }
+  width: 58.31%;
+  max-width: 58.31%; }
 
 .s8 {
-  width: 66.64%; }
+  width: 66.64%;
+  max-width: 66.64%; }
 
 .s9 {
-  width: 74.97%; }
+  width: 74.97%;
+  max-width: 74.97%; }
 
 .s10 {
-  width: 83.3%; }
+  width: 83.3%;
+  max-width: 83.3%; }
 
 .s11 {
-  width: 91.63%; }
+  width: 91.63%;
+  max-width: 91.63%; }
 
 .s12 {
-  width: 99.9%; }
+  width: 99.9%;
+  max-width: 99.9%; }
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
@@ -2433,14 +2445,15 @@ a {
 a:hover {
   color: #0D47A1; }
 
-.button, input[type=submit], button[type=submit] {
+.button, button, input[type=submit] {
   font-family: Roboto-Medium;
   color: white !important; }
-  .button:hover, input[type=submit]:hover, button[type=submit]:hover {
+  .button:hover, button:hover, input[type=submit]:hover {
     color: white !important;
+    background-color: rgba(0, 0, 0, 0.17) !important;
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.47); }
 
-.basic-button, .button, input[type=submit], button[type=submit] {
+.basic-button, .button, button, input[type=submit] {
   font-size: 14pt;
   border: 0;
   background-color: rgba(0, 0, 0, 0.27);
@@ -2455,7 +2468,7 @@ a:hover {
   border-radius: 2px;
   transition: all 0.3s ease;
   cursor: pointer; }
-  .basic-button:focus, .button:focus, input[type=submit]:focus, button[type=submit]:focus {
+  .basic-button:focus, .button:focus, button:focus, input[type=submit]:focus {
     outline: 0; }
 
 button {
@@ -2654,6 +2667,12 @@ button {
 .right {
   float: right; }
 
+.inline {
+  display: inline-table; }
+
+.hidden {
+  display: none; }
+
 .dropdown {
   font-size: 12pt !important;
   min-width: 200px;
@@ -2738,7 +2757,7 @@ label {
   margin: 5px;
   cursor: pointer; }
 
-input, button {
+input {
   margin: 5px;
   display: block;
   padding: 10px;
@@ -2747,19 +2766,21 @@ input, button {
   border: 2px solid #B0BEC5;
   font-size: 1.3em;
   outline: 0; }
-  input[type=submit], button[type=submit] {
+  input .large {
+    width: 80% !important; }
+  input[type=submit] {
     cursor: pointer; }
+  input[type=text]:focus, input [type=search]:focus, input [type=url]:focus, input [type=email]:focus, input [type=select]:focus, input textarea:focus {
+    outline: none;
+    border-color: #607D8B;
+    background-color: #EEE; }
 
 textarea {
   font-family: Roboto-Light;
+  display: block;
   min-height: 150px;
   padding: 10px;
   font-size: 1.2em; }
-
-button {
-  cursor: pointer; }
-  button:hover {
-    background-color: rgba(255, 255, 255, 0.47); }
 
 .form-group-1 {
   padding: 10px;
@@ -2770,6 +2791,16 @@ button {
   padding: 10px;
   display: inline-table;
   width: 48%; }
+
+textarea {
+  min-height: 300px;
+  outline: none;
+  border: 2px solid #B0BEC5;
+  font-size: 1.1em; }
+  textarea:focus {
+    outline: none;
+    border-color: #607D8B;
+    background-color: #EEE; }
 
 .badge {
   padding-top: 5px;
@@ -2800,62 +2831,55 @@ header {
   color: rgba(255, 255, 255, 0.67);
   padding: 10px;
   background-color: #f49c00; }
-  header nav, header h1 {
-    display: inline-block; }
-  header h1 {
-    color: white;
-    font-family: Roboto-Thin !important; }
-  header nav {
-    width: 80%; }
-    header nav ul li {
-      display: inline-block; }
-    header nav ul .search-section {
-      width: 40%;
-      margin-left: 5%; }
-      header nav ul .search-section input, header nav ul .search-section button {
-        display: inline-block; }
-        header nav ul .search-section input[type=search], header nav ul .search-section button[type=search] {
-          width: 60%; }
-    header nav ul .user-section {
-      width: 45%; }
-      header nav ul .user-section .user-section-menu {
-        display: inline-table;
-        position: relative; }
-        header nav ul .user-section .user-section-menu span {
-          cursor: pointer; }
-        header nav ul .user-section .user-section-menu i {
-          display: inline-block; }
-        header nav ul .user-section .user-section-menu ul {
-          color: rgba(0, 0, 0, 0.67);
-          position: absolute;
-          top: 20px;
-          border: 1px solid #BBB;
-          box-shadow: 0 4px 5px rgba(0, 0, 0, 0.47);
-          background-color: white;
-          left: 0;
-          display: none; }
-          header nav ul .user-section .user-section-menu ul li {
-            padding: 10px;
-            width: 250px; }
-        header nav ul .user-section .user-section-menu:hover > ul {
-          display: block; }
-      header nav ul .user-section .icon {
-        font-size: 1.2em;
-        color: rgba(0, 0, 0, 0.27);
-        margin-right: 3%; }
-        header nav ul .user-section .icon i {
-          font-size: 1.1em; }
-        header nav ul .user-section .icon:hover {
+  header h1 a {
+    color: white; }
+    header h1 a:hover {
+      color: white;
+      text-decoration: underline; }
+  header article, header h1 {
+    display: inline-table; }
+  header .search-section {
+    width: 30%; }
+    header .search-section input {
+      display: inline-table; }
+  header .user-section {
+    width: 46%;
+    font-size: 1.2em; }
+    header .user-section ul li {
+      display: inline-table;
+      position: relative; }
+      header .user-section ul li a {
+        color: rgba(0, 0, 0, 0.27); }
+        header .user-section ul li a:hover {
           color: rgba(0, 0, 0, 0.47); }
+      header .user-section ul li ul {
+        color: rgba(0, 0, 0, 0.67);
+        position: absolute;
+        top: 20px;
+        border: 1px solid #BBB;
+        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.47);
+        background-color: white;
+        left: 0;
+        display: none; }
+        header .user-section ul li ul li {
+          display: list-item;
+          padding: 10px;
+          width: 250px; }
+          header .user-section ul li ul li a {
+            color: rgba(0, 0, 0, 0.67); }
+            header .user-section ul li ul li a:hover {
+              text-decoration: underline; }
+      header .user-section ul li:hover > ul {
+        display: block; }
 
 .wrapper {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 8%;
+  margin-right: 8%;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.47);
   background-color: #FFF; }
 
 .main article {
-  display: inline-block;
+  display: inline-table;
   width: 100%; }
 
 .banners {
@@ -2945,11 +2969,41 @@ table {
   table tbody tr:nth-child(odd) td {
     background-color: #f4f7f9; }
 
-.pagebanner, .pagelinks {
+.pagebanner {
   display: block;
   margin: 8px;
   padding: 5px;
   background-color: #EEE;
-  font-size: 1.2em; }
+  font-size: 1.2em;
+  width: 50%;
+  border-radius: 5px; }
+
+.pagelinks {
+  display: block;
+  margin-top: 10px;
+  padding: 5px; }
+
+.step {
+  padding: 10px;
+  margin-left: 30px; }
+  .step img {
+    margin: 10px; }
+
+.ingredients li {
+  margin: 10px;
+  list-style: circle;
+  font-size: 1.4em; }
+
+.recipe-info {
+  background-color: #EEE;
+  padding: 10px; }
+
+.navbar ul {
+  border-radius: 6px; }
+  .navbar ul li a {
+    padding: 8px;
+    background-color: #f4f7f9;
+    border-bottom: 1px solid #BBB;
+    display: list-item; }
 
 /*# sourceMappingURL=style.css.map */

@@ -41,7 +41,6 @@ public class Message  extends domain.DomainEntity{
         this.body = body;
     }
 
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Past
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -102,4 +101,6 @@ public class Message  extends domain.DomainEntity{
     public void setFolders(Collection<Folder> folders) {
         this.folders = folders;
     }
+
+
 }

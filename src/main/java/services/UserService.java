@@ -44,7 +44,6 @@ public class UserService {
 
     public User findOne(int userId){
         User result;
-
         result = userRepository.findOne(userId);
         Assert.notNull(result);
 
@@ -132,7 +131,7 @@ public class UserService {
     }
 
 
-    Collection<User> findByKeyword(String key){
+    public Collection<User> findByKeyword(String key){
         Collection<User> result;
 
         result = userRepository.findByKeyword(key);

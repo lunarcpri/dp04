@@ -159,6 +159,114 @@
         </property>
     </bean>
 
+    <bean id="userAccount12" class="security.UserAccount">
+        <property name="username" value="user11" />
+        <property name="password" value="ee11cbb19052e40b07aac0ca060c23ee" />
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="USER" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="userAccount13" class="security.UserAccount">
+        <property name="username" value="user12" />
+        <property name="password" value="ee11cbb19052e40b07aac0ca060c23ee" />
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="USER" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="userAccount14" class="security.UserAccount">
+        <property name="username" value="user13" />
+        <property name="password" value="ee11cbb19052e40b07aac0ca060c23ee" />
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="USER" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="userAccount15" class="security.UserAccount">
+        <property name="username" value="user14" />
+        <property name="password" value="ee11cbb19052e40b07aac0ca060c23ee" />
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="USER" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="userAccount16" class="security.UserAccount">
+        <property name="username" value="user15" />
+        <property name="password" value="ee11cbb19052e40b07aac0ca060c23ee" />
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="USER" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="userAccount17" class="security.UserAccount">
+        <property name="username" value="user16" />
+        <property name="password" value="ee11cbb19052e40b07aac0ca060c23ee" />
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="USER" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="userAccount18" class="security.UserAccount">
+        <property name="username" value="user17" />
+        <property name="password" value="ee11cbb19052e40b07aac0ca060c23ee" />
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="USER" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="userAccount19" class="security.UserAccount">
+        <property name="username" value="user18" />
+        <property name="password" value="ee11cbb19052e40b07aac0ca060c23ee" />
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="USER" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="userAccount20" class="security.UserAccount">
+        <property name="username" value="user19" />
+        <property name="password" value="ee11cbb19052e40b07aac0ca060c23ee" />
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="USER" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
 
     <!-- Administrators -->
 
@@ -169,8 +277,20 @@
         <property name="phone" value="+34 (001) 955661915" />
         <property name="address" value="Address 1" />
         <property name="userAccount" ref="userAccount1" />
+        <property name="socialIdentities">
+            <list>
+                <ref bean="socialIdentitieAdmin1"/>
+            </list>
+        </property>
     </bean>
 
+    <bean id="socialIdentitieAdmin1" class="domain.SocialIdentity">
+        <property name="picture" value="https://abs.twimg.com/icons/apple-touch-icon-192x192.png"/>
+        <property name="name" value="Twitter"/>
+        <property name="nick" value="admin1"/>
+        <property name="link" value="http://twitter.com/Admin1"/>
+        <property name="actor" ref="administrator1"/>
+    </bean>
     <!-- Users -->
 	
 	<bean id="user1" class="domain.User">
@@ -270,6 +390,7 @@
         <property name="phone" value="+34 (001) 955661915" />
         <property name="address" value="Address 1" />
         <property name="company" value="Company 1" />
+        <property name="userAccount" ref="userAccount12"/>
     </bean>
 
     <bean id="sponsor2" class="domain.Sponsor">
@@ -279,6 +400,7 @@
         <property name="phone" value="+34 (001) 955661915" />
         <property name="address" value="Address 1" />
         <property name="company" value="Company 2" />
+        <property name="userAccount" ref="userAccount13"/>
     </bean>
 
     <bean id="sponsor3" class="domain.Sponsor">
@@ -288,7 +410,7 @@
         <property name="phone" value="+34 (001) 955661915" />
         <property name="address" value="Address 1" />
         <property name="company" value="Company 3" />
-        <property name="userAccount" ref="userAccount4"/>
+        <property name="userAccount" ref="userAccount14"/>
     </bean>
 
     <bean id="sponsor4" class="domain.Sponsor">
@@ -298,6 +420,7 @@
         <property name="phone" value="+34 (001) 955661915" />
         <property name="address" value="Address 1" />
         <property name="company" value="Company 4" />
+        <property name="userAccount" ref="userAccount15"/>
     </bean>
 
     <bean id="sponsor5" class="domain.Sponsor">
@@ -307,6 +430,7 @@
         <property name="phone" value="+34 (001) 955661915" />
         <property name="address" value="Address 1" />
         <property name="company" value="Company 5" />
+        <property name="userAccount" ref="userAccount16"/>
     </bean>
 
 <!-- Cooks -->
@@ -316,7 +440,7 @@
         <property name="email" value="cook1@mail.com" />
         <property name="phone" value="+34 (001) 955661915" />
         <property name="address" value="Address 1" />
-        <property name="userAccount" ref="userAccount5" />
+        <property name="userAccount" ref="userAccount17"/>
     </bean>
     
     <bean id="cook2" class="domain.Cook">
@@ -325,7 +449,7 @@
         <property name="email" value="cook2@mail.com" />
         <property name="phone" value="+34 (001) 955661916" />
         <property name="address" value="Address 2" />
-        <property name="userAccount" ref="userAccount5" />
+        <property name="userAccount" ref="userAccount18"/>
     </bean>
     
     <bean id="cook3" class="domain.Cook">
@@ -334,7 +458,7 @@
         <property name="email" value="cook3@mail.com" />
         <property name="phone" value="+34 (001) 955661917" />
         <property name="address" value="Address 3" />
-        <property name="userAccount" ref="userAccount5" />
+        <property name="userAccount" ref="userAccount19"/>
     </bean>
 
 
@@ -424,7 +548,6 @@
 
 
     <bean id="recipe1" class="domain.Recipe">
-        <property name="hits" value="hint 1" />
         <property name="title" value="Title " />
         <property name="summary" value="summary" />
         <property name="created_at" value="01/02/2015 23:59"/>
@@ -605,7 +728,6 @@
     </bean>
 
     <bean id="recipe2" class="domain.Recipe">
-        <property name="hits" value="hint 1" />
         <property name="summary" value="summary" />
         <property name="title" value="Title 1" />
         <property name="created_at" value="01/02/2015 23:59"/>
@@ -671,7 +793,6 @@
 
 
     <bean id="recipe3" class="domain.Recipe">
-        <property name="hits" value="hint 1" />
         <property name="title" value="Title 1" />
         <property name="picture" value="https://recetassaboresypasiones.files.wordpress.com/2014/10/calamares-a-la-romana.jpg"/>
         <property name="summary" value="summary" />
@@ -787,7 +908,7 @@
     </bean>
 
     <bean id="recipe4" class="domain.Recipe">
-        <property name="hits" value="hint 1" />
+   
         <property name="summary" value="summary" />
         <property name="title" value="Title 1" />
         <property name="created_at" value="01/02/2015 23:59"/>
@@ -830,7 +951,7 @@
     </bean>
 
     <bean id="recipe5" class="domain.Recipe">
-        <property name="hits" value="hint 1" />
+   
         <property name="title" value="Title 1" />
         <property name="summary" value="summary" />
         <property name="created_at" value="01/02/2015 23:59"/>
@@ -896,7 +1017,7 @@
     </bean>
 
     <bean id="recipe6" class="domain.Recipe">
-        <property name="hits" value="hint 1" />
+   
         <property name="summary" value="summary" />
         <property name="title" value="Title 1" />
         <property name="created_at" value="01/02/2015 23:59"/>
@@ -948,7 +1069,7 @@
     </bean>
 
     <bean id="recipe7" class="domain.Recipe">
-        <property name="hits" value="hint 1" />
+   
         <property name="title" value="Title 1" />
         <property name="summary" value="summary" />
         <property name="created_at" value="01/02/2015 23:59"/>
@@ -1008,7 +1129,7 @@
     </bean>
 
     <bean id="recipe8" class="domain.Recipe">
-        <property name="hits" value="hint 1" />
+   
         <property name="summary" value="summary" />
         <property name="title" value="Title 1" />
         <property name="created_at" value="01/02/2015 23:59"/>

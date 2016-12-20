@@ -128,7 +128,6 @@ public class RecipeService {
         old.setTitle(recipe.getTitle());
         old.setPicture(recipe.getPicture());
         old.setSummary(recipe.getSummary());
-        old.setHits(recipe.getHits());
         old.setUpdated_at(new Date());
         Assert.notNull(recipe.getQuantities());
         old.setQuantities(recipe.getQuantities());

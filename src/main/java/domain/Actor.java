@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -30,11 +31,11 @@ public abstract class Actor extends DomainEntity {
 	private String address;
 	private Collection<Message> SendedMessages;
 	private Collection<Message> ReceivedMessages;
-	private Collection<SocialIdentity> socialIdentities;
+	private List<SocialIdentity> socialIdentities;
     private UserAccount userAccount;
     private Collection<Star> starses;
 	private Collection<Folder> folders;
-	private Collection<MasterClass> masterClasses;
+	private Collection<MasterClass> attendingMasterClasses;
 
 
 	@NotBlank
@@ -47,6 +48,7 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	@Email
+	@NotBlank
 	public String getEmail() {
 		return email;
 	}
@@ -105,11 +107,11 @@ public abstract class Actor extends DomainEntity {
 
 	@Valid
 	@OneToMany(mappedBy = "actor", cascade = CascadeType.ALL)
-	public Collection<SocialIdentity> getSocialIdentities() {
+	public List<SocialIdentity> getSocialIdentities() {
 		return socialIdentities;
 	}
 
-	public void setSocialIdentities(Collection<SocialIdentity> socialIdentities) {
+	public void setSocialIdentities(List<SocialIdentity> socialIdentities) {
 		this.socialIdentities = socialIdentities;
 	}
 
@@ -145,11 +147,11 @@ public abstract class Actor extends DomainEntity {
     }
 
 	@ManyToMany
-	public Collection<MasterClass> getMasterClasses() {
-		return masterClasses;
+	public Collection<MasterClass> getAttendingMasterClasses() {
+		return attendingMasterClasses;
 	}
 
-	public void setMasterClasses(Collection<MasterClass> masterClasses) {
-		this.masterClasses = masterClasses;
+	public void setAttendingMasterClasses(Collection<MasterClass> masterClasses) {
+		this.attendingMasterClasses = masterClasses;
 	}
 }

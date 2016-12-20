@@ -21,6 +21,10 @@
 		<put-attribute name="title" value="Register as Nutritionist" />
 		<put-attribute name="body" value="/views/nutritionist/register.jsp" />
 	</definition>
+	<definition name="nutritionist/edit" extends="master.page">
+		<put-attribute name="title" value="Edit your Info" />
+		<put-attribute name="body" value="/views/nutritionist/edit.jsp" />
+	</definition>
 
 	
 </tiles-definitions>

@@ -22,5 +22,10 @@
         <put-attribute name="body" value="/views/recipe/list.jsp" />
     </definition>
 
+    <definition name="recipe/index" extends="master.page">
+        <put-attribute name="body" value="/views/recipe/index.jsp" />
+    </definition>
+
+
 
 </tiles-definitions>

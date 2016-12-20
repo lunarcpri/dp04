@@ -37,7 +37,6 @@ public class RecipeServiceTest extends AbstractTest {
         recipe.setTitle("Nueva Receta");
         recipe.setAuthor(userService.findByPrincipal());
         recipe.setPicture("http://google.es");
-        recipe.setHits("Esto es un hint");
         Recipe recipe2 = recipeService.newRecipe(recipe);
 
         Assert.assertNotNull(recipe2);
@@ -58,7 +57,6 @@ public class RecipeServiceTest extends AbstractTest {
         recipe.setTitle("Nueva Receta");
         recipe.setAuthor(userService.findByPrincipal());
         recipe.setPicture("http://google.es");
-        recipe.setHits("Esto es un hint");
         recipe.setSteps(stepCollect);
         Recipe recipe2 = recipeService.newRecipe(recipe);
         List<Recipe> list = new ArrayList<Recipe>(recipeService.findByKeyword("Nueva"));

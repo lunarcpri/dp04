@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import repositories.ActorRepository;
 import repositories.RecipeRepository;
+import security.LoginService;
+import security.UserAccount;
 import security.UserAccountService;
 
 import java.util.Collection;
@@ -84,6 +86,10 @@ public class ActorService {
 
     // Other business methods -------------------------------------------------
 
-
+        public Actor findActorByPrincipal()
+        {
+            UserAccount userAccount = LoginService.getPrincipal();
+            return actorRepository.findActorByUserAccount(userAccount);
+        }
 
 }

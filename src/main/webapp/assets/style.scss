@@ -10,68 +10,60 @@ header{
   color:$white2;
   padding:10px;
   background-color: $red3;
-  nav,h1{
-    display: inline-block;
-  }
   h1{
-    color:$white1;
-    font-family: Roboto-Thin!important;
+    a{
+      color:$white1;
+      &:hover{
+        color:$white1;
+        text-decoration: underline;
+      }
+    }
   }
-  nav{
-    width:80%;
+  article,h1{
+    display: inline-table;
+  }
+  .search-section{
+    width:30%;
+    input{
+      display: inline-table;
+    }
+  }
+  .user-section{
+    width:46%;
+    font-size: 1.2em;
     ul{
       li{
-        display: inline-block;
-      }
-      .search-section{
-        width: 40%;
-        margin-left:5%;
-        input{
-          display: inline-block;
-          &[type=search]{
-            width:60%;
-          }
-        }
-      }
-      .user-section{
-        width:45%;
-        .user-section-menu{
-          display: inline-table;
-          position: relative;
-          span{
-            cursor:pointer;
-          }
-          i{
-            display: inline-block;
-          }
-          ul{
-            color:$black-2;
-            position: absolute;
-            top:20px;
-            border:1px solid $grey2;
-            box-shadow: $normal-box-shadow;
-            background-color: $white1;
-            left:0;
-            display:none;
-            li{
-              padding:10px;
-              width:250px;
-            }
-          }
-          &:hover > ul{
-            display:block;
-          }
-        }
-        .icon{
-          font-size: 1.2em;
+        display: inline-table;
+        position: relative;
+        a{
           color:$black-4;
-          margin-right:3%;
-          i{
-            font-size:1.1em;
-          }
           &:hover{
             color:$black-3;
           }
+        }
+        ul {
+          color: $black-2;
+          position: absolute;
+          top: 20px;
+          border: 1px solid $grey2;
+          box-shadow: $normal-box-shadow;
+          background-color: $white1;
+          left: 0;
+          display: none;
+          li {
+            display: list-item;
+            padding: 10px;
+            width: 250px;
+            a{
+              color:$black-2;
+              &:hover{
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+        &:hover > ul{
+          display:block;
         }
       }
     }
@@ -79,15 +71,15 @@ header{
 }
 
 .wrapper{
-  margin-left:10%;
-  margin-right:10%;
+  margin-left:8%;
+  margin-right:8%;
   box-shadow:$normal-box-shadow;
   background-color: #FFF;
 }
 
 .main{
   article{
-    display: inline-block;
+    display: inline-table;
     width:100%;
   }
 }
@@ -220,8 +212,48 @@ table{
   padding:5px;
   background-color: $grey1;
   font-size: 1.2em;
+  width:50%;
+  border-radius: 5px;
 }
 
 .pagelinks{
-  @extend .pagebanner;
+  display:block;
+  margin-top:10px;
+  padding:5px;
+}
+
+.step{
+  padding:10px;
+  margin-left:30px;
+  img{
+    margin:10px;
+  }
+}
+
+.ingredients{
+  li{
+    margin:10px;
+    list-style: circle;
+    font-size:1.4em;
+  }
+}
+
+.recipe-info{
+  background-color: $grey1;
+  padding:10px;
+
+}
+
+.navbar{
+  ul{
+    border-radius:6px;
+    li{
+      a{
+      padding:8px;
+      background-color: $blue-grey5;
+      border-bottom: 1px solid $grey2;
+        display: list-item;
+      }
+    }
+  }
 }

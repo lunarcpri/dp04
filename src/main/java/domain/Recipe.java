@@ -24,7 +24,6 @@ public class Recipe  extends DomainEntity {
     private boolean read_only;
     private String picture;
     private String summary;
-    private String hits;
     private Collection<Quantity> quantities;
     private Collection<Step> steps;
     private User author;
@@ -99,15 +98,6 @@ public class Recipe  extends DomainEntity {
     public void setSummary(String summary) {
         this.summary = summary;
     }
-
-    public String getHits() {
-        return hits;
-    }
-
-    public void setHits(String hits) {
-        this.hits = hits;
-    }
-
     //Relationship
 
     @Valid

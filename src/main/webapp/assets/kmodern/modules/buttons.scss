@@ -5,6 +5,7 @@
   color:$white1!important;
   &:hover{
     color:$white1!important;
+    background-color: $black-5!important;
     box-shadow: $normal-box-shadow;
   }
 }
@@ -31,6 +32,7 @@
 }
 
 button{
+  @extend .button;
   border:0;
   outline:0;
   &:focus{

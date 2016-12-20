@@ -17,14 +17,16 @@ public class StringToActorConverter implements Converter<String, Actor> {
 
 	@Override
 	public Actor convert(String text) {
-		Actor result;
-		int id;
+		Actor result = null;
 
 		try {
-			id = Integer.valueOf(text);
-			result = actorRepository.findOne(id);
-		} catch (Throwable oops) {
-			throw new IllegalArgumentException(oops);
+			result = (Actor) Class.forName(text).newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			result = actorRepository.findOne(Integer.valueOf(text));
 		}
 
 		return result;

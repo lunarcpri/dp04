@@ -23,7 +23,6 @@ public class SocialIdentity extends domain.DomainEntity{
     private String link;
     private String picture;
 
-
     @NotBlank
     public String getNick()
     {
@@ -76,8 +75,8 @@ public class SocialIdentity extends domain.DomainEntity{
 
 //Relationships
 
-    public Actor actor;
-    @NotNull
+    private Actor actor;
+
     @Valid
     @ManyToOne
     public Actor getActor() {

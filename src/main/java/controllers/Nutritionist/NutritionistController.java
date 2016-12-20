@@ -1,7 +1,9 @@
 package controllers.Nutritionist;
 
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Nutritionist;
+import domain.Sponsor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -10,10 +12,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import services.NutritionistService;
+import sun.dc.pr.PRError;
 
 import javax.validation.Valid;
 
@@ -27,24 +33,22 @@ public class NutritionistController extends AbstractController {
     @Autowired
     private UserDetailsService userDetailsService;
 
+
+
     @RequestMapping(value = "/register")
     public ModelAndView index() {
-        ModelAndView result;
-
-        result = new ModelAndView("nutritionist/register");
-
-        result.addObject("nutritionist",new Nutritionist());
-
-        return result;
+        return createEditModelAndView(new Nutritionist(),null);
     }
+
+
     @RequestMapping(value = "/register",method = RequestMethod.POST,params = "register")
     public ModelAndView create(
-            @Valid Nutritionist nutritionist, BindingResult binding
+            @ModelAttribute("sponsor") @Valid Nutritionist nutritionist, BindingResult binding
     ) {
         ModelAndView result;
 
         if (binding.hasErrors()){
-            result = new ModelAndView("nutritionist/register");
+            result = createEditModelAndView(nutritionist,"wrong00");
         }else{
             try{
                 Md5PasswordEncoder md5PasswordEncoder = new Md5PasswordEncoder();
@@ -61,11 +65,21 @@ public class NutritionistController extends AbstractController {
 
                 result = new ModelAndView("redirect:../");
             }catch (Throwable oops){
-                result = new ModelAndView("nutritionist/register");
-                result.addObject("message","wrong");
+                result = createEditModelAndView(nutritionist,"wrong");
             }
 
         }
+
+        return result;
+    }
+
+    protected ModelAndView createEditModelAndView(Nutritionist nutritionist, String message) {
+        ModelAndView result;
+
+        result = new ModelAndView("nutritionist/register");
+
+        result.addObject("nutritionist",nutritionist);
+        result.addObject("message",message);
 
         return result;
     }

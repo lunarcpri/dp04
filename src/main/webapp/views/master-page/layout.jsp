@@ -18,11 +18,12 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+    <title><tiles:insertAttribute name="title" /></title>
 	<base
 			href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 
@@ -33,11 +34,14 @@
 
 
 <link rel="stylesheet" href="assets/style.css" type="text/css">
-
-<title><tiles:insertAttribute name="title" /></title>
-
+    <link rel="stylesheet" href="assets/chosen.css" type="text/css">
+	<script src="assets/js/jquery.js" type="text/javascript"></script>
+    <script src="assets/js/chosen.js"type="text/javascript" ></script>
+    <script src="assets/js/app.js" type="text/javascript"></script>
+<title><tiles:insertAttribute name="title" />${title}</title>
+	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <script type="text/javascript">
-	function relativeRedir(loc) {	
+	function relativeRedir(loc) {
 		var b = document.getElementsByTagName('base');
 		if (b && b[0] && b[0].href) {
 	  		if (b[0].href.substr(b[0].href.length - 1) == '/' && loc.charAt(0) == '/')

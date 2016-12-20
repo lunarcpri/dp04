@@ -86,17 +86,15 @@ public class MessageService {
 
 
 
-    public Message newMessage(Collection<Actor> actors, Message message){
-        Message result;
+    public Message newMessage(Message message){
 
         Date sendedAt = new Date();
         Actor senderActor = userService.findByPrincipal();
         Assert.notNull(senderActor);
-        Assert.notNull(actors);
-        message.setRecipients(actors);
         message.setSender(senderActor);
         message.setSended_at(sendedAt);
-        List<Folder> folders = setFolders(message,senderActor,actors);
+        message = save(message);
+        List<Folder> folders = setFolders(message,senderActor,message.getRecipients());
         message.setFolders(folders);
         return save(message);
     }
